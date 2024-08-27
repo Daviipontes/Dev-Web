@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    
+
+</head>
+<body>
+    <div class="navbar-container">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        
+        <nav class="navbar navbar-expand-lg">
+            
+            <a class="navbar-brand" href="#">musicALL</a>
+            <form class="form-inline my-2 my-lg-0 mx-auto search-form">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search for anything..." aria-label="Search">
+                <button class="btn btn-search" type="submit"><i class="fas fa-search"></i></button>
+            </form>
+            <div class="navbar-icons">
+                <a href="#" class="btn btn-outline-light">Register</a>
+                <a href="#"><i class="fas fa-shopping-cart"></i></a>
+                <a href="#"><i class="fas fa-user"></i></a>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container mt-5">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
+            </ol>
+        </nav>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Shopping Cart</h2>
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Products</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Sub-total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img src="assets/img/product2.jpeg" alt="TV" class="img-fluid mr-2" style="width: 50px;">
+                                        4K UHD LED Smart TV with Chromecast Built-in
+                                    </td>
+                                    <td>
+                                        <span class="text-muted"></span> $70
+                                    </td>
+                                    <td>
+                                        <button class="quantity-btn">-</button> 01 <button class="quantity-btn">+</button>
+                                    </td>
+                                    <td>$70</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img src="assets/img/product1.jpg" alt="Headphones" class="img-fluid mr-2" style="width: 50px;">
+                                        Wired Over-Ear Gaming Headphones with USB
+                                    </td>
+                                    <td>$250</td>
+                                    <td>
+                                        <button class="quantity-btn">-</button> 03 <button class="quantity-btn">+</button>
+                                    </td>
+                                    <td>$250</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="d-flex justify-content-between">
+                            <button class="return-btn">← Return to Shop</button>
+                            <button class="update-btn">Update Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">Card Totals</h3>
+                        <table class="table">
+                            <tr>
+                                <td>Sub-total</td>
+                                <td>$320</td>
+                            </tr>
+                            <tr>
+                                <td>Shipping</td>
+                                <td>Free</td>
+                            </tr>
+                            <tr>
+                                <td>Discount</td>
+                                <td>$24</td>
+                            </tr>
+                            <tr>
+                                <td>Tax</td>
+                                <td>$61.99</td>
+                            </tr>
+                            <tr>
+                                <th>Total</th>
+                                <th>$357.99 USD</th>
+                            </tr>
+                        </table>
+                        <button class="checkout-btn btn-block">Proceed to Checkout →</button>
+
+                        <div class="coupon mt-4">
+                            <h3 class="text-center">Coupon Code</h3>
+                            <input type="text" class="form-control" placeholder="Email address">
+                            <button class="apply-btn mt-2 btn-block">Apply Coupon</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h6 class="footer-title">Top Category</h6>
+                    <ul class="list-footer">
+                        <li><a href="#">Computers & Laptops</a></li>
+                        <li><a href="#">Smartphones</a></li>
+                        <li><a href="#">Cameras & Photography</a></li>
+                        <li><a href="#">Accessories</a></li>
+                        <li><a href="#">Home Appliances</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-title">Quick Links</h6>
+                    <ul class="list-footer">
+                        <li><a href="#">Shop Products</a></li>
+                        <li><a href="#">Checkout</a></li>
+                        <li><a href="#">Cart</a></li>
+                        <li><a href="#">Wishlist</a></li>
+                        <li><a href="#">Compare</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-title">Customer Service</h6>
+                    <ul class="list-footer">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Product Support</a></li>
+                        <li><a href="#">Warranty</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-title">Contact Us</h6>
+                    <p>+629 555 0529</p>
+                    <p>4874 Westfalben Avenue, Manchester, Kentucky 39485</p>
+                    <p>info@musicall.com</p>
+                    <div class="mt-2">
+                        <a href="#" class="mr-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="mr-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p>&copy; 2024 musicALL. All Rights Reserved. Design by Davi&Carlos</p>
+            </div>
+        </div>
+    </footer>
+    </footer>
+
+</body>
+</html>

@@ -114,17 +114,20 @@ body {
     margin-bottom: 15px;
 }
 
-.footer .list-unstyled {
+.footer .list-footer {
     padding-left: 0;
     list-style: none;
 }
 
-.footer .list-unstyled li {
+.footer .list-footer li {
     margin-bottom: 10px;
+    font-size: 12px;
+    color:var(--font-color-dark)
 }
 
+
 .footer a {
-    color: var(--white);
+    color: var(--background-color);
     text-decoration: none;
 }
 
@@ -352,4 +355,6 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+
 

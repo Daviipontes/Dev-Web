@@ -1,0 +1,55 @@
+
+:root {
+    --background-color: #EEEEEE;
+    --background-clearer-color: #FFFFFF;
+    --darker-color: #201E43;
+    --middle-color: #134B70;
+    --icons-color: #508C9B;
+    --white: #FFFFFF;
+    --font-color-dark:#475156;
+    --border-color: #134B70;
+    --hover-color: #b1b1b1;
+}
+
+body {
+    
+    background-color: var(--white);
+    color: var(--font-color-dark);
+    margin: 0;
+    padding: 0;
+}
+
+.card {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.quantity-btn {
+    border: 1px solid var(--border-color);
+    background-color: var(--white);
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.return-btn, .update-btn, .checkout-btn, .apply-btn {
+    background-color: var(--icons-color);
+    border: none;
+    color: var(--white);
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.return-btn:hover, .update-btn:hover, .checkout-btn:hover, .apply-btn:hover {
+    background-color: var(--darker-color);
+}
+
+.checkout-btn {
+    margin-bottom: 20px;
+}
+
+.navbar-brand{
+    color: var(--white)!important;
+
+}
+
