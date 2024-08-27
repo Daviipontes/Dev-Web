@@ -53,3 +53,18 @@ body {
 
 }
 
+.remove-button{
+    background-color: var(--white);
+    border: none;
+}
+
+
+.apply-btn,.update-btn,.return-btn{
+    border-radius: 3px;
+}
+
+.update-btn,.return-btn{
+    background-color: var(--white);
+    border: 1px solid var(--icons-color);
+    color: var(--icons-color);
+}

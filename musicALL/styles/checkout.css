@@ -1,0 +1,72 @@
+:root {
+    --background-color: #EEEEEE;
+    --background-clearer-color: #FFFFFF;
+    --darker-color: #201E43;
+    --middle-color: #134B70;
+    --icons-color: #508C9B;
+    --white: #FFFFFF;
+    --font-color-dark:#475156;
+    --border-color: #134B70;
+    --hover-color: #b1b1b1;
+}
+
+body {
+    
+    background-color: var(--white)!important;
+    color: var(--font-color-dark);
+    margin: 0;
+    padding: 0;
+}
+
+h4 {
+    color: var(--darker-color);
+}
+
+.form-label {
+    font-weight: bold;
+    color: var(--darker-color);
+}
+
+.form-control {
+    border-radius: 5px;
+    border: 1px solid var(--white);
+    box-shadow: none;
+}
+
+.list-group-item {
+    background-color: var(--background-clearer-color);
+}
+
+.list-group-item img {
+    border-radius: 5px;
+}
+
+.list-group-item .font-weight-bold {
+    color: var(--darker-color);
+}
+
+.btn-primary {
+    background-color: var(--middle-color);
+    border: none;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: var(--icons-color);
+}
+
+.text-muted {
+    color: var(--icons-color);
+}
+
+.form-control{
+    border: 1px solid var(--background-color)!important;
+}
+
+.form-label{
+    color: var(--font-color-dark);
+}
+
+.row{
+    margin: 2em 0 2em 0!important;
+}
