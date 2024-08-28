@@ -1,15 +1,15 @@
 /* Importa o CSS global */
 @import url('/styles/style.css');
 :root {
-    --background-color: #EEEEEE;
-    --background-clearer-color: #FFFFFF;
-    --darker-color: #201E43;
-    --middle-color: #134B70;
+    --darker-color: #EEEEEE;
+    --middle-color: #FFFFFF;
+    --background-color: #201E43;
+    --background-clearer-color: #134B70;
     --icons-color: #508C9B;
-    --white: #FFFFFF;
-    --font-color-dark:#475156;
-    --border-color: #134B70;
-    --hover-color: #0A2B40;
+    --my-white: #201E43;
+    --font-color-dark:#FFFFFF;
+    --border-color: #b1b1b1;
+    --hover-color: #134B70;
 }
 /* Estilos específicos para a página do produto */
 
@@ -54,7 +54,7 @@
     color: var(--darker-color);
 }
 
-.Rating {
+.rating {
     color: #f39c12;
     margin-bottom: 10px;
 }
@@ -130,7 +130,7 @@
     color: var(--darker-color);
 }
 
-.Rating {
+.rating {
     font-size: 14px;
 }
 
@@ -146,8 +146,8 @@
 
 .chat-btn {
     position: relative;
-    background-color: var(--white);
-    color: var(--icons-color);
+    background-color: var(--darker-color);
+    color: var(--background-clearer-color);
     
     padding: 10px 20px;
     border-radius: 25px;
@@ -158,7 +158,7 @@
 
 .chat-btn:hover {
     background-color: var(--hover-color);
-    color: var(--white);
+    color: var(--darker-color);
 }
 
 .chat-btn.active {
@@ -186,7 +186,7 @@
 }
 
 .btn-primary {
-    color: var(--white);
+    color: var(--my-white);
     background-color: var(--middle-color);
     border-color: var(--middle-color);
 }
@@ -235,14 +235,14 @@
 #buy-now {
     max-width: 100%;
     color:var(--icons-color);
-    background-color: var(--white);
+    background-color: var(--darker-color);
     border-color: var(--icons-color);
 }
 
 #add-to-cart{
     margin:0 2em;
     background-color: var(--icons-color);
-    color: var(--white);
+    color: var(--darker-color);
 }
 
 #meuVideo{
@@ -257,12 +257,16 @@
     display: none;
 }
 
+.text-product{
+    color: var(--font-color-dark) !important;
+}
+
 #tab-label {
     cursor: pointer;
     display: inline-block;
     padding: 10px 20px;
     background-color: var(--background-color-clearer); /* Cor de fundo branca */
-    color: var(--icons-color); /* Cor da fonte azul */
+    color: var(--darker-color); /* Cor da fonte azul */
    
     border-bottom:2px solid var(--icons-color) ;
     
@@ -273,7 +277,7 @@
 
 #tab-label:hover {
     background-color: var(--icons-color); /* Cor de fundo azul ao passar o mouse */
-    color: var(--white); /* Cor da fonte branca ao passar o mouse */
+    color: var(--my-white); /* Cor da fonte branca ao passar o mouse */
 }
 
 .tab-content {

@@ -92,6 +92,7 @@ body {
 
 
 
+
 .category-title {
     font-size: 1.2rem;
     font-weight: bold;
@@ -248,9 +249,17 @@ body {
 
 
 .product-title {
+    font-size: 1.2rem;
+    color: var(--darker-color);
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.product-text {
+    
     font-size: 1rem;
     color: var(--darker-color);
-    margin: 10px 0;
+    
 }
 
 .product-price {

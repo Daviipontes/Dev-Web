@@ -1,19 +1,19 @@
 
 :root {
-    --background-color: #EEEEEE;
-    --background-clearer-color: #FFFFFF;
-    --darker-color: #201E43;
-    --middle-color: #134B70;
+    --darker-color: #EEEEEE;
+    --middle-color: #FFFFFF;
+    --background-color: #201E43;
+    --background-clearer-color: #134B70;
     --icons-color: #508C9B;
-    --white: #FFFFFF;
-    --font-color-dark:#475156;
-    --border-color: #134B70;
-    --hover-color: #b1b1b1;
+    --my-white: #201E43;
+    --font-color-dark:#FFFFFF;
+    --border-color: #b1b1b1;
+    --hover-color: #134B70;
 }
 
 body {
     
-    background-color: var(--white);
+    background-color: var(--my-white);
     color: var(--font-color-dark);
     margin: 0;
     padding: 0;
@@ -26,7 +26,7 @@ body {
 
 .quantity-btn {
     border: 1px solid var(--border-color);
-    background-color: var(--white);
+    background-color: var(--my-white);
     padding: 5px 10px;
     cursor: pointer;
 }
@@ -34,7 +34,7 @@ body {
 .return-btn, .update-btn, .apply-btn {
     background-color: var(--icons-color);
     border: none;
-    color: var(--white);
+    color: var(--my-white);
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
@@ -43,6 +43,7 @@ body {
 .return-btn:hover, .update-btn:hover, .apply-btn:hover {
     background-color: var(--darker-color);
     text-decoration: none !important;
+    color: var(--background-color);
 }
 
 
@@ -50,7 +51,7 @@ body {
 
 .checkout-button {
     background-color: var(--icons-color)!important;
-    color: var(--white)!important;
+    color: var(--font-color-dark)!important;
     text-decoration: none;
 
     border: 1px dotted var(--icons-color) !important;
@@ -58,18 +59,18 @@ body {
 
 .checkout-button:hover{
     
-    background-color: var(--white)!important;
-    color: var(--icons-color)!important;
+    background-color: var(--my-white)!important;
+    color: var(--darker-color)!important;
     
     
 }
 .navbar-brand{
-    color: var(--white)!important;
+    color: var(--my-white)!important;
 
 }
 
 .remove-button{
-    background-color: var(--white);
+    background-color: var(--my-white);
     border: none;
 }
 
@@ -79,9 +80,9 @@ body {
 }
 
 .update-btn,.return-btn{
-    background-color: var(--white);
-    border: 1px solid var(--icons-color);
-    color: var(--icons-color);
+    background-color: var(--my-white);
+    border: 1px solid var(--darker-color);
+    color: var(--darker-color);
 }
 
 
