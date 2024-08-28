@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profile</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles/profile.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Barra de navegação -->
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="/index.html">musicALL</a>
+        <form class="form-inline my-2 my-lg-0 mx-auto search-form">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search for anything..." aria-label="Search">
+            <button class="btn btn-search" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+        <div class="navbar-icons">
+            <a href="#" class="btn btn-outline-light">Register</a>
+            <a href="#"><i class="fas fa-shopping-cart"></i></a>
+            <a href="#"><i class="fas fa-user"></i></a>
+        </div>
+    </nav>
+
+    <!-- Boxes de informações pessoais e endereço -->
+    <div class="container">
+        <h4>Hello, Carlos</h4>
+        <p>This is your profile. You can check your <a href="#" class="profile-link">Recent Purchases</a> and <a href="#" class="profile-link">Shipping Addresses</a> and also edit your <a href="#" class="profile-link">Password</a> and <a href="#" class="profile-link">Account Settings</a>.</p>
+        <div class="row">
+
+            <!-- Box de informações pessoais -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">PROFILE DETAILS</div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <img src="assets/img/profile_pic.png" alt="Profile Image" class="profile-image">
+                            <div>
+                                <p class="profile-header">Carlos Victor</p>
+                                <p class="profile-info">Ceará, Brasil</p>
+                            </div>
+                        </div>
+                        <p class="profile-info">Email: carlos.victor@alu.ufc.br</p>
+                        <p class="profile-info">Security Email: carlos.victor@alu.ufc.br</p>
+                        <p class="profile-info">Phone Number: +55 85 9XXXX-XXXX</p>
+                        <button type="button" class="btn btn-custom">EDIT ACCOUNT</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Box de endereço -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">SHIPPING ADDRESS</div>
+                    <div class="card-body">
+                        <p class="profile-header">Carlos Victor</p>
+                        <p class="address-info">Rua XXX, Número XXX, Fortaleza-CE, Brasil</p>
+                        <p class="address-info">Phone Number: +55 85 XXXX-XXXX</p>
+                        <p class="address-info">Email: carlos.victor@alu.ufc.br</p>
+                        <button type="button" class="btn btn-custom">EDIT ADDRESS</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Box de compras recentes -->
+    <div class="container mt-4">
+        <h5>RECENT PURCHASES</h5>
+        <div class="card">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="table-font">ORDER ID</th>
+                        <th class="table-font">STATUS</th>
+                        <th class="table-font">DATE</th>
+                        <th class="table-font">TOTAL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="#" class="profile-link">#96459761</a></td>
+                        <td class="status-in-progress">IN PROGRESS</td>
+                        <td class="table-font">30 Dez, 2019 05:18</td>
+                        <td class="table-font">$1,500 (5 Products)</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#" class="profile-link">#716767167</a></td>
+                        <td class="status-completed">COMPLETED</td>
+                        <td class="table-font">2 Fev, 2019 19:28</td>
+                        <td class="table-font">$80 (11 Products)</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#" class="profile-link">#95214362</a></td>
+                        <td class="status-canceled">CANCELED</td>
+                        <td class="table-font">20 Mar, 2019 23:14</td>
+                        <td class="table-font">$160 (3 Products)</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#" class="profile-link">#716767167</a></td>
+                        <td class="status-completed">COMPLETED</td>
+                        <td class="table-font">2 Fev, 2019 19:28</td>
+                        <td class="table-font">$80 (1 Product)</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#" class="profile-link">#51746385</a></td>
+                        <td class="status-completed">COMPLETED</td>
+                        <td class="table-font">2 Fev, 2019 19:28</td>
+                        <td class="table-font">$2,300 (2 Products)</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#" class="profile-link">#51746385</a></td>
+                        <td class="status-canceled">CANCELED</td>
+                        <td class="table-font">30 Dez, 2019 07:52</td>
+                        <td class="table-font">$70 (1 Product)</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#" class="profile-link">#673971743</a></td>
+                        <td class="status-completed">COMPLETED</td>
+                        <td class="table-font">7 Dez, 2019 23:26</td>
+                        <td class="table-font">$220 (1 Product)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <!-- Barra inferior -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h6 class="footer-title">Top Category</h6>
+                    <ul class="list-footer">
+                        <li><a href="#">Violões</a></li>
+                        <li><a href="#">Guitarras</a></li>
+                        <li><a href="#">Percussão</a></li>
+                        <li><a href="#">Sopro</a></li>
+                        <li><a href="#">Periféricos</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-title">Quick Links</h6>
+                    <ul class="list-footer">
+                        <li><a href="#">Shop Products</a></li>
+                        <li><a href="#">Checkout</a></li>
+                        <li><a href="#">Cart</a></li>
+                        
+                    </ul>
+                </div>
+                
+                <div class="col-md-3">
+                    <h6 class="footer-title">Contact Us</h6>
+                    <p>+55 8599131-7493</p>
+                    <p>Fortaleza, Ceará, Brasil</p>
+                    <p>info@musicall.com</p>
+                    <div class="mt-2">
+                        <a href="#" class="mr-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="mr-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p>&copy; 2024 musicALL. All Rights Reserved. Design by Davi&Carlos</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

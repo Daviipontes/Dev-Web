@@ -1,0 +1,406 @@
+:root {
+    --darker-color: #EEEEEE;
+    --middle-color: #FFFFFF;
+    --background-color: #201E43;
+    --background-clearer-color: #134B70;
+    --icons-color: #508C9B;
+    --my-white: #201E43;
+    --font-color-dark:#FFFFFF;
+    --border-color: #b1b1b1;
+    --hover-color: #134B70;
+}
+.container {
+    margin-top: 30px;
+}
+
+.card {
+    background-color: var(--background-clearer-color);
+    border: 1px solid var(--border-color);
+}
+
+.card-header {
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border-color: var(--border-color);
+}
+
+.save-changes-btn {
+    background-color: var(--middle-color);
+    border-color: var(--middle-color);
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    color: var(--background-clearer-color)
+}
+
+.save-changes-btn:hover {
+    background-color: var(--hover-color);
+    color: var(--font-color-dark);
+}
+
+
+body {
+    background-color: var(--background-color)!important;
+    margin: 0;
+    padding: 0;
+    color: var(--font-color-dark)!important;
+}
+
+.navbar {
+    background-color: var(--middle-color); /* Cor de fundo da barra de navegação */
+    padding: .5rem 1rem;
+}
+
+.navbar-brand {
+    color: var(--my-white);
+    font-weight: bold;
+    font-size: 1.25rem;
+    margin-right: 20px;
+}
+
+.btn-primary{
+    background-color: var(--icons-color);
+    border: var(--icons-color);
+    margin: 0 0 30px 0;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+}
+.navbar .form-inline {
+    flex-grow: 1;
+    max-width: 500px;
+    position: relative; /* Define o posicionamento relativo para o container do form */
+}
+
+.navbar .form-inline input {
+    width: 100%;
+    padding: 10px 40px 10px 15px; /* Adiciona padding à direita para espaço do ícone */
+    border-radius: 5px;
+    border: 1px solid var(--background-color);
+}
+
+.navbar .btn-search {
+    position: absolute; /* Define o botão como absoluto */
+    right: 10px; /* Posiciona à direita do campo */
+    top: 50%; /* Centraliza verticalmente */
+    transform: translateY(-50%); /* Ajusta o alinhamento vertical */
+    background-color: transparent;
+    border: none;
+    color: var(--icons-color);
+    font-size: 1.2rem;
+    padding: 0;
+    cursor: pointer;
+}
+
+.navbar .navbar-icons {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .navbar-icons a {
+    color: var(--my-white);
+    margin-left: 15px;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.navbar .navbar-icons .btn-outline-light {
+    padding: 5px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border-color: var(--my-white);
+}
+
+.navbar .navbar-icons a:hover {
+    color: var(--background-clearer-color);
+}
+
+.navbar-brand :hover{
+    color: var(--my-white)!important;
+
+}
+
+
+
+.category-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.category-list {
+    padding-left: 0;
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.category-list li {
+    margin-bottom: 10px;
+}
+
+.footer {
+    background-color: var(--darker-color);
+    color: var(--my-white);
+    padding: 40px 0;
+}
+
+.footer .footer-title {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.footer .list-footer {
+    padding-left: 0;
+    list-style: none;
+}
+
+.footer .list-footer li {
+    margin-bottom: 10px;
+    font-size: 12px;
+    color:var(--background-clearer-color)
+}
+
+
+.footer a {
+    color: var(--background-color);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color:var(--background-color);
+}
+
+.footer p {
+    margin-bottom: 0;
+}
+
+
+.col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding-right: 5px; /* Ajuste o padding para reduzir o espaço entre colunas */
+    padding-left: 5px; /* Ajuste o padding para reduzir o espaço entre colunas */
+}
+
+.form-check {
+    margin-bottom: 10px;
+}
+
+.form-check-input {
+    margin-right: 10px;
+    accent-color: var(--middle-color); /* Define a cor do checkbox */
+}
+
+.form-check-label {
+    color: var(--darker-color);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.product-col {
+    flex: 0 0 100%; /* Ajuste para diminuir a largura */
+    max-width: 30%; /* Mantém a proporção */
+    margin-bottom: 2px; /* Espaço entre os cards */
+}
+
+
+/* Efeito de hover para aumentar o card e adicionar sombra */
+.product-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    text-decoration: none; /* Garante que o texto não seja sublinhado */
+}
+
+.product-card {
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+    max-width: 300px; /* Define a largura máxima dos cards */
+    height: 380px; /* Define a altura fixa dos cards */
+    min-height: 380px; /* Garante que o conteúdo não aumente a altura */
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--darker-color);
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: var(--background-clearer-color);
+    text-align: center;
+    padding: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card img {
+    width: 100%;
+    height: 150px; /* Define a altura da imagem */
+    object-fit: contain; /* Garante que a imagem se encaixe no espaço sem distorção */
+    margin-bottom: 10px;
+    
+    background-color: var(--font-color-dark);
+    border-radius: 3px;
+}
+
+
+
+.product-card h5 {
+    font-size: 16px;
+    margin: 10px 0;
+    height: 60px; /* Define a altura do título para manter o alinhamento */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    
+    -webkit-box-orient: vertical;
+}
+
+.product-card .price {
+    font-size: 18px;
+    color: var(--middle-color);
+    margin-bottom: 10px;
+}
+
+.product-card .old-price {
+    font-size: 14px;
+    color: var(--background-color);
+    text-decoration: line-through;
+}
+
+.product-card button {
+    margin-top: auto; /* Mantém o botão na parte inferior do card */
+    background-color: var(--middle-color);
+    color: var(--my-white);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.product-card button:hover {
+    background-color: var(--icons-color);
+}
+
+.product-text {
+    font-size: 1rem;
+    color: var(--darker-color);
+    
+}
+
+.product-title {
+    font-size: 1.2rem;
+    color: var(--darker-color);
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.product-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--middle-color);
+}
+
+.row {
+    margin: 4em 0 4em 0;
+    justify-content: space-between; /* Espaço entre colunas */
+}
+
+
+
+.pagination {
+    margin-top: 20px;
+}
+
+.page-item .page-link {
+    color: var(--background-clearer-color);
+    border: 1px solid var(--middle-color);
+    margin: 0 5px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.page-item.active .page-link {
+    background-color: var(--darker-color);
+    color: var(--my-white);
+    border: none;
+}
+
+.page-item .page-link:hover {
+    background-color: var(--middle-color);
+    color: var(--my-white);
+}
+
+.page-item.disabled .page-link {
+    background-color: var(--background-color);
+    color: var(--background-color);
+    pointer-events: none;
+}
+
+.pagination .page-item:first-child .page-link,
+.pagination .page-item:last-child .page-link {
+    border-radius: 50%;
+}
+
+.page-item.disabled .page-link {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+@media (min-width: 768px) {
+    .product-col:nth-child(3n+3) {
+        margin-right: 2%; /* Cria uma margem à direita da última coluna */
+    }
+}
+
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 0 4em;
+}
+
+.filter-btn {
+    position: relative;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border: 2px solid var(--border-color);
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.filter-btn:hover {
+    background-color: var(--hover-color);
+    color: var(--my-white);
+}
+
+.filter-btn.active {
+    background-color: var(--active-color);
+    color: var(--text-color);
+}
+
+.filter-btn.active::after {
+    content: "✕";
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: var(--text-color);
+    color: var(--active-color);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
