@@ -19,13 +19,13 @@ body {
 
 .navbar {
     background-color: var(--middle-color); /* Cor de fundo da barra de navegação */
-    padding: 10px 20px;
+    padding: .5rem 1rem;
 }
 
 .navbar-brand {
     color: var(--white);
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     margin-right: 20px;
 }
 
@@ -83,6 +83,11 @@ body {
 
 .navbar .navbar-icons a:hover {
     color: var(--background-clearer-color);
+}
+
+.navbar-brand :hover{
+    color: var(--white)!important;
+
 }
 
 

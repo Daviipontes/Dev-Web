@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - musicALL</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/styles/checkout.css">
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+    <div class="navbar-container">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        
+        <nav class="navbar navbar-expand-lg">
+            
+            <a class="navbar-brand" href="/index.html">musicALL</a>
+            <form class="form-inline my-2 my-lg-0 mx-auto search-form">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search for anything..." aria-label="Search">
+                <button class="btn btn-search" type="submit"><i class="fas fa-search"></i></button>
+            </form>
+            <div class="navbar-icons">
+                <a href="#" class="btn btn-outline-light">Register</a>
+                <a href="/cart.html"><i class="fas fa-shopping-cart"></i></a>
+                <a href="#"><i class="fas fa-user"></i></a>
+            </div>
+        </nav>
+    </div>
+
+
+
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Informações de Cobrança -->
+            <div class="col-md-8">
+                <h4 class="font-weight-bold">Billing Information</h4>
+                <form action="/submit-checkout" method="POST">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="first-name" class="form-label">First name</label>
+                            <input type="text" class="form-control" id="first-name" name="first_name" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="last-name" class="form-label">Last name</label>
+                            <input type="text" class="form-control" id="last-name" name="last_name" required>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label for="company-name" class="form-label">Company Name <span class="text-muted">(Optional)</span></label>
+                            <input type="text" class="form-control" id="company-name" name="company_name">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="address" name="address" required>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-3">
+                            <label for="country" class="form-label">Country</label>
+                            <select class="form-control" id="country" name="country" required>
+                                <option>Select...</option>
+                                <!-- Add countries here -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="state" class="form-label">Region/State</label>
+                            <select class="form-control" id="state" name="state" required>
+                                <option>Select...</option>
+                                <!-- Add states here -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="city" class="form-label">City</label>
+                            <select class="form-control" id="city" name="city" required>
+                                <option>Select...</option>
+                                <!-- Add cities here -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="zip-code" class="form-label">Zip Code</label>
+                            <input type="text" class="form-control" id="zip-code" name="zip_code" required>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="phone-number" class="form-label">Phone Number</label>
+                            <input type="text" class="form-control" id="phone-number" name="phone_number" required>
+                        </div>
+                    </div>
+                    <div class="form-check mt-3">
+                        <input class="form-check-input" type="checkbox" value="" id="different-address">
+                        <label class="form-check-label" for="different-address">Ship to a different address</label>
+                    </div>
+
+                    <!-- Pagamento -->
+                    <h4 class="font-weight-bold mt-4">Payment - Pix</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="pix-name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="pix-name" name="pix_name" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="pix-receipt" class="form-label">Insert PIX receipt</label>
+                            <input type="file" class="form-control" id="pix-receipt" name="pix_receipt" required>
+                        </div>
+                    </div>
+
+                    <!-- Informação Adicional -->
+                    <h4 class="font-weight-bold mt-4">Additional Information</h4>
+                    <div class="form-group">
+                        <label for="order-notes" class="form-label">Order Notes <span class="text-muted">(Optional)</span></label>
+                        <textarea class="form-control" id="order-notes" name="order_notes" rows="4"></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Resumo do Pedido -->
+            <div class="col-md-4">
+                <h4 class="font-weight-bold">Order Summary</h4>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <img src="assets/img/product2.jpeg" alt="Product Image" class="img-thumbnail" style="width: 50px;">
+                            <span>Yamaha P-125 Piano Digital</span>
+                            <br>
+                            <small>1 x R$ 4.200</small>
+                        </div>
+                        <span>R$ 4.200</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <img src="assets/img/product1.jpg" alt="Product Image" class="img-thumbnail" style="width: 50px;">
+                            <span>Fender Stratocaster</span>
+                            <br>
+                            <small>1 x R$ 6.500</small>
+                        </div>
+                        <span>R$ 6.500</span>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between">
+                            <span>Sub-total</span>
+                            <span>R$10.700,00</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Shipping</span>
+                            <span>Free</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Discount</span>
+                            <span>R$ 0</span>
+                        </div>
+                        
+                        <hr>
+                        <div class="d-flex justify-content-between font-weight-bold">
+                            <span>Total</span>
+                            <span>R$10.700,00</span>
+                        </div>
+                    </li>
+                </ul>
+                <a href="/finished.html">
+                    <button type="submit" class="btn order-button mt-4">PLACE ORDER</button>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h6 class="footer-title">Top Category</h6>
+                    <ul class="list-footer">
+                        <li><a href="#">Violões</a></li>
+                        <li><a href="#">Guitarras</a></li>
+                        <li><a href="#">Percussão</a></li>
+                        <li><a href="#">Sopro</a></li>
+                        <li><a href="#">Periféricos</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-title">Quick Links</h6>
+                    <ul class="list-footer">
+                        <li><a href="#">Shop Products</a></li>
+                        <li><a href="#">Checkout</a></li>
+                        <li><a href="#">Cart</a></li>
+                        
+                    </ul>
+                </div>
+                
+                <div class="col-md-3">
+                    <h6 class="footer-title">Contact Us</h6>
+                    <p>+55 8599131-7493</p>
+                    <p>Fortaleza, Ceará, Brasil</p>
+                    <p>info@musicall.com</p>
+                    <div class="mt-2">
+                        <a href="#" class="mr-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="mr-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p>&copy; 2024 musicALL. All Rights Reserved. Design by Davi&Carlos</p>
+            </div>
+        </div>
+    </footer>
+    </footer>
+
+
+    <!-- Bootstrap JS -->
+
+</body>
+
+</html>

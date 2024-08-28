@@ -172,6 +172,11 @@
 
 }
 
+.mt-4{
+    border-top: 1px solid var(--background-color)!important;
+    padding-top: 1em;
+
+}
 
 
 
@@ -181,7 +186,7 @@
 }
 
 .btn-primary {
-    color: #fff;
+    color: var(--white);
     background-color: var(--middle-color);
     border-color: var(--middle-color);
 }
@@ -228,7 +233,7 @@
 }
 
 #buy-now {
-    max-width: 30%;
+    max-width: 100%;
     color:var(--icons-color);
     background-color: var(--white);
     border-color: var(--icons-color);

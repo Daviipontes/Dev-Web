@@ -20,14 +20,14 @@
         
         <nav class="navbar navbar-expand-lg">
             
-            <a class="navbar-brand" href="#">musicALL</a>
+            <a class="navbar-brand" href="/index.html">musicALL</a>
             <form class="form-inline my-2 my-lg-0 mx-auto search-form">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search for anything..." aria-label="Search">
                 <button class="btn btn-search" type="submit"><i class="fas fa-search"></i></button>
             </form>
             <div class="navbar-icons">
                 <a href="#" class="btn btn-outline-light">Register</a>
-                <a href="#"><i class="fas fa-shopping-cart"></i></a>
+                <a href="/cart.html"><i class="fas fa-shopping-cart"></i></a>
                 <a href="#"><i class="fas fa-user"></i></a>
             </div>
         </nav>
@@ -57,28 +57,39 @@
                             </thead>
                             <tbody>
                                 <tr>
+                                    
                                     <td>
-                                        <img src="assets/img/product2.jpeg" alt="TV" class="img-fluid mr-2" style="width: 50px;">
-                                        4K UHD LED Smart TV with Chromecast Built-in
+                                        <button class="remove-button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#508C9B" class="bi bi-x" viewBox="0 0 16 16">
+                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                          </svg></button>
+                                        
+                                        <img src="assets/img/product2.jpeg" alt="TV" class="img-thumbnail mr-2" style="width: 50px;">
+                                        Yamaha P-125 Piano Digital
                                     </td>
                                     <td>
-                                        <span class="text-muted"></span> $70
+                                        <span class="text-muted"></span> R$ 4.200
                                     </td>
                                     <td>
-                                        <button class="quantity-btn">-</button> 01 <button class="quantity-btn">+</button>
+                                        01 
                                     </td>
-                                    <td>$70</td>
+                                    <td>R$ 4.200</td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <img src="assets/img/product1.jpg" alt="Headphones" class="img-fluid mr-2" style="width: 50px;">
-                                        Wired Over-Ear Gaming Headphones with USB
+                                        <button class="remove-button" >
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#508C9B" class="bi bi-x" viewBox="0 0 16 16">
+                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                          </svg></button>
+
+                                        <img src="assets/img/product1.jpg" alt="Headphones" class="img-thumbnail mr-2" style="width: 50px;">
+                                        Fender Stratocaster
                                     </td>
-                                    <td>$250</td>
+                                    <td>R$ 6.500</td>
                                     <td>
-                                        <button class="quantity-btn">-</button> 03 <button class="quantity-btn">+</button>
+                                         01
                                     </td>
-                                    <td>$250</td>
+                                    <td>R$ 6.500</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -97,7 +108,7 @@
                         <table class="table">
                             <tr>
                                 <td>Sub-total</td>
-                                <td>$320</td>
+                                <td>R$ 10.700,00</td>
                             </tr>
                             <tr>
                                 <td>Shipping</td>
@@ -105,24 +116,18 @@
                             </tr>
                             <tr>
                                 <td>Discount</td>
-                                <td>$24</td>
+                                <td>0</td>
                             </tr>
-                            <tr>
-                                <td>Tax</td>
-                                <td>$61.99</td>
-                            </tr>
+                            
                             <tr>
                                 <th>Total</th>
-                                <th>$357.99 USD</th>
+                                <th>R$ 10.700,00</th>
                             </tr>
                         </table>
-                        <button class="checkout-btn btn-block">Proceed to Checkout →</button>
+                        <a href="/checkout.html">
+                        <button class="btn checkout-button ">Proceed to Checkout →</button></a>
 
-                        <div class="coupon mt-4">
-                            <h3 class="text-center">Coupon Code</h3>
-                            <input type="text" class="form-control" placeholder="Email address">
-                            <button class="apply-btn mt-2 btn-block">Apply Coupon</button>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -134,11 +139,11 @@
                 <div class="col-md-3">
                     <h6 class="footer-title">Top Category</h6>
                     <ul class="list-footer">
-                        <li><a href="#">Computers & Laptops</a></li>
-                        <li><a href="#">Smartphones</a></li>
-                        <li><a href="#">Cameras & Photography</a></li>
-                        <li><a href="#">Accessories</a></li>
-                        <li><a href="#">Home Appliances</a></li>
+                        <li><a href="#">Violões</a></li>
+                        <li><a href="#">Guitarras</a></li>
+                        <li><a href="#">Percussão</a></li>
+                        <li><a href="#">Sopro</a></li>
+                        <li><a href="#">Periféricos</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3">
@@ -147,24 +152,14 @@
                         <li><a href="#">Shop Products</a></li>
                         <li><a href="#">Checkout</a></li>
                         <li><a href="#">Cart</a></li>
-                        <li><a href="#">Wishlist</a></li>
-                        <li><a href="#">Compare</a></li>
+                        
                     </ul>
                 </div>
-                <div class="col-md-3">
-                    <h6 class="footer-title">Customer Service</h6>
-                    <ul class="list-footer">
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Returns</a></li>
-                        <li><a href="#">Product Support</a></li>
-                        <li><a href="#">Warranty</a></li>
-                        <li><a href="#">Shipping Info</a></li>
-                    </ul>
-                </div>
+                
                 <div class="col-md-3">
                     <h6 class="footer-title">Contact Us</h6>
-                    <p>+629 555 0529</p>
-                    <p>4874 Westfalben Avenue, Manchester, Kentucky 39485</p>
+                    <p>+55 8599131-7493</p>
+                    <p>Fortaleza, Ceará, Brasil</p>
                     <p>info@musicall.com</p>
                     <div class="mt-2">
                         <a href="#" class="mr-2"><i class="fab fa-facebook-f"></i></a>
@@ -178,6 +173,7 @@
             </div>
         </div>
     </footer>
+
 
 </body>
 </html>
