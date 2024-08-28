@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profile_config</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles/profile_config.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Barra de navegação -->
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="/index.html">musicALL</a>
+        <form class="form-inline my-2 my-lg-0 mx-auto search-form">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search for anything..." aria-label="Search">
+            <button class="btn btn-search" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+        <div class="navbar-icons">
+            <a href="#" class="btn btn-outline-light">Register</a>
+            <a href="#"><i class="fas fa-shopping-cart"></i></a>
+            <a href="#"><i class="fas fa-user"></i></a>
+        </div>
+    </nav>
+
+    <!-- Blocos principais -->
+    <div class="container">
+
+        <!-- Bloco settings -->
+        <div class="card mb-4">
+            <div class="card-header">
+                CONFIGURAÇÕES DE PERFIL
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-2 text-center">
+                        <img src="assets/img/profile_pic.png" alt="Profile Picture" class="rounded-circle">
+                    </div>
+                    <!-- Coluna esquerda -->
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="displayName">Nome</label>
+                            <input type="text" class="form-control" id="displayName">
+                        </div>
+                        <div class="form-group">
+                            <label for="fullName">Nome Completo</label>
+                            <input type="text" class="form-control" id="fullName">
+                        </div>
+                        <div class="form-group">
+                            <label for="secondaryEmail">Email Secundário</label>
+                            <input type="text" class="form-control" id="secondaryEmail">
+                        </div>
+                        <div class="form-group">
+                            <label for="countryRegion">País/Região</label>
+                            <input type="text" class="form-control" id="countryRegion">
+                        </div>
+                        <button type="button" class="btn save-changes-btn">SALVAR ALTERAÇÕES</button>
+                    </div>
+                    <!-- Coluna direita -->
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="username">Nome de Usuário</label>
+                            <input type="text" class="form-control" id="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber">Telefone/Celular</label>
+                            <input type="text" class="form-control" id="phoneNumber">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="states">Estado</label>
+                                <input type="text" class="form-control" id="states">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="zipCode">CEP</label>
+                                <input type="text" class="form-control" id="zipCode">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+         <div class="row">
+
+            <!-- Bloco endereço de entrega -->
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        ENDEREÇO DE ENTREGA
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="shippingFirstName">Primeiro Nome</label>
+                                <input type="text" class="form-control" id="shippingFirstName">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="shippingLastName">Último Nome</label>
+                                <input type="text" class="form-control" id="shippingLastName">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="shippingCompanyName">Nome da Empresa (Opcional)</label>
+                            <input type="text" class="form-control" id="shippingCompanyName">
+                        </div>
+                        <div class="form-group">
+                            <label for="shippingAddress">Endereço</label>
+                            <input type="text" class="form-control" id="shippingAddress">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="shippingCountry">País</label>
+                                <input type="text" class="form-control" id="shippingCountry">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="shippingRegion">Estado</label>
+                                <input type="text" class="form-control" id="shippingRegion">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="shippingCity">Cidade</label>
+                                <input type="text" class="form-control" id="shippingCity">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="shippingZipCode">CEP</label>
+                                <input type="text" class="form-control" id="shippingZipCode">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="shippingEmail">Email</label>
+                            <input type="email" class="form-control" id="shippingEmail">
+                        </div>
+                        <div class="form-group">
+                            <label for="shippingPhoneNumber">Telefone</label>
+                            <input type="text" class="form-control" id="shippingPhoneNumber">
+                        </div>
+                        <button type="button" class="btn save-changes-btn">SALVAR ALTERAÇÕES</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        MUDAR SENHA
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="currentPassword">Senha Atual</label>
+                            <input type="password" class="form-control" id="currentPassword">
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">Nova Senha</label>
+                            <input type="password" class="form-control" id="newPassword">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirmar Nova Senha</label>
+                            <input type="password" class="form-control" id="confirmPassword">
+                        </div>
+                        <button type="button" class="btn save-changes-btn">MUDAR SENHA</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Barra inferior -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h6 class="footer-title">Top Category</h6>
+                    <ul class="list-footer">
+                        <li><a href="#">Computers & Laptops</a></li>
+                        <li><a href="#">Smartphones</a></li>
+                        <li><a href="#">Cameras & Photography</a></li>
+                        <li><a href="#">Accessories</a></li>
+                        <li><a href="#">Home Appliances</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-title">Quick Links</h6>
+                    <ul class="list-footer">
+                        <li><a href="#">Shop Products</a></li>
+                        <li><a href="#">Checkout</a></li>
+                        <li><a href="#">Cart</a></li>
+                        <li><a href="#">Wishlist</a></li>
+                        <li><a href="#">Compare</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-title">Customer Service</h6>
+                    <ul class="list-footer">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Product Support</a></li>
+                        <li><a href="#">Warranty</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-title">Contact Us</h6>
+                    <p>+629 555 0529</p>
+                    <p>4874 Westfalben Avenue, Manchester, Kentucky 39485</p>
+                    <p>info@musicall.com</p>
+                    <div class="mt-2">
+                        <a href="#" class="mr-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="mr-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p>&copy; 2024 musicALL. All Rights Reserved. Design by Davi&Carlos</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
