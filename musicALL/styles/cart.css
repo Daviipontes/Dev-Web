@@ -31,7 +31,7 @@ body {
     cursor: pointer;
 }
 
-.return-btn, .update-btn, .checkout-btn, .apply-btn {
+.return-btn, .update-btn, .apply-btn {
     background-color: var(--icons-color);
     border: none;
     color: var(--white);
@@ -40,14 +40,29 @@ body {
     cursor: pointer;
 }
 
-.return-btn:hover, .update-btn:hover, .checkout-btn:hover, .apply-btn:hover {
+.return-btn:hover, .update-btn:hover, .apply-btn:hover {
     background-color: var(--darker-color);
+    text-decoration: none !important;
 }
 
-.checkout-btn {
-    margin-bottom: 20px;
+
+
+
+.checkout-button {
+    background-color: var(--icons-color)!important;
+    color: var(--white)!important;
+    text-decoration: none;
+
+    border: 1px dotted var(--icons-color) !important;
 }
 
+.checkout-button:hover{
+    
+    background-color: var(--backgroud-clearer-color)!important;
+    color: var(--icons-color)!important;
+    
+    
+}
 .navbar-brand{
     color: var(--white)!important;
 
@@ -67,4 +82,11 @@ body {
     background-color: var(--white);
     border: 1px solid var(--icons-color);
     color: var(--icons-color);
+}
+
+a{
+    text-decoration: none;
+}
+a :hover{
+    text-decoration: none !important;
 }
