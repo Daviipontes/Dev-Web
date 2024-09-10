@@ -34,52 +34,111 @@
       ]
     },
     {
+      "id": 3,
       "name": "Shure SM58 Microfone",
       "seller": "Carlos",
       "rating": 4.6,
+      "brand": "Shure",
+      "availability": "In Stock",
+      "categories": ["Microfone"],
       "price": 850.00,
-      "link": "#",
-      "images": ["/assets/product3.jpeg"]
+      "images": ["/assets/product3.jpeg"],
+      "video": "/assets/video.mp4",
+      "description": [
+        "O Shure SM58 é o microfone vocal mais popular e confiável do mercado.",
+        "Ideal para performances ao vivo e gravações em estúdio, ele oferece excelente clareza vocal.",
+        "Sua construção robusta e o sistema anti-choque minimizam o ruído de manuseio.",
+        "Com uma resposta de frequência otimizada para vocais, é o microfone preferido por profissionais em todo o mundo."
+      ]
     },
     {
+      "id": 4,
       "name": "Roland TD-17KVX Bateria Eletrônica",
       "seller": "Carlos",
       "rating": 4.9,
+      "brand": "Roland",
+      "availability": "In Stock",
+      "categories": ["Bateria", "Instrumentos"],
       "price": 9300.00,
-      "link": "#",
-      "images": ["/assets/product4.jpg"]
+      "images": ["/assets/product4.jpg"],
+      "video": "/assets/video.mp4",
+      "description": [
+        "A Roland TD-17KVX é uma bateria eletrônica avançada com sons realistas e ótima resposta ao toque.",
+        "Com pads de malha para uma sensação autêntica e silenciosa, ela é ideal para treinos e performances ao vivo.",
+        "Possui uma vasta gama de sons de bateria, percussão e instrumentos eletrônicos integrados.",
+        "O módulo de som é altamente personalizável, permitindo ajustes nos timbres e efeitos."
+      ]
     },
     {
+      "id": 5,
       "name": "Marshall DSL40C Amplificador",
       "seller": "Carlos",
       "rating": 4.8,
+      "brand": "Marshall",
+      "availability": "In Stock",
+      "categories": ["Amplificador", "Acessório"],
       "price": 4900.00,
-      "link": "#",
-      "images": ["/assets/product5.jpeg"]
+      "images": ["/assets/product5.jpeg"],
+      "video": "/assets/video.mp4",
+      "description": [
+        "O Marshall DSL40C é um amplificador valvulado clássico com um timbre quente e encorpado.",
+        "Perfeito para guitarristas que buscam uma ampla gama de sons, desde limpos até distorções pesadas.",
+        "Possui dois canais independentes e um reverb integrado, ideal para performances ao vivo.",
+        "A qualidade de construção robusta garante durabilidade e longevidade."
+      ]
     },
     {
+      "id": 6,
       "name": "Korg Kross 2 Workstation",
       "seller": "Carlos",
       "rating": 4.8,
+      "brand": "Korg",
+      "availability": "In Stock",
+      "categories": ["Piano", "Instrumentos", "Digital"],
       "price": 5700.00,
-      "link": "#",
-      "images": ["/assets/product6.jpeg"]
+      "images": ["/assets/product6.jpeg"],
+      "video": "/assets/video.mp4",
+      "description": [
+        "O Korg Kross 2 é uma poderosa workstation com uma vasta biblioteca de sons e efeitos.",
+        "Leve e portátil, ele é ideal para músicos que se apresentam ao vivo e produzem em estúdio.",
+        "Com pads sensíveis ao toque, é fácil criar loops e faixas de acompanhamento em tempo real.",
+        "A conectividade USB permite fácil integração com softwares de gravação."
+      ]
     },
     {
+      "id": 7,
       "name": "Ibanez RG550",
       "seller": "Carlos",
       "rating": 4.7,
+      "brand": "Ibanez",
+      "availability": "In Stock",
+      "categories": ["Guitarra", "Instrumentos"],
       "price": 7200.00,
-      "link": "#",
-      "images": ["/assets/product7.jpg"]
+      "images": ["/assets/product7.jpg"],
+      "video": "/assets/video.mp4",
+      "description": [
+        "A Ibanez RG550 é uma guitarra de alta performance, popular entre guitarristas de rock e metal.",
+        "Com um braço fino e captadores poderosos, oferece velocidade e precisão em solos rápidos.",
+        "O sistema de tremolo permite alavancadas extremas sem perder a afinação.",
+        "A construção sólida e leve garante conforto durante longas performances."
+      ]
     },
     {
+      "id": 8,
       "name": "AKG C414 XLII Microphone",
       "seller": "Carlos",
       "rating": 4.5,
+      "brand": "AKG",
+      "availability": "In Stock",
+      "categories": ["Microfone"],
       "price": 6200.00,
-      "link": "#",
-      "images": ["/assets/product8.jpeg"]
+      "images": ["/assets/product8.jpeg"],
+      "video": "/assets/video.mp4",
+      "description": [
+        "O AKG C414 XLII é um microfone condensador de alto desempenho, ideal para gravações de voz e instrumentos.",
+        "Com nove padrões polares, ele oferece flexibilidade em uma variedade de situações de gravação.",
+        "Sua resposta de frequência suave e detalhada faz dele uma escolha popular entre engenheiros de som.",
+        "Robusto e versátil, é uma excelente opção para estúdios profissionais e home studios."
+      ]
     }
-  ]
-  
+]

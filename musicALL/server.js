@@ -57,63 +57,12 @@ app.get('/search', (req, res) => {
     // Filtrar produtos cujo nome inclua o termo de busca
     const filteredProducts = productsData.filter(product => product.name.toLowerCase().includes(query));
 
-    // Renderizar a página principal, mas passando os produtos filtrados
-    res.render('pages/index', {
+    // Renderizar a página de resultados de busca, passando os produtos filtrados
+    res.render('pages/searchResults', {
         title: `Search Results for "${req.query.query}"`,
-        cssFile: null, // Ou outro CSS que já é usado na página principal
-        products: filteredProducts,
-        query: req.query.query,
-        showSearchResults: true  // Passa uma flag para indicar que é uma busca
-    });
-});
-
-
-app.get('/filter', (req, res) => {
-    const { category, price, brand } = req.query;
-    let filteredProducts = productsData;
-
-    // Filtro por categoria
-    if (category) {
-        const categoriesArray = Array.isArray(category) ? category : [category];
-        filteredProducts = filteredProducts.filter(product => 
-            categoriesArray.some(cat => product.categories.includes(cat))
-        );
-    }
-
-    // Filtro por faixa de preço
-    if (price) {
-        switch (price) {
-            case 'under-200':
-                filteredProducts = filteredProducts.filter(product => product.price < 200);
-                break;
-            case '200-500':
-                filteredProducts = filteredProducts.filter(product => product.price >= 200 && product.price <= 500);
-                break;
-            case '500-1000':
-                filteredProducts = filteredProducts.filter(product => product.price >= 500 && product.price <= 1000);
-                break;
-            case '1000-5000':
-                filteredProducts = filteredProducts.filter(product => product.price >= 1000 && product.price <= 5000);
-                break;
-            case 'over-5000':
-                filteredProducts = filteredProducts.filter(product => product.price > 5000);
-                break;
-        }
-    }
-
-    // Filtro por marca
-    if (brand) {
-        const brandsArray = Array.isArray(brand) ? brand : [brand];
-        filteredProducts = filteredProducts.filter(product => 
-            brandsArray.includes(product.brand)
-        );
-    }
-
-    // Renderiza a página com os produtos filtrados
-    res.render('pages/index', {
-        title: 'Filtered Products',
-        products: filteredProducts,
-        cssFile: null
+        cssFile: null,
+        products: filteredProducts
+        
     });
 });
 
