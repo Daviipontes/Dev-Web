@@ -1,0 +1,214 @@
+<div class="container mt-4">
+    <div class="row">
+        <!-- Informações de Cobrança -->
+        <div class="col-md-8">
+            <h4 class="font-weight-bold">Billing Information</h4>
+            <form id="checkout-form" action="/submit-checkout" method="POST" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="first-name" class="form-label">First name</label>
+                        <input type="text" class="form-control" id="first-name" name="first_name" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="last-name" class="form-label">Last name</label>
+                        <input type="text" class="form-control" id="last-name" name="last_name" required>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <label for="company-name" class="form-label">Company Name <span class="text-muted">(Optional)</span></label>
+                        <input type="text" class="form-control" id="company-name" name="company_name">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <label for="address" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="address" name="address" required>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-3">
+                        <label for="country" class="form-label">Country</label>
+                        <select class="form-control" id="country" name="country" required>
+                            <option value="">Select a country</option>
+                            <% for (const country in locationData.countries) { %>
+                                <option value="<%= country %>"><%= country %></option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="state" class="form-label">Region/State</label>
+                        <select class="form-control" id="state" name="state" required>
+                            <option value="">Select a state</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="city" class="form-label">City</label>
+                        <select class="form-control" id="city" name="city" required>
+                            <option value="">Select a city</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="zip-code" class="form-label">Zip Code</label>
+                        <input type="text" class="form-control" id="zip-code" name="zip_code" required>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="phone-number" class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" id="phone-number" name="phone_number" required>
+                    </div>
+                </div>
+                <div class="form-check mt-3">
+                    <input class="form-check-input" type="checkbox" value="" id="different-address">
+                    <label class="form-check-label" for="different-address">Ship to a different address</label>
+                </div>
+
+                <!-- Pagamento -->
+                <h4 class="font-weight-bold mt-4">Payment - Pix</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="pix-name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="pix-name" name="pix_name" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="pix-receipt" class="form-label">Insert PIX receipt</label>
+                        <input type="file" class="form-control" id="pix-receipt" name="pix_receipt" required>
+                    </div>
+                </div>
+
+                <!-- Informação Adicional -->
+                <h4 class="font-weight-bold mt-4">Additional Information</h4>
+                <div class="form-group">
+                    <label for="order-notes" class="form-label">Order Notes <span class="text-muted">(Optional)</span></label>
+                    <textarea class="form-control" id="order-notes" name="order_notes" rows="4"></textarea>
+                </div>
+
+                <!-- Botão de Submissão -->
+                <button type="submit" class="btn order-button mt-4" id="place-order-btn">Place Order</button>
+            </form>
+        </div>
+
+        <!-- Resumo do Pedido -->
+        <div class="col-md-4">
+            <h4 class="font-weight-bold">Order Summary</h4>
+            <ul class="list-group">
+                <% cart.forEach(item => { %>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <img src="<%= item.images[0] %>" alt="Product Image" class="img-thumbnail" style="width: 50px;">
+                        <span><%= item.name %></span>
+                        <br>
+                        <small><%= item.quantity %> x R$ <%= parseFloat(item.price).toFixed(2).replace('.', ',') %></small>
+                    </div>
+                    <span>R$ <%= (item.price * item.quantity).toFixed(2).replace('.', ',') %></span>
+                </li>
+                <% }) %>
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                        <span>Sub-total</span>
+                        <span>R$ <%= subtotal.toFixed(2).replace('.', ',') %></span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Shipping</span>
+                        <span>Free</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Discount</span>
+                        <span>R$ 0</span>
+                    </div>
+                    
+                    <hr>
+                    <div class="d-flex justify-content-between font-weight-bold">
+                        <span>Total</span>
+                        <span>R$ <%= subtotal.toFixed(2).replace('.', ',') %></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelector('.order-button').addEventListener('click', function(event) {
+    const requiredFields = [
+        'first-name',
+        'last-name',
+        'address',
+        'country',
+        'state',
+        'city',
+        'zip-code',
+        'email',
+        'phone-number',
+        'pix-name',
+        'pix-receipt'
+    ];
+
+    let allValid = true;
+
+    requiredFields.forEach(fieldId => {
+        const input = document.getElementById(fieldId);
+
+        // Verifica se o campo está vazio ou, no caso de ser um input de arquivo, se nenhum arquivo foi selecionado
+        if (!input.value || (input.type === 'file' && !input.files.length)) {
+            allValid = false;
+            input.classList.add('is-invalid'); // Adiciona uma classe para marcar o campo como inválido
+        } else {
+            input.classList.remove('is-invalid'); // Remove a classe se o campo for válido
+        }
+    });
+
+    if (!allValid) {
+        event.preventDefault(); // Impede o envio do formulário se houver campos inválidos
+        alert('Please fill in all required fields.');
+    } else {
+        // Submete o formulário
+        document.getElementById('checkout-form').submit();
+    }
+});
+
+// script para selecionar países, estados e cidades
+
+const locationData = <%- JSON.stringify(locationData) %>;
+
+    document.getElementById('country').addEventListener('change', function() {
+        const country = this.value;
+        const states = locationData.countries[country]?.states || {};
+
+        // Preencher os estados
+        const stateSelect = document.getElementById('state');
+        stateSelect.innerHTML = '<option value="">Select a state</option>';
+        Object.keys(states).forEach(state => {
+            const option = document.createElement('option');
+            option.value = state;
+            option.textContent = state;
+            stateSelect.appendChild(option);
+        });
+
+        // Limpar a lista de cidades
+        document.getElementById('city').innerHTML = '<option value="">Select a city</option>';
+    });
+
+    // Quando o estado muda, preencher as cidades
+    document.getElementById('state').addEventListener('change', function() {
+        const country = document.getElementById('country').value;
+        const state = this.value;
+        const cities = locationData.countries[country]?.states[state] || [];
+
+        // Preencher as cidades
+        const citySelect = document.getElementById('city');
+        citySelect.innerHTML = '<option value="">Select a city</option>';
+        cities.forEach(city => {
+            const option = document.createElement('option');
+            option.value = city;
+            option.textContent = city;
+            citySelect.appendChild(option);
+        });
+    });
+
+</script>

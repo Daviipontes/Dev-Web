@@ -1,0 +1,18 @@
+{
+    "countries": {
+      "Brazil": {
+        "states": {
+          "Ceará": ["Fortaleza", "Sobral"],
+          "São Paulo": ["São Paulo", "Campinas"],
+          "Rio de Janeiro": ["Rio de Janeiro", "Niterói"]
+        }
+      },
+      "USA": {
+        "states": {
+          "California": ["Los Angeles", "San Francisco"],
+          "New York": ["New York City", "Buffalo"]
+        }
+      }
+    }
+  }
+  

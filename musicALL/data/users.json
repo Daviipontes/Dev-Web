@@ -1,0 +1,48 @@
+[
+  {
+    "first_name": "sdas",
+    "last_name": "dasdasd",
+    "company_name": "dasdsa",
+    "address": "dasdsa",
+    "country": "Brazil",
+    "state": "Ceará",
+    "city": "Fortaleza",
+    "zip_code": "asdasd",
+    "email": "dasdas",
+    "phone_number": "asdasd",
+    "pix_name": "sadasd",
+    "pix_receipt": "11162e7dcdb764333f6c703be3158a12",
+    "order_notes": "",
+    "order_items": [
+      {
+        "id": 1,
+        "name": "Yamaha P-125 Piano Digital",
+        "seller": "Carlos",
+        "rating": 5,
+        "brand": "Yamaha",
+        "availability": "In Stock",
+        "categories": [
+          "Piano",
+          "Instrumentos",
+          "Digital"
+        ],
+        "price": 4200,
+        "images": [
+          "/assets/product2.jpeg",
+          "/assets/product1.jpg",
+          "/assets/product3.jpeg"
+        ],
+        "video": "/assets/video.mp4",
+        "description": [
+          "O Yamaha P-125 é um piano digital projetado para simular a experiência de um piano acústico com a conveniência e portabilidade de um instrumento eletrônico.",
+          "Com 88 teclas e o sistema Graded Hammer Standard (GHS), o P-125 oferece um toque natural, com teclas mais pesadas nas notas graves e mais leves nas notas agudas.",
+          "Equipado com o motor sonoro Pure CF, o P-125 reproduz com precisão o som do piano de concerto Yamaha CFIIIS, conhecido pela sua clareza tonal.",
+          "O P-125 oferece 24 vozes diferentes, incluindo pianos elétricos, órgãos e cordas, e vem com 50 músicas pré-definidas e 20 ritmos de bateria para prática e performance."
+        ],
+        "quantity": 1
+      }
+    ],
+    "order_total": 4200,
+    "order_date": "2024-09-09T23:47:30.047Z"
+  }
+]

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+
+    <!-- CSS Geral -->
+    <link href="/css/styles/style.css" rel="stylesheet"> 
+
+    <% if (cssFile) { %>
+        <link href="/<%= cssFile %>" rel="stylesheet">
+    <% } %>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="/">musicALL</a>
+        <form class="form-inline my-2 my-lg-0 mx-auto search-form" action="/search" method="GET">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search for anything..." aria-label="Search">
+            <button class="btn btn-search" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+        <div class="navbar-icons">
+            <a href="#" class="btn btn-outline-light">Register</a>
+            <a href="/cart"><i class="fas fa-shopping-cart"></i></a>
+            <a href="#"><i class="fas fa-user"></i></a>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row mt-3">
+            <!-- Espaço para conteúdo dinâmico -->
+            <%- body %>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h6 class="footer-title">Top Category</h6>
+                    <ul class="list-footer">
+                        <li><a href="#">Violões</a></li>
+                        <li><a href="#">Guitarras</a></li>
+                        <li><a href="#">Percussão</a></li>
+                        <li><a href="#">Sopro</a></li>
+                        <li><a href="#">Periféricos</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-title">Quick Links</h6>
+                    <ul class="list-footer">
+                        <li><a href="#">Shop Products</a></li>
+                        <li><a href="#">Checkout</a></li>
+                        <li><a href="#">Cart</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-title">Customer Service</h6>
+                    <ul class="list-footer">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Product Support</a></li>
+                        <li><a href="#">Warranty</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-title">Contact Us</h6>
+                    <p>+55 8599131-7493</p>
+                    <p>Fortaleza, Ceará, Brasil</p>
+                    <p>info@musicall.com</p>
+                    <div class="mt-2">
+                        <a href="#" class="mr-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="mr-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p>&copy; 2024 musicALL. All Rights Reserved. Design by Davi&Carlos</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/js/main.js"></script>
+</body>
+</html>

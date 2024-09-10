@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>musicALL</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="/index.html">musicALL</a>
+        <form class="form-inline my-2 my-lg-0 mx-auto search-form">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search for anything..." aria-label="Search">
+            <button class="btn btn-search" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+        <div class="navbar-icons">
+            <a href="#" class="btn btn-outline-light">Register</a>
+            <a href="/cart.html"><i class="fas fa-shopping-cart"></i></a>
+            <a href="#"><i class="fas fa-user"></i></a>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row mt-3">
+            <!-- Seções de categorias -->
+            <div class="col-md-3">
+                <h5 class="font-weight-bold">Category</h5>
+                <form action="/filter" method="GET">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="category" value="Instrumentos Musicais" id="cat1">
+                        <label class="form-check-label" for="cat1">Instrumentos Musicais</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="category" value="Guitarra" id="cat2">
+                        <label class="form-check-label" for="cat2">Guitarra</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="category" value="Bateria" id="cat3">
+                        <label class="form-check-label" for="cat3">Bateria</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="category" value="Piano & Teclado" id="cat4">
+                        <label class="form-check-label" for="cat4">Piano & Teclado</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="category" value="Saxofone" id="cat5">
+                        <label class="form-check-label" for="cat5">Saxofone</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="category" value="Microfone" id="cat6">
+                        <label class="form-check-label" for="cat6">Microfone</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="category" value="Acessório" id="cat7">
+                        <label class="form-check-label" for="cat7">Acessório</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="category" value="Percussão" id="cat8">
+                        <label class="form-check-label" for="cat8">Percussão</label>
+                    </div>
+                    
+                </form>
+
+                <h5 class="font-weight-bold">Price Range</h5>
+                    <form action="/filter" method="GET">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="price" value="All Prices" id="price1">
+                            <label class="form-check-label" for="price1">All Prices</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="price" value="Under $200" id="price2">
+                            <label class="form-check-label" for="price2">Under $200</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="price" value="$200 to $500" id="price3">
+                            <label class="form-check-label" for="price3">$200 to $500</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="price" value="$500 to $1,000" id="price4">
+                            <label class="form-check-label" for="price4">$500 to $1,000</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="price" value="$1,000 to $5,000" id="price5">
+                            <label class="form-check-label" for="price5">$1,000 to $5,000</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="price" value="Over $5,000" id="price6">
+                            <label class="form-check-label" for="price6">Over $5,000</label>
+                        </div>
+                    </form>
+
+                <h5 class="font-weight-bold">Popular Brands</h5>
+                    <form action="/filter" method="GET">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="brand" value="Yamaha" id="brand1">
+                                    <label class="form-check-label" for="brand1">Yamaha</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="brand" value="Fender" id="brand2">
+                                    <label class="form-check-label" for="brand2">Fender</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="brand" value="Gibson" id="brand3">
+                                    <label class="form-check-label" for="brand3">Gibson</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="brand" value="Korg" id="brand4">
+                                    <label class="form-check-label" for="brand4">Korg</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="brand" value="Roland" id="brand5">
+                                    <label class="form-check-label" for="brand5">Roland</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="brand" value="Ibanez" id="brand6">
+                                    <label class="form-check-label" for="brand6">Ibanez</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="brand" value="Marshall" id="brand7">
+                                    <label class="form-check-label" for="brand7">Marshall</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="brand" value="Peavey" id="brand8">
+                                    <label class="form-check-label" for="brand8">Peavey</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="brand" value="Line 6" id="brand9">
+                                    <label class="form-check-label" for="brand9">Line 6</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="brand" value="Orange" id="brand10">
+                                    <label class="form-check-label" for="brand10">Orange</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="brand" value="BOSS" id="brand11">
+                                    <label class="form-check-label" for="brand11">BOSS</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="brand" value="Squier" id="brand12">
+                                    <label class="form-check-label" for="brand12">Squier</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="brand" value="Takamine" id="brand13">
+                                    <label class="form-check-label" for="brand13">Takamine</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="brand" value="Epiphone" id="brand14">
+                                    <label class="form-check-label" for="brand14">Epiphone</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                <h5 class="category-title">Popular Tags</h5>
+        
+                <div class="filter-buttons">
+                    <button class="filter-btn" data-filter="instrumentos">Instrumentos Musicais</button>
+                    <button class="filter-btn" data-filter="guitarra">Guitarra</button>
+                    <button class="filter-btn" data-filter="bateria">Bateria</button>
+                    <button class="filter-btn" data-filter="piano">Piano & Teclado</button>
+                    <button class="filter-btn" data-filter="saxofone">Saxofone</button>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <!-- Card de Produto 1 -->
+                    <div class="col-md-4 product-col">
+                        <a href="product1.html" class="product-card">
+                            <img src="/assets/img/product1.jpg" class="img-fluid" alt="Product Image">
+                            <p class="product-title">Fender Stratocaster</p>
+                            <p class="product-text">Seller: Carlos</p>
+                            <p class="product-text">Rating: <strong>4,8/5</strong></p>
+                            <p class="product-price">R$ 6.500,00</p>
+                        </a>
+                    </div>
+                    <!-- Card de Produto 2 -->
+                    <div class="col-md-4 product-col">
+                        <a href="product2.html" class="product-card">
+                            <img src="/assets/img/product2.jpeg" class="img-fluid" alt="Product Image">
+                            <p class="product-title">Yamaha P-125 Piano Digital</p>
+                            <p class="product-text">Seller: Carlos</p>
+                            <p class="product-text">Rating: <strong>4,4/5</strong></p>
+                            <p class="product-price">R$ 4.200,00</p>
+                        </a>
+                    </div>
+                    <!-- Card de Produto 3 -->
+                    <div class="col-md-4 product-col">
+                        <a href="product3.html" class="product-card">
+                            <img src="/assets/img/product3.jpeg" class="img-fluid" alt="Product Image">
+                            <p class="product-title">Shure SM58 Microfone</p>
+                            <p class="product-text">Seller: Carlos</p>
+                            <p class="product-text">Rating: <strong>4,6/5</strong></p>
+                            <p class="product-price">R$ 850,00</p>
+                        </a>
+                    </div>
+                    <!-- Card de Produto 4 -->
+                    <div class="col-md-4 product-col">
+                        <a href="product4.html" class="product-card">
+                            <img src="/assets/img/product4.jpg" class="img-fluid" alt="Product Image">
+                            <p class="product-title">Roland TD-17KVX Bateria Eletrônica </p>
+                            <p class="product-text">Seller: Carlos</p>
+                            <p class="product-text">Rating: <strong>4,9/5</strong></p>
+                            <p class="product-price"> R$ 9.300,00</p>
+                        </a>
+                    </div>
+                    <!-- Card de Produto 5 -->
+                    <div class="col-md-4 product-col">
+                        <a href="product5.html" class="product-card">
+                            <img src="/assets/img/product5.jpeg" class="img-fluid" alt="Product Image">
+                            <p class="product-title">Marshall DSL40C Amplificador</p>
+                            <p class="product-text">Seller: Carlos</p>
+                            <p class="product-text">Rating: <strong>4,8/5</strong></p>
+                            <p class="product-price">R$ 4.900,00</p>
+                        </a>
+                    </div>
+                    <!-- Card de Produto 6 -->
+                    <div class="col-md-4 product-col">
+                        <a href="product6.html" class="product-card">
+                            <img src="/assets/img/product6.jpeg" class="img-fluid" alt="Product Image">
+                            <p class="product-title">Korg Kross 2 Workstation</p>
+                            <p class="product-text">Seller: Carlos</p>
+                            <p class="product-text">Rating: <strong>4,8/5</strong></p>
+                            <p class="product-price">R$ 5.700,00</p>
+                        </a>
+                    </div>
+                </div>
+            <nav aria-label="Product Pagination">
+                <ul class="pagination justify-content-center">
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" >‹</a>
+                  </li>
+                  <li class="page-item active">
+                    <a class="page-link" href="#">01</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">02</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">03</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">04</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">05</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">06</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">›</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+        </div>
+    </div>
+
+    
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h6 class="footer-title">Top Category</h6>
+                    <ul class="list-footer">
+                        <li><a href="#">Violões</a></li>
+                        <li><a href="#">Guitarras</a></li>
+                        <li><a href="#">Percussão</a></li>
+                        <li><a href="#">Sopro</a></li>
+                        <li><a href="#">Periféricos</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-title">Quick Links</h6>
+                    <ul class="list-footer">
+                        <li><a href="#">Shop Products</a></li>
+                        <li><a href="#">Checkout</a></li>
+                        <li><a href="#">Cart</a></li>
+                        
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-title">Customer Service</h6>
+                    <ul class="list-footer">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Product Support</a></li>
+                        <li><a href="#">Warranty</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-title">Contact Us</h6>
+                    <p>+55 8599131-7493</p>
+                    <p>Fortaleza, Ceará, Brasil</p>
+                    <p>info@musicall.com</p>
+                    <div class="mt-2">
+                        <a href="#" class="mr-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="mr-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p>&copy; 2024 musicALL. All Rights Reserved. Design by Davi&Carlos</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

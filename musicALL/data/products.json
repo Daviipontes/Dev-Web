@@ -1,0 +1,85 @@
+[
+    {
+      "id": 1,
+      "name": "Yamaha P-125 Piano Digital",
+      "seller": "Carlos",
+      "rating": 5,
+      "brand": "Yamaha",
+      "availability": "In Stock",
+      "categories": ["Piano", "Instrumentos", "Digital"],
+      "price": 4200.00,
+      "images": ["/assets/product2.jpeg", "/assets/product1.jpg", "/assets/product3.jpeg"],
+      "video": "/assets/video.mp4",
+      "description": [
+        "O Yamaha P-125 é um piano digital projetado para simular a experiência de um piano acústico com a conveniência e portabilidade de um instrumento eletrônico.",
+        "Com 88 teclas e o sistema Graded Hammer Standard (GHS), o P-125 oferece um toque natural, com teclas mais pesadas nas notas graves e mais leves nas notas agudas.",
+        "Equipado com o motor sonoro Pure CF, o P-125 reproduz com precisão o som do piano de concerto Yamaha CFIIIS, conhecido pela sua clareza tonal.",
+        "O P-125 oferece 24 vozes diferentes, incluindo pianos elétricos, órgãos e cordas, e vem com 50 músicas pré-definidas e 20 ritmos de bateria para prática e performance."
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Fender Stratocaster",
+      "seller": "Carlos",
+      "rating": 4.8,
+      "brand": "Fender",
+      "availability": "In Stock",
+      "categories": ["Guitarra", "Instrumentos"],
+      "price": 6500.00,
+      "images": ["/assets/product1.jpg", "/assets/product1.jpg", "/assets/product1.jpg"],
+      "video": "/assets/video.mp4",
+      "description": [
+        "A Fender Stratocaster é uma guitarra icônica...",
+        "Blah blah blah..."
+      ]
+    },
+    {
+      "name": "Shure SM58 Microfone",
+      "seller": "Carlos",
+      "rating": 4.6,
+      "price": 850.00,
+      "link": "#",
+      "images": ["/assets/product3.jpeg"]
+    },
+    {
+      "name": "Roland TD-17KVX Bateria Eletrônica",
+      "seller": "Carlos",
+      "rating": 4.9,
+      "price": 9300.00,
+      "link": "#",
+      "images": ["/assets/product4.jpg"]
+    },
+    {
+      "name": "Marshall DSL40C Amplificador",
+      "seller": "Carlos",
+      "rating": 4.8,
+      "price": 4900.00,
+      "link": "#",
+      "images": ["/assets/product5.jpeg"]
+    },
+    {
+      "name": "Korg Kross 2 Workstation",
+      "seller": "Carlos",
+      "rating": 4.8,
+      "price": 5700.00,
+      "link": "#",
+      "images": ["/assets/product6.jpeg"]
+    },
+    {
+      "name": "Ibanez RG550",
+      "seller": "Carlos",
+      "rating": 4.7,
+      "price": 7200.00,
+      "link": "#",
+      "images": ["/assets/product7.jpg"]
+    },
+    {
+      "name": "AKG C414 XLII Microphone",
+      "seller": "Carlos",
+      "rating": 4.5,
+      "price": 6200.00,
+      "link": "#",
+      "images": ["/assets/product8.jpeg"]
+    }
+  ]
+  
