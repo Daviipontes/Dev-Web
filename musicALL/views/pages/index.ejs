@@ -142,11 +142,11 @@
             </div>
         </div>
 
-        <!-- Área de produtos -->
+        <!-- produtss -->
         <div class="col-md-9">      
            <div id="products-list">
                 <div class="row justify-content-start">
-                    <!-- Produtos serão carregados via JavaScript -->
+                    <!-- produtos renderizados dinamicamente -->
                 </div>
             </div>
 
@@ -171,10 +171,10 @@
 </div>
 
 <script>
-    // Carrega todos os produtos e os exibe inicialmente
+    // carrega todos os produtos e exibe inicialmente
     let allProducts = <%- JSON.stringify(products) %>;
 
-    // Função para renderizar os produtos
+    // renderiza
     function renderProducts(products) {
         const productsList = document.querySelector('#products-list .row');
         productsList.innerHTML = ''; // Limpar a lista
@@ -198,10 +198,10 @@
         }
     }
 
-    // Renderizar todos os produtos inicialmente
+    // renderiza todos os produtos inicialmente
     renderProducts(allProducts);
 
-    // Filtragem via Front-End
+    // filtro frontend
     document.getElementById('filter-form').addEventListener('submit', function(event) {
         event.preventDefault(); // Impede o envio padrão
 
@@ -212,14 +212,14 @@
 
         let filteredProducts = allProducts;
 
-        // Filtra por categorias
+        // filtro categorias
         if (selectedCategories.length > 0) {
             filteredProducts = filteredProducts.filter(product =>
                 selectedCategories.some(cat => product.categories.includes(cat))
             );
         }
 
-        // Filtra por faixa de preço
+        // filtro preço
         if (selectedPrice && selectedPrice !== 'All Prices') {
             filteredProducts = filteredProducts.filter(product => {
                 if (selectedPrice === 'Under 200') return product.price < 200;
@@ -230,14 +230,14 @@
             });
         }
 
-        // Filtra por marcas
+        
         if (selectedBrands.length > 0) {
             filteredProducts = filteredProducts.filter(product =>
                 selectedBrands.includes(product.brand)
             );
         }
 
-        // Renderiza os produtos filtrados
+        // renderiza os produtos filtrados
         renderProducts(filteredProducts);
     });
 </script>
