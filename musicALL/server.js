@@ -258,11 +258,12 @@ app.get('/profile_config', (req, res) => {
     });
 });
 
+const currentUserEmail = 'carlos.victor@alu.ufc.br'
 
 // Obter compras recentes de um usuario especifico
 app.get('/api/recent-purchases', (req, res) => {
     const users = loadUsers();
-    const user = users.find(user => user.email === 'carlos.victor@alu.ufc.br');
+    const user = users.find(user => user.email === currentUserEmail); // Usuario
 
     if (user && user.orders) {
         res.json(user.orders);
@@ -271,6 +272,26 @@ app.get('/api/recent-purchases', (req, res) => {
     }
 });
 
+// Obter detalhes do perfil de um usuario
+app.get('/api/profile-details', (req, res) => {
+    const users = loadUsers();
+    const user = users.find(user => user.email === currentUserEmail); // Replace with authenticated user's email
+
+    if (user) {
+        res.json({
+            first_name: user.first_name,
+            last_name: user.last_name,
+            email: user.email,
+            phone_number: user.phone_number,
+            address: user.address,
+            city: user.city,
+            state: user.state,
+            country: user.country
+        });
+    } else {
+        res.status(404).json({ message: 'User not found.' });
+    }
+});
 
 // Inicialização do servidor
 const porta = 8090

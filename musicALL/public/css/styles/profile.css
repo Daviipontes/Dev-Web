@@ -11,7 +11,7 @@
 }
 
 /* Estilo das compras recentes */
-.status-inprogress {
+.status-in-progress {
     color: lightsalmon;
     font-weight: bold;
 }
@@ -24,6 +24,10 @@
 .status-canceled {
     color: lightcoral;
     font-weight: bold;
+}
+
+.table {
+    color: var(--font-color-dark)
 }
 
 .table-font {
@@ -333,7 +337,7 @@ body {
 .product-card button {
     margin-top: auto; /* Mantém o botão na parte inferior do card */
     background-color: var(--middle-color);
-    color:var(--white);
+    color: var(--white);
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
