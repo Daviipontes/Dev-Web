@@ -37,7 +37,7 @@ const loadUsers = () => {
     }
 };
 
-// Função para salvar os dados no arquivo usuarios.json
+// salvar os dados no arquivo usuarios.json
 const saveUsers = (users) => {
     try {
         fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2), 'utf-8');
@@ -54,10 +54,10 @@ app.get('/search', (req, res) => {
     const query = req.query.query.toLowerCase(); // Captura o termo de busca
     const productsData = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'products.json'), 'utf-8'));
 
-    // Filtrar produtos cujo nome inclua o termo de busca
+    // filtra produtos que o nome inclua o termo de busca
     const filteredProducts = productsData.filter(product => product.name.toLowerCase().includes(query));
 
-    // Renderizar a página de resultados de busca, passando os produtos filtrados
+    // renderiza a página de resultados de busca
     res.render('pages/searchResults', {
         title: `Search Results for "${req.query.query}"`,
         cssFile: null,
@@ -75,14 +75,14 @@ app.post('/cart/buy-now', (req, res) => {
         const cartItem = cart.find(item => item.id === product.id);
   
         if (!cartItem) {
-            // Adiciona o produto ao carrinho com a quantidade especificada
+            // adiciona o produto ao carrinho com a quantidade especificada
             cart.push({
                 ...product,
                 quantity: parseInt(quantity)
             });
         }
   
-        // Redireciona para o carrinho após adicionar o produto
+        // redireciona pro carrinho depois adicionar o produto
         res.redirect('/cart');
     } else {
         res.status(404).send('Produto não encontrado');
@@ -90,23 +90,23 @@ app.post('/cart/buy-now', (req, res) => {
   });
 
 app.post('/cart', (req, res) => {
-  const { id, quantity } = req.body; // Pegue o ID e a quantidade do corpo da requisição
+  const { id, quantity } = req.body; // pega o ID e a quantidade do corpo da requisição
 
-  // Buscar o produto no JSON usando o ID
+  // buscar o produto no JSON usando o ID
   const product = productsData.find(p => p.id === parseInt(id));
 
   if (product) {
-      // Verificar se o produto já está no carrinho
+      // verifica se o produto já tá no carrinho
       const productExists = cart.find(item => item.id === id);
 
       if (productExists) {
-          // Atualizar a quantidade se o produto já está no carrinho
+          // atualiza a quantidade se o produto já tá no carrinho
           productExists.quantity += parseInt(quantity);
       } else {
-          // Adicionar o produto ao carrinho
+          // Adiciona o produto ao carrinho
           cart.push({
-              ...product, // Adiciona todas as informações do produto
-              quantity: parseInt(quantity) // Adiciona a quantidade
+              ...product, // adiciona todas as infos do produto
+              quantity: parseInt(quantity) // adiciona a quantidade
           });
       }
 
@@ -116,7 +116,7 @@ app.post('/cart', (req, res) => {
   }
 });
 
-// Rota principal para a página inicial
+// rota principal para a home
 app.get('/', (req, res) => {
     res.render('pages/index', { 
         title: 'Home', 
@@ -186,10 +186,10 @@ app.post('/submit-checkout', upload.single('pix_receipt'), (req, res) => {
 
     const users = loadUsers(); // Carregar usuários existentes
 
-    // Verifica se o arquivo PIX receipt foi enviado
+    // verifica se o arquivo PIX receipt foi enviado
     const pix_receipt = req.file ? req.file.filename : null;
 
-    // Criar novo usuário/pedido com as informações de checkout e os itens do carrinho
+    // criar novo usuário/pedido com as informações de checkout e os itens do carrinho
     const newUser = {
         first_name,
         last_name,
@@ -202,23 +202,23 @@ app.post('/submit-checkout', upload.single('pix_receipt'), (req, res) => {
         email,
         phone_number,
         pix_name,
-        pix_receipt,  // Nome do arquivo PIX receipt
+        pix_receipt,  // nome do arquivo PIX receipt
         order_notes,
-        order_items: cart, // Itens do carrinho
-        order_total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0), // Total do pedido
-        order_date: new Date().toISOString() // Data do pedido
+        order_items: cart, // itens do carrinho
+        order_total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0), // total 
+        order_date: new Date().toISOString() // data 
     };
 
-    // Adicionar novo pedido
+    // adiciona novo pedido ao users
     users.push(newUser);
 
-    // Salvar no arquivo users.json
+    // salva no json
     saveUsers(users);
 
-    // Esvaziar o carrinho
+    // esvazia o carrinho
     cart = [];
 
-    // Redirecionar para a página de confirmação
+    // redireciona para a página de confirmação
     res.redirect('/finished');
 });
 
