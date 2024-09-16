@@ -275,7 +275,7 @@ app.get('/api/recent-purchases', (req, res) => {
 // Obter detalhes do perfil de um usuario
 app.get('/api/profile-details', (req, res) => {
     const users = loadUsers();
-    const user = users.find(user => user.email === currentUserEmail); // Replace with authenticated user's email
+    const user = users.find(user => user.email === currentUserEmail); // Usuario
 
     if (user) {
         res.json({
