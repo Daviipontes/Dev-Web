@@ -54,19 +54,21 @@
                 </tr>
             </thead>
             <tbody id="purchases-table-body">
-                <!-- Purchases will be inserted here dynamically -->
+                <!-- Compras recentes serao geradas dinamicamente -->
             </tbody>
         </table>
     </div>
 </div>
 
 <script>
+    // Gerar compras recentes dinamicamente
     document.addEventListener('DOMContentLoaded', function () {
         fetch('/api/recent-purchases')
             .then(response => response.json())
             .then(purchases => {
                 const purchasesTableBody = document.getElementById('purchases-table-body');
                 
+                //iterar para cada compra recente obtida
                 purchases.forEach(purchase => {
                     const row = document.createElement('tr');
 

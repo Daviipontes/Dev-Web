@@ -259,7 +259,7 @@ app.get('/profile_config', (req, res) => {
 });
 
 
-// Endpoint to get recent purchases for a specific user (for simplicity, assuming user Carlos Victor)
+// Obter compras recentes de um usuario especifico
 app.get('/api/recent-purchases', (req, res) => {
     const users = loadUsers();
     const user = users.find(user => user.email === 'carlos.victor@alu.ufc.br');
