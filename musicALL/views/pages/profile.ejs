@@ -1,0 +1,97 @@
+<!-- Boxes de informações pessoais e endereço -->
+<div class="container">
+    <h4>Hello, Carlos</h4>
+    <p>This is your profile. You can check your <a href="#" class="profile-link">Recent Purchases</a> and <a href="#" class="profile-link">Shipping Addresses</a> and also edit your <a href="#" class="profile-link">Password</a> and <a href="#" class="profile-link">Account Settings</a>.</p>
+    <div class="row">
+
+        <!-- Box de informações pessoais -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">PROFILE DETAILS</div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <img src="assets/profile_pic.png" alt="Profile Image" class="profile-image">
+                        <div>
+                            <p class="profile-header">Carlos Victor</p>
+                            <p class="profile-info">Ceará, Brasil</p>
+                        </div>
+                    </div>
+                    <p class="profile-info">Email: carlos.victor@alu.ufc.br</p>
+                    <p class="profile-info">Security Email: carlos.victor@alu.ufc.br</p>
+                    <p class="profile-info">Phone Number: +55 85 9XXXX-XXXX</p>
+                    <a class="btn btn-custom" href="/profile_config">EDIT ACCOUNT</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Box de endereço -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">SHIPPING ADDRESS</div>
+                <div class="card-body">
+                    <p class="profile-header">Carlos Victor</p>
+                    <p class="address-info">Rua XXX, Número XXX, Fortaleza-CE, Brasil</p>
+                    <p class="address-info">Phone Number: +55 85 XXXX-XXXX</p>
+                    <p class="address-info">Email: carlos.victor@alu.ufc.br</p>
+                    <a class="btn btn-custom" href="/profile_config">EDIT ADDRESS</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Box de compras recentes -->
+<div class="container mt-4">
+    <h5>RECENT PURCHASES</h5>
+    <div class="card">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ORDER ID</th>
+                    <th>STATUS</th>
+                    <th>DATE</th>
+                    <th>TOTAL</th>
+                </tr>
+            </thead>
+            <tbody id="purchases-table-body">
+                <!-- Purchases will be inserted here dynamically -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        fetch('/api/recent-purchases')
+            .then(response => response.json())
+            .then(purchases => {
+                const purchasesTableBody = document.getElementById('purchases-table-body');
+                
+                purchases.forEach(purchase => {
+                    const row = document.createElement('tr');
+
+                    const orderId = document.createElement('td');
+                    orderId.innerHTML = `<a href="#" class="profile-link">#${purchase.order_id}</a>`;
+                    row.appendChild(orderId);
+
+                    const status = document.createElement('td');
+                    status.className = `status-${purchase.order_status.toLowerCase()}`;
+                    status.textContent = purchase.order_status;
+                    row.appendChild(status);
+
+                    const date = document.createElement('td');
+                    date.textContent = new Date(purchase.order_date).toLocaleDateString('pt-BR', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+                    row.appendChild(date);
+
+                    const total = document.createElement('td');
+                    total.textContent = `$${purchase.order_total} (${purchase.order_number_items} Products)`;
+                    row.appendChild(total);
+
+                    purchasesTableBody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching recent purchases:', error);
+            });
+    });
+</script>

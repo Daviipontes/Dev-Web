@@ -27,6 +27,7 @@
     width: 100%;
     margin-top: 50px;
     margin-bottom: 50px;
+    border: 1px solid var(--border-color);
 }
 
 .login-toggle {
@@ -68,11 +69,13 @@
     border-radius: 5px;
     transition: background-color 0.3s ease;
     font-weight: bold;
+    color: var(--white)
 }
 
 .login-box .btn-primary:hover {
     background-color: var(--hover-color);
     border-color: var(--hover-color);
+    color: var(--font-color-dark)
 }
 
 .forgot-password-link {
@@ -90,28 +93,28 @@
 }
 
 .seller-link {
-    color: blue;
+    color: lightblue;
 }
 
 
 
 
 body {
-    background-color: var(--background-color);
+    background-color: var(--background-color)!important;
     margin: 0;
     padding: 0;
-    color: var(--font-color-dark);
+    color: var(--font-color-dark)!important;
 }
 
 .navbar {
     background-color: var(--middle-color); /* Cor de fundo da barra de navegação */
-    padding: 10px 20px;
+    padding: .5rem 1rem;
 }
 
 .navbar-brand {
     color: var(--white);
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     margin-right: 20px;
 }
 
@@ -171,6 +174,11 @@ body {
     color: var(--background-clearer-color);
 }
 
+.navbar-brand :hover{
+    color: var(--white)!important;
+
+}
+
 
 
 .category-title {
@@ -208,7 +216,7 @@ body {
 .footer .list-footer li {
     margin-bottom: 10px;
     font-size: 12px;
-    color:var(--font-color-dark)
+    color:var(--background-clearer-color)
 }
 
 
@@ -274,10 +282,10 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid var(--background-color);
+    border: 1px solid var(--darker-color);
     border-radius: 5px;
     overflow: hidden;
-    background-color: var(--white);
+    background-color: var(--background-clearer-color);
     text-align: center;
     padding: 15px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -288,7 +296,12 @@ body {
     height: 150px; /* Define a altura da imagem */
     object-fit: contain; /* Garante que a imagem se encaixe no espaço sem distorção */
     margin-bottom: 10px;
+    
+    background-color: var(--font-color-dark);
+    border-radius: 3px;
 }
+
+
 
 .product-card h5 {
     font-size: 16px;
@@ -327,11 +340,17 @@ body {
     background-color: var(--icons-color);
 }
 
-
-.product-title {
+.product-text {
     font-size: 1rem;
     color: var(--darker-color);
+    
+}
+
+.product-title {
+    font-size: 1.2rem;
+    color: var(--darker-color);
     margin: 10px 0;
+    font-weight: bold;
 }
 
 .product-price {
@@ -352,7 +371,7 @@ body {
 }
 
 .page-item .page-link {
-    color: var(--darker-color);
+    color: var(--background-clearer-color);
     border: 1px solid var(--middle-color);
     margin: 0 5px;
     border-radius: 50%;
@@ -377,7 +396,7 @@ body {
 
 .page-item.disabled .page-link {
     background-color: var(--background-color);
-    color: var(--background-clearer-color);
+    color: var(--background-color);
     pointer-events: none;
 }
 

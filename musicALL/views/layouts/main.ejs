@@ -6,14 +6,14 @@
     <title><%= title %></title>
 
     <!-- CSS Geral -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     <link href="/css/styles/style.css" rel="stylesheet"> 
 
     <% if (cssFile) { %>
         <link href="/<%= cssFile %>" rel="stylesheet">
     <% } %>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg">
@@ -23,9 +23,12 @@
             <button class="btn btn-search" type="submit"><i class="fas fa-search"></i></button>
         </form>
         <div class="navbar-icons">
-            <a href="#" class="btn btn-outline-light">Register</a>
+            <a href="/signup" class="btn btn-outline-light">Register</a>
             <a href="/cart"><i class="fas fa-shopping-cart"></i></a>
-            <a href="#"><i class="fas fa-user"></i></a>
+            <a href="/profile"><i class="fas fa-user"></i></a>
+            <button id="decrease-font-btn">A-</button>
+            <button id="increase-font-btn">A+</button>
+            <button onclick="switchStyle()"><i class="fas fa-moon"></i></button>
         </div>
     </nav>
 
@@ -86,4 +89,136 @@
     </footer>
     <script src="/js/main.js"></script>
 </body>
+
+<script>
+    const increaseButton = document.getElementById('increase-font-btn');
+    const decreaseButton = document.getElementById('decrease-font-btn');
+    const elements = document.querySelectorAll('*'); // seleciona todos os elementos
+    let increaseAmount = 2; // quantidade de pixels que a fonte será aumentada
+
+    // criar cookie
+    function setCookie(name, value, days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        const expires = "expires=" + date.toUTCString();
+        document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
+
+    // obter cookie
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    // aplicar fonte e tema salvos no cookie
+    function applySavedFontSizeAndTheme() {
+        const savedFontSize = getCookie('fontSize');
+        if (savedFontSize) {
+            const numberSavedFontSize = parseFloat(savedFontSize)
+            elements.forEach(function (element) {
+                const style = window.getComputedStyle(element);
+                const currentFontSize = parseFloat(style.fontSize);
+                const newFontSize = currentFontSize + numberSavedFontSize/2;
+                element.style.fontSize = `${newFontSize}px`;
+            });
+        }
+        const savedTheme = getCookie("theme");
+        if (savedTheme) {
+            implementTheme(savedTheme);
+        }
+    }
+
+    // aplicar fonte e tema ao carregar a página
+    window.onload = applySavedFontSizeAndTheme;
+
+    increaseButton.addEventListener('click', function () {
+        elements.forEach(function (element) {
+            // obter tamanho de fonte atual
+            const style = window.getComputedStyle(element);
+            const currentFontSize = parseFloat(style.fontSize);
+
+            // aumentar tamanho da fonte
+            const newFontSize = currentFontSize + increaseAmount;
+            element.style.fontSize = `${newFontSize}px`;
+        });
+        
+        // salvar a nova fonte num cookie por 7 dias
+        const savedFontChange = getCookie('fontSize');
+        if (savedFontChange) {
+            const numberFontChange = parseFloat(savedFontChange);
+            const newFontChange = numberFontChange + increaseAmount;
+            setCookie('fontSize', newFontChange, 7);
+        } else {
+            setCookie('fontSize', '2', 7);
+        }
+    });
+    decreaseButton.addEventListener('click', function () {
+        elements.forEach(function (element) {
+            // obter tamanho de fonte atual
+            const style = window.getComputedStyle(element);
+            const currentFontSize = parseFloat(style.fontSize);
+
+            // aumentar tamanho da fonte
+            const newFontSize = currentFontSize - increaseAmount;
+            element.style.fontSize = `${newFontSize}px`;
+        });
+        // salvar a nova fonte num cookie por 7 dias
+        const savedFontChange = getCookie('fontSize');
+        if (savedFontChange) {
+            const numberFontChange = parseFloat(savedFontChange);
+            const newFontChange = numberFontChange - increaseAmount;
+            setCookie('fontSize', newFontChange, 7);
+        } else {
+            setCookie('fontSize', '-2', 7);
+        }
+    });
+
+    // funcao de implementar tema
+    function implementTheme (theme) {
+        const root = document.querySelector(":root");
+        if (theme == "dark") {
+            root.style.setProperty('--background-color', '#201E43');
+            root.style.setProperty('--background-clearer-color', '#134B70');
+            root.style.setProperty('--darker-color', '#EEEEEE');
+            root.style.setProperty('--middle-color', '#FFFFFF');
+            root.style.setProperty('--icons-color', '#508C9B');
+            root.style.setProperty('--white', '#201E43');
+            root.style.setProperty('--font-color-dark', '#FFFFFF');
+            root.style.setProperty('--border-color', '#b1b1b1');
+            root.style.setProperty('--hover-color', '#134B70');
+        }
+        else {
+            root.style.setProperty('--background-color', '#EEEEEE');
+            root.style.setProperty('--background-clearer-color', '#FFFFFF');
+            root.style.setProperty('--darker-color', '#201E43');
+            root.style.setProperty('--middle-color', '#134B70');
+            root.style.setProperty('--icons-color', '#508C9B');
+            root.style.setProperty('--white', '#FFFFFF');
+            root.style.setProperty('--font-color-dark', '#475156');
+            root.style.setProperty('--border-color', '#134B70');
+            root.style.setProperty('--hover-color', '#0A2B40');
+        }
+    }
+
+    // trocar de estilo
+    function switchStyle() {
+        const root = document.querySelector(":root");
+        const style = getComputedStyle(root);
+        const primaryColor = style.getPropertyValue("--white");
+
+        let newTheme;
+        if (primaryColor == "#FFFFFF") {
+            newTheme = "dark";
+        } else {
+            newTheme = "light";
+        }
+            
+        implementTheme(newTheme);
+
+        setCookie("theme", newTheme, 7);
+    }
+
+</script>
+
 </html>

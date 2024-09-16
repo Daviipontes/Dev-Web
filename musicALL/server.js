@@ -230,6 +230,46 @@ app.get('/finished', (req, res) => {
     });
 });
 
+app.get('/signup', (req, res) => {
+    res.render('pages/signup', {
+        title: 'Sign up',
+        cssFile: 'css/styles/login.css'
+    });
+});
+
+app.get('/login', (req, res) => {
+    res.render('pages/login', {
+        title: 'Login',
+        cssFile: 'css/styles/login.css'
+    });
+});
+
+app.get('/profile', (req, res) => {
+    res.render('pages/profile', {
+        title: 'Profile',
+        cssFile: 'css/styles/profile.css'
+    });
+});
+
+app.get('/profile_config', (req, res) => {
+    res.render('pages/profile_config', {
+        title: 'Profile Config',
+        cssFile: 'css/styles/profile_config.css'
+    });
+});
+
+
+// Endpoint to get recent purchases for a specific user (for simplicity, assuming user Carlos Victor)
+app.get('/api/recent-purchases', (req, res) => {
+    const users = loadUsers();
+    const user = users.find(user => user.email === 'carlos.victor@alu.ufc.br');
+
+    if (user && user.orders) {
+        res.json(user.orders);
+    } else {
+        res.status(404).json({ message: 'No orders found for this user.' });
+    }
+});
 
 
 // Inicialização do servidor

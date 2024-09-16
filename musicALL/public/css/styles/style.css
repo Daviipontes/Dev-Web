@@ -74,11 +74,25 @@ body {
     font-size: 1.2rem;
 }
 
+.navbar .navbar-icons button {
+    color: var(--font-color-dark);
+    background-color: var(--background-color);
+    margin-left: 15px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    border-color: var(--white);
+}
+
 .navbar .navbar-icons .btn-outline-light {
     padding: 5px 15px;
     font-size: 1rem;
     border-radius: 5px;
     border-color: var(--white);
+}
+
+.navbar .navbar-icons .btn-outline-light:hover {
+    color: var(--hover-color)
 }
 
 .navbar .navbar-icons a:hover {
@@ -199,7 +213,7 @@ body {
     border: 1px solid var(--background-color);
     border-radius: 5px;
     overflow: hidden;
-    background-color: var(--white);
+    background-color: var(--background-clearer-color);
     text-align: center;
     padding: 15px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
