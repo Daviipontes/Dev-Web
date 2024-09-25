@@ -1,0 +1,208 @@
+[
+  {
+    "first_name": "sdas",
+    "last_name": "dasdasd",
+    "company_name": "dasdsa",
+    "address": "dasdsa",
+    "country": "Brazil",
+    "state": "Ceará",
+    "city": "Fortaleza",
+    "zip_code": "asdasd",
+    "email": "dasdas",
+    "phone_number": "asdasd",
+    "pix_name": "sadasd",
+    "pix_receipt": "11162e7dcdb764333f6c703be3158a12",
+    "order_notes": "",
+    "orders": [
+      {
+        "order_items": [
+          {
+            "id": 1,
+            "name": "Yamaha P-125 Piano Digital",
+            "seller": "Carlos",
+            "rating": 5,
+            "brand": "Yamaha",
+            "availability": "In Stock",
+            "categories": [
+              "Piano",
+              "Instrumentos",
+              "Digital"
+            ],
+            "price": 4200,
+            "images": [
+              "/assets/product2.jpeg",
+              "/assets/product1.jpg",
+              "/assets/product3.jpeg"
+            ],
+            "video": "/assets/video.mp4",
+            "description": [
+              "O Yamaha P-125 é um piano digital projetado para simular a experiência de um piano acústico com a conveniência e portabilidade de um instrumento eletrônico.",
+              "Com 88 teclas e o sistema Graded Hammer Standard (GHS), o P-125 oferece um toque natural, com teclas mais pesadas nas notas graves e mais leves nas notas agudas.",
+              "Equipado com o motor sonoro Pure CF, o P-125 reproduz com precisão o som do piano de concerto Yamaha CFIIIS, conhecido pela sua clareza tonal.",
+              "O P-125 oferece 24 vozes diferentes, incluindo pianos elétricos, órgãos e cordas, e vem com 50 músicas pré-definidas e 20 ritmos de bateria para prática e performance."
+            ],
+            "quantity": 1
+          }
+        ],
+        "order_total": 4200,
+        "order_date": "2024-09-09T23:47:30.047Z",
+        "order_number_items": 1,
+        "order_status": "INPROGRESS",
+        "order_id": 222222
+      }
+    ]
+  },
+  {
+    "first_name": "Carlos",
+    "last_name": "Victor",
+    "company_name": "",
+    "address": "Rua abcde, 123",
+    "country": "Brazil",
+    "state": "Ceará",
+    "city": "Fortaleza",
+    "zip_code": "12312312",
+    "email": "carlos.victor@alu.ufc.br",
+    "phone_number": "85988888888",
+    "pix_name": "Carlos",
+    "pix_receipt": "ee7932ba85d88e8bab077beb9c26dd96",
+    "order_notes": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "orders": [
+      {
+        "order_items": [
+          {
+            "id": 5,
+            "name": "Marshall DSL40C Amplificador",
+            "seller": "Carlos",
+            "rating": 4.8,
+            "brand": "Marshall",
+            "availability": "In Stock",
+            "categories": [
+              "Amplificador",
+              "Acessório"
+            ],
+            "price": 4900,
+            "images": [
+              "/assets/product5.jpeg"
+            ],
+            "video": "/assets/video.mp4",
+            "description": [
+              "O Marshall DSL40C é um amplificador valvulado clássico com um timbre quente e encorpado.",
+              "Perfeito para guitarristas que buscam uma ampla gama de sons, desde limpos até distorções pesadas.",
+              "Possui dois canais independentes e um reverb integrado, ideal para performances ao vivo.",
+              "A qualidade de construção robusta garante durabilidade e longevidade."
+            ],
+            "quantity": 1
+          },
+          {
+            "id": 4,
+            "name": "Roland TD-17KVX Bateria Eletrônica",
+            "seller": "Carlos",
+            "rating": 4.9,
+            "brand": "Roland",
+            "availability": "In Stock",
+            "categories": [
+              "Bateria",
+              "Instrumentos"
+            ],
+            "price": 9300,
+            "images": [
+              "/assets/product4.jpg"
+            ],
+            "video": "/assets/video.mp4",
+            "description": [
+              "A Roland TD-17KVX é uma bateria eletrônica avançada com sons realistas e ótima resposta ao toque.",
+              "Com pads de malha para uma sensação autêntica e silenciosa, ela é ideal para treinos e performances ao vivo.",
+              "Possui uma vasta gama de sons de bateria, percussão e instrumentos eletrônicos integrados.",
+              "O módulo de som é altamente personalizável, permitindo ajustes nos timbres e efeitos."
+            ],
+            "quantity": 1
+          }
+        ],
+        "order_total": 14200,
+        "order_date": "2024-09-16T07:13:44.861Z",
+        "order_number_items": 2,
+        "order_status": "CANCELED",
+        "order_id": 111111
+      },
+      {
+        "order_items": [
+          {
+            "id": 1,
+            "name": "Yamaha P-125 Piano Digital",
+            "seller": "Carlos",
+            "rating": 5,
+            "brand": "Yamaha",
+            "availability": "In Stock",
+            "categories": [
+              "Piano",
+              "Instrumentos",
+              "Digital"
+            ],
+            "price": 4200,
+            "images": [
+              "/assets/product2.jpeg",
+              "/assets/product1.jpg",
+              "/assets/product3.jpeg"
+            ],
+            "video": "/assets/video.mp4",
+            "description": [
+              "O Yamaha P-125 é um piano digital projetado para simular a experiência de um piano acústico com a conveniência e portabilidade de um instrumento eletrônico.",
+              "Com 88 teclas e o sistema Graded Hammer Standard (GHS), o P-125 oferece um toque natural, com teclas mais pesadas nas notas graves e mais leves nas notas agudas.",
+              "Equipado com o motor sonoro Pure CF, o P-125 reproduz com precisão o som do piano de concerto Yamaha CFIIIS, conhecido pela sua clareza tonal.",
+              "O P-125 oferece 24 vozes diferentes, incluindo pianos elétricos, órgãos e cordas, e vem com 50 músicas pré-definidas e 20 ritmos de bateria para prática e performance."
+            ],
+            "quantity": 1
+          }
+        ],
+        "order_total": 4200,
+        "order_date": "2024-09-09T23:47:30.047Z",
+        "order_number_items": 1,
+        "order_status": "INPROGRESS",
+        "order_id": 222222
+      }
+    ]
+  },
+  {
+    "first_name": "sdas",
+    "last_name": "dasdasd",
+    "company_name": "dasdsa",
+    "address": "dasdsa",
+    "country": "Brazil",
+    "state": "Ceará",
+    "city": "Fortaleza",
+    "zip_code": "asdasd",
+    "email": "dasdas",
+    "phone_number": "asdasd",
+    "pix_name": "sadasd",
+    "pix_receipt": "0da1d93076b10e16af74fa69dd3b6c2f",
+    "order_notes": "",
+    "order_items": [
+      {
+        "id": 2,
+        "name": "Fender Stratocaster",
+        "seller": "Carlos",
+        "rating": 4.8,
+        "brand": "Fender",
+        "availability": "In Stock",
+        "categories": [
+          "Guitarra",
+          "Instrumentos"
+        ],
+        "price": 6500,
+        "images": [
+          "/assets/product1.jpg",
+          "/assets/product1.jpg",
+          "/assets/product1.jpg"
+        ],
+        "video": "/assets/video.mp4",
+        "description": [
+          "A Fender Stratocaster é uma guitarra icônica...",
+          "Blah blah blah..."
+        ],
+        "quantity": 1
+      }
+    ],
+    "order_total": 6500,
+    "order_date": "2024-09-25T04:29:27.082Z"
+  }
+]

@@ -1,0 +1,117 @@
+<div class="container mt-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Shopping Cart</h2>
+
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Products</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Sub-total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (cart.length > 0) { %>
+                                <% cart.forEach(item => { %>
+                                <tr>
+                                    <td>
+                                        <button class="remove-button" onclick="removeFromCart(<%= item.id %>)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#508C9B" class="bi bi-x" viewBox="0 0 16 16">
+                                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                            </svg>
+                                        </button>
+
+                                        <img src="<%= item.images && item.images.length > 0 ? item.images[0] : '/assets/default-image.jpg' %>" alt="<%= item.name ? item.name : 'Produto sem nome' %>" class="img-thumbnail mr-2" style="width: 50px;">
+                                        <%= item.name %>
+                                    </td>
+                                    <td>R$ <%= item.price ? item.price.toFixed(2).replace('.', ',') : '0,00' %></td>
+                                    <td>
+                                        <input type="number" class="quantity-btn" value="<%= item.quantity ? item.quantity : 1 %>" min="1" onchange="updateCart(<%= item.id %>, this.value)">
+                                    </td>
+                                    <td>R$ <%= item.price && item.quantity ? (item.price * item.quantity).toFixed(2).replace('.', ',') : '0,00' %></td>
+                                </tr>
+                                <% }) %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="4">Your cart is empty.</td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Cart Totals</h3>
+                    <table class="table">
+                        <tr>
+                            <td>Sub-total</td>
+                            <td>R$ <%= cart.reduce((total, item) => total + (item.price ? item.price * (item.quantity || 1) : 0), 0).toFixed(2).replace('.', ',') %></td>
+                        </tr>
+                        <tr>
+                            <td>Shipping</td>
+                            <td>Free</td>
+                        </tr>
+                        <tr>
+                            <td>Discount</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <th>Total</th>
+                            <th>R$ <%= cart.reduce((total, item) => total + (item.price ? item.price * (item.quantity || 1) : 0), 0).toFixed(2).replace('.', ',') %></th>
+                        </tr>
+                    </table>
+                    <a href="/checkout" class="btn checkout-button">Proceed to Checkout →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Função para remover do carrinho
+    function removeFromCart(id) {
+        fetch(`http://localhost:8091/api/cart/${id}`, { // Aponta para a nova rota DELETE
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+        }).then(res => res.json())
+          .then(data => {
+            if (data.success) {
+                location.reload(); // Recarrega a página para refletir as mudanças no carrinho
+            } else {
+                console.error('Erro ao remover o produto do carrinho:', data.message);
+            }
+        }).catch(err => console.error('Erro:', err));
+    }
+
+    // Função para atualizar a quantidade no carrinho
+    function updateCart(id, quantity) {
+        // Envia uma requisição PUT para o backend para atualizar a quantidade
+        fetch('http://localhost:8091/api/cart', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id, quantity })
+        }).then(res => res.json())
+          .then(data => {
+            if (data.success) {
+                location.reload(); // Recarregar a página para refletir as mudanças no carrinho
+            } else {
+                console.error('Erro ao atualizar o carrinho:', data.message);
+            }
+        }).catch(err => console.error('Erro:', err));
+    }
+</script>
