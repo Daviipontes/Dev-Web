@@ -25,6 +25,15 @@ app.use((req, res, next) => {
     next();
 });
 
+// Middleware para checar se um usuário está logado
+function isLoggedIn(req, res, next) {
+    if (req.session.user) {
+        next();
+    } else {
+        res.redirect('/login');
+    }
+}
+
 // Configuração do EJS e Layouts
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -249,7 +258,7 @@ app.get('/logout', (req, res) => {
 });
 
 // Profile - Obter detalhes do perfil do Servidor B
-app.get('/profile', async (req, res) => {
+app.get('/profile', isLoggedIn, async (req, res) => {
     try {
         const response = await axios.get(`${API_SERVER_URL}/api/profile-details`);
         const profile = response.data;
