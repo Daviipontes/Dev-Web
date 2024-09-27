@@ -23,7 +23,13 @@
             <button class="btn btn-search" type="submit"><i class="fas fa-search"></i></button>
         </form>
         <div class="navbar-icons">
-            <a href="/signup" class="btn btn-outline-light">Register</a>
+            <% if (typeof user !== 'undefined') { %>
+                <!-- Mostrar botão de logout se usuário está logado -->
+                <a href="/logout" class="btn btn-outline-light">Logout</a>
+            <% } else { %>
+                <!-- Mostrar botão de signup se usuário não está logado -->
+                <a href="/signup" class="btn btn-outline-light">Register</a>
+            <% } %>
             <a href="/cart"><i class="fas fa-shopping-cart"></i></a>
             <a href="/profile"><i class="fas fa-user"></i></a>
             <button id="decrease-font-btn">A-</button>

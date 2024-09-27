@@ -19,6 +19,12 @@ app.use(session({
     cookie: { secure: false }
 }));
 
+// Middleware para disponibilizar a sessão em todas as views
+app.use((req, res, next) => {
+    res.locals.user = req.session.user;
+    next();
+});
+
 // Configuração do EJS e Layouts
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -230,6 +236,16 @@ app.post('/login', async (req, res) => {
     } catch (err) {
         res.status(500).send('Error during login');
     }
+});
+
+// Rota de logout
+app.get('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            return res.status(500).send('Error logging out');
+        }
+        res.redirect('/');
+    });
 });
 
 // Profile - Obter detalhes do perfil do Servidor B
