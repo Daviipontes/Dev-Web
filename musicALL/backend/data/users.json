@@ -22,5 +22,32 @@
     "password": "123",
     "name": "Brenda",
     "role": "seller"
+  },
+  {
+    "email": "",
+    "password": "",
+    "name": "",
+    "role": "",
+    "username": "",
+    "securityEmail": "",
+    "phone": "",
+    "fullName": "",
+    "country": "",
+    "state": "",
+    "zip": "",
+    "shippingAddress": {
+      "firstName": "",
+      "lastName": "",
+      "companyName": "",
+      "address": "",
+      "country": "",
+      "state": "",
+      "city": "",
+      "zip": "",
+      "email": "",
+      "phone": ""
+    },
+    "products": [],
+    "orders": []
   }
 ]
