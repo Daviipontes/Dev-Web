@@ -1,5 +1,6 @@
 // serverA.js - Servidor A (Frontend)
 const express = require('express');
+const session = require('express-session');
 const path = require('path');
 const bodyParser = require('body-parser');
 const expressLayouts = require('express-ejs-layouts');
@@ -9,6 +10,14 @@ const multer = require('multer');
 const app = express();
 const upload = multer({ dest: 'uploads/' });
 const API_SERVER_URL = 'http://localhost:8091'; // URL do Servidor B (API)
+
+// Configuração do middleware de sessão
+app.use(session({
+    secret: 'chave-secreta',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+}));
 
 // Configuração do EJS e Layouts
 app.set('view engine', 'ejs');
@@ -158,12 +167,69 @@ app.get('/signup', (req, res) => {
     });
 });
 
+// Submeter signup
+app.post('/signup', async (req, res) => {
+    const { email, password, confirm_password, name, role } = req.body;
+
+    if (password !== confirm_password) {
+        return res.render('pages/signup', {
+            title: 'Sign up',
+            cssFile: 'css/styles/login.css',
+            error: 'Passwords do not match'
+        });
+    }
+
+    try {
+        const response = await axios.post(`${API_SERVER_URL}/api/signup`, { 
+            email, 
+            password, 
+            name, 
+            role: role ? 'seller' : 'buyer'
+        });
+
+        if (response.data.success) {
+            res.redirect('/login');
+        } else {
+            res.render('pages/signup', {
+                title: 'Sign up',
+                cssFile: 'css/styles/login.css',
+                error: response.data.message
+            });
+        }
+    } catch (err) {
+        res.status(500).send('Error during signup');
+    }
+});
+
 // Login
 app.get('/login', (req, res) => {
     res.render('pages/login', {
         title: 'Login',
         cssFile: 'css/styles/login.css'
     });
+});
+
+// Submeter login
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        const response = await axios.post(`${API_SERVER_URL}/api/login`, { email, password });
+
+        if (response.data.success) {
+            const user = response.data.user;
+            req.session.user = { email: user.email, name: user.name, role: user.role };
+            res.redirect('/');
+        } else {
+            res.render('pages/login', {
+                title: 'Login',
+                cssFile: 'css/styles/login.css',
+                error: response.data.message || 'Invalid email or password'
+            });
+        }
+    } catch (err) {
+        res.status(500).send('Error during login');
+    }
 });
 
 // Profile - Obter detalhes do perfil do Servidor B

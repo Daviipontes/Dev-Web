@@ -230,6 +230,43 @@ app.get('/api/profile-details', async (req, res) => {
     }
 });
 
+// API para login
+app.post('/api/login', async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        const users = await loadUsers();
+        const user = users.find(u => u.email === email && u.password === password);
+
+        if (user) {
+            res.json({ success: true, user });
+        } else {
+            res.json({ success: false, message: 'Invalid email or password' });
+        }
+    } catch (err) {
+        res.status(500).json({ message: 'Error during login' });
+    }
+});
+
+// API para signup
+app.post('/api/signup', async (req, res) => {
+    const { email, password, name, role } = req.body;
+    try {
+        const users = await loadUsers();
+        const existingUser = users.find(u => u.email === email);
+
+        if (existingUser) {
+            res.json({ success: false, message: 'User already exists' });
+        } else {
+            const newUser = { email, password, name, role };
+            users.push(newUser);
+            await saveUsers(users);
+            res.json({ success: true });
+        }
+    } catch (err) {
+        res.status(500).json({ message: 'Error during signup' });
+    }
+});
+
 // Inicialização do servidor
 const porta = 8091;
 app.listen(porta, () => {
