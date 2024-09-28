@@ -123,7 +123,7 @@ app.post('/product/new', upload.fields([{ name: 'images' }, { name: 'video' }]),
         
         const { name, price, brand, rating, availability, categories, description, userEmail} = req.body;
          
-        ;
+        
         
         
         const formData = new FormData();
@@ -164,68 +164,95 @@ app.post('/product/new', upload.fields([{ name: 'images' }, { name: 'video' }]),
 });
 
 
-app.post('/product/delete/:id', isLoggedIn, hasAnyRole(['admin', 'seller']), async (req, res) => {
-    const productId = req.params.id;
+app.post('/product/:id/delete', isLoggedIn, hasAnyRole(['admin', 'seller']), async (req, res) => {
     try {
-        await axios.delete(`${API_SERVER_URL}/api/products/${productId}`);
+        const productId = req.params.id;  // Captura o ID do produto da URL
+
+        // Faz uma requisição DELETE para a API de remoção de produtos
+        await axios.delete(`${API_SERVER_URL}/api/products/${productId}`, {
+            headers: {
+                Cookie: req.headers.cookie  // Passa o cookie de sessão
+            }
+        });
+
+        // Redireciona para a página de produtos após a remoção
         res.redirect('/products');
     } catch (err) {
+        console.error('Erro ao remover produto:', err.message);
         res.status(500).send('Erro ao remover produto');
     }
 });
 
-app.post('/product/edit/:id', isLoggedIn, hasAnyRole(['admin', 'seller']), upload.fields([{ name: 'images' }, { name: 'video' }]), async (req, res) => {
-    const productId = req.params.id;
-    
+app.post('/product/:id/edit', upload.fields([{ name: 'images' }, { name: 'video' }]), isLoggedIn, hasAnyRole(['admin', 'seller']), async (req, res) => {
     try {
-        const response = await axios.get(`${API_SERVER_URL}/api/products/${productId}`);
-        const product = response.data;
+        const productId = req.params.id;
+        
+        
+        const user = req.session.user;
+        
+        const sessionUserEmail = user ? user.email : null;
+        
+        const { name, price, brand, rating, availability, categories, description, userEmail} = req.body;
+        // Criar o formData para enviar os arquivos e dados do produto
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('price', price);
+        formData.append('brand', brand);
+        formData.append('rating', rating);
+        formData.append('availability', availability);
+        formData.append('categories', categories);
+        formData.append('description', description);
+        formData.append('userEmail', sessionUserEmail); // Inclui o email do usuário logado
 
-        // Verifica se o vendedor está tentando editar seu próprio produto
-        if (req.session.user.role === 'seller' && product.seller !== req.session.user.email) {
-            return res.status(403).send('Você não tem permissão para editar este produto.');
+        // Adicionar imagens ao FormData
+        if (req.files['images']) {
+            req.files['images'].forEach((file) => {
+                formData.append('images', file.buffer, file.originalname);
+            });
         }
 
-        // Manipula os uploads de imagens e vídeo
-        const newImages = req.files['images'] ? req.files['images'].map(file => `/uploads/images/${file.filename}`) : product.images;
-        const newVideo = req.files['video'] ? `/uploads/videos/${req.files['video'][0].filename}` : product.video;
+        // Adicionar vídeo ao FormData
+        if (req.files['video'] && req.files['video'][0]) {
+            formData.append('video', req.files['video'][0].buffer, req.files['video'][0].originalname);
+        }
 
-        // Atualizar o produto com os novos dados (incluindo arquivos)
-        const updatedProduct = {
-            ...product,
-            ...req.body,
-            images: newImages, // Substitui as imagens apenas se forem fornecidas novas
-            video: newVideo   // Substitui o vídeo apenas se for fornecido um novo
-        };
+        // Adicionar o cookie de sessão no cabeçalho da requisição
+        const response = await axios.put(`${API_SERVER_URL}/api/products/${productId}`, formData, {
+            headers: {
+                ...formData.getHeaders(),
+                Cookie: req.headers.cookie  // Passa o cookie de sessão
+            }
+        });
 
-        await axios.put(`${API_SERVER_URL}/api/products/${productId}`, updatedProduct);
         res.redirect('/products');
     } catch (err) {
+        console.error('Erro ao editar produto:', err.message);
         res.status(500).send('Erro ao editar produto');
     }
 });
 
 // Rota GET para carregar a página de edição de produto
-app.get('/product/:id/edit', isLoggedIn, async (req, res) => {
+app.get('/product/:id/edit', isLoggedIn, hasAnyRole(['admin', 'seller']), async (req, res) => {
     try {
         const productId = req.params.id;
-        const products = await axios.get(`${API_SERVER_URL}/api/products`);
-        const product = products.data.find(p => p.id === parseInt(productId));
 
-        if (!product) {
-            return res.status(404).send('Produto não encontrado.');
-        }
+        // Buscar o produto a partir da API
+        const response = await axios.get(`${API_SERVER_URL}/api/products/${productId}`);
+        const product = response.data;
 
+        // Renderiza a página de edição, passando os dados do produto para o formulário
         res.render('pages/edit-product', {
             title: 'Editar Produto',
-            product: product, // Passa os dados do produto para a view
-            cssFile: 'css/styles/edit-product.css'
+            product: product, // Passa o produto para a página EJS
+            userEmail: req.session.user.email, // Email do usuário logado
+            cssFile: 'css/styles/edit-product.css'  // Arquivo CSS para o estilo
         });
     } catch (err) {
-        console.error('Erro ao carregar o produto para edição:', err);
-        res.status(500).send('Erro ao carregar produto para edição');
+        console.error('Erro ao carregar página de edição:', err);
+        res.status(500).send('Erro ao carregar página de edição');
     }
 });
+
 // Rota de produto individual
 app.get('/product/:id', async (req, res) => {
     const productId = req.params.id;

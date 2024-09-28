@@ -1,32 +1,33 @@
-<h1>Editar Produto</h1>
-
 <div class="container">
+    <h1>Editar Produto</h1>
+
+    <!-- Formulário para editar o produto -->
     <form action="/product/<%= product.id %>/edit" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">Nome do Produto</label>
             <input type="text" class="form-control" id="name" name="name" value="<%= product.name %>" required>
         </div>
-        
-        <div class="form-group">
-            <label for="price">Preço</label>
-            <input type="number" step="0.01" class="form-control" id="price" name="price" value="<%= product.price %>" required>
-        </div>
-        
+
         <div class="form-group">
             <label for="brand">Marca</label>
             <input type="text" class="form-control" id="brand" name="brand" value="<%= product.brand %>" required>
         </div>
-        
+
         <div class="form-group">
             <label for="rating">Avaliação</label>
             <input type="number" class="form-control" id="rating" name="rating" value="<%= product.rating %>" required>
         </div>
-        
+
+        <div class="form-group">
+            <label for="price">Preço</label>
+            <input type="number" step="0.01" class="form-control" id="price" name="price" value="<%= product.price %>" required>
+        </div>
+
         <div class="form-group">
             <label for="availability">Disponibilidade</label>
             <input type="text" class="form-control" id="availability" name="availability" value="<%= product.availability %>" required>
         </div>
-        
+
         <div class="form-group">
             <label for="categories">Categorias (separadas por vírgula)</label>
             <input type="text" class="form-control" id="categories" name="categories" value="<%= product.categories.join(', ') %>" required>
@@ -37,12 +38,12 @@
             <textarea class="form-control" id="description" name="description" rows="5" required><%= product.description.join('\n') %></textarea>
         </div>
 
-        <!-- Exibir imagens existentes -->
+        <!-- Exibir imagens atuais -->
         <div class="form-group">
             <label>Imagens Existentes</label>
             <div>
                 <% product.images.forEach(function(image) { %>
-                    <img src="<%= image %>" alt="Imagem do Produto" style="width: 100px; height: 100px;">
+                    <img src="<%= image %>" alt="Imagem do Produto" style="width: 100px; height: 100px; margin-right: 10px;">
                 <% }) %>
             </div>
         </div>
@@ -53,12 +54,17 @@
             <input type="file" class="form-control" id="images" name="images" accept="image/*" multiple>
         </div>
 
-        <!-- Exibir vídeo existente -->
+        <!-- Exibir vídeo atual -->
         <div class="form-group">
-            <label>Vídeo Existente</label>
-            <video controls style="width: 300px;">
-                <source src="<%= product.video %>" type="video/mp4">
-            </video>
+            <label>Vídeo Atual</label>
+            <% if (product.video) { %>
+                <video controls style="width: 300px; margin-top: 10px;">
+                    <source src="<%= product.video %>" type="video/mp4">
+                    Seu navegador não suporta vídeos.
+                </video>
+            <% } else { %>
+                <p>Nenhum vídeo disponível.</p>
+            <% } %>
         </div>
 
         <!-- Upload de novo vídeo -->
@@ -66,6 +72,9 @@
             <label for="video">Substituir Vídeo</label>
             <input type="file" class="form-control" id="video" name="video" accept="video/*">
         </div>
+
+        <!-- Email do vendedor (oculto) -->
+        <input type="hidden" name="userEmail" value="<%= userEmail %>">
 
         <button type="submit" class="btn btn-primary">Salvar Alterações</button>
         <a href="/products" class="btn btn-secondary">Cancelar</a>

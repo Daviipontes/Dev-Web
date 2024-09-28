@@ -14,7 +14,7 @@
                 <% if (userRole === 'admin' || (userRole === 'seller' && userEmail === product.seller)) { %>
                     <a href="/product/<%= product.id %>/edit" class="btn btn-primary">Editar</a>
                     <form action="/product/<%= product.id %>/delete" method="POST" style="display:inline;">
-                        <button type="submit" class="btn btn-danger">Remover Produto</button>
+                        <button type="submit" class="btn btn-primary">Remover Produto</button>
                     </form>
                 <% } %>
             </li>

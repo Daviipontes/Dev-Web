@@ -229,7 +229,7 @@
     ]
   },
   {
-    "id": 11,
+    "id": 12,
     "name": "Violão asd",
     "seller": "davi@gmail.com",
     "brand": "ola",
@@ -240,12 +240,12 @@
       "vasd"
     ],
     "images": [
-      "/uploads/images/1727549457165-96r5blip.png",
-      "/uploads/images/1727549457174-9i1hgws8.png"
+      "/uploads/images/1727562566076-Image157.gif",
+      "/uploads/images/1727562566077-96r5blip.png"
     ],
-    "video": "/uploads/videos/1727549457180-6037087_Children_Movie_1920x1080.mp4",
+    "video": "/uploads/videos/1727562566087-video.mp4",
     "description": [
-      "sadas"
+      "descrição"
     ]
   }
 ]

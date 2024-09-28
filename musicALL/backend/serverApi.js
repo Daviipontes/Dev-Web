@@ -189,80 +189,83 @@ app.post('/api/products', upload.fields([
 });
 
 
-app.put('/api/products/:id', isLoggedIn, hasAnyRole(['admin', 'seller']), upload.fields([
-    { name: 'images', maxCount: 5 },
-    { name: 'video', maxCount: 1 }
+app.put('/api/products/:id', upload.fields([
+    { name: 'images', maxCount: 5 }, // Suporta até 5 imagens
+    { name: 'video', maxCount: 1 }   // Suporta 1 vídeo
 ]), async (req, res) => {
-    const { id } = req.params;
-    const { name, brand, rating, price, availability, categories, description } = req.body;
-
     try {
+        const productId = parseInt(req.params.id);
+        const { name, brand, rating, price, availability, categories, description } = req.body;
+
+        userEmail = req.body.userEmail;
+
+        if (!userEmail) {
+            return res.status(400).json({ success: false, message: 'Email do usuário é obrigatório.' });
+        }
+
+        // Carrega todos os produtos
         const products = await loadProducts();
-        const product = products.find(p => p.id === parseInt(id));
+        const productIndex = products.findIndex(p => p.id === productId);
 
-        if (!product) {
-            return res.status(404).json({ message: 'Produto não encontrado' });
+        if (productIndex === -1) {
+            return res.status(404).json({ success: false, message: 'Produto não encontrado.' });
         }
 
-        // Verificar se o usuário tem permissão para editar o produto
-        if (req.session.user.role === 'seller' && req.session.user.name !== product.seller) {
-            return res.status(403).json({ message: 'Acesso negado. Apenas o vendedor original pode editar este produto.' });
-        }
 
-        // Manipulando o upload de arquivos
+        // Atualizar os campos do produto
+        products[productIndex].name = name || products[productIndex].name;
+        products[productIndex].brand = brand || products[productIndex].brand;
+        products[productIndex].rating = rating ? parseInt(rating) : products[productIndex].rating;
+        products[productIndex].price = price ? parseFloat(price) : products[productIndex].price;
+        products[productIndex].availability = availability || products[productIndex].availability;
+        products[productIndex].categories = categories ? categories.split(',').map(c => c.trim()) : products[productIndex].categories;
+        products[productIndex].description = description ? description.split('\n') : products[productIndex].description;
+
+        // Manipulação de imagens (se houver)
         if (req.files['images']) {
-            product.images = req.files['images'].map(file => `/uploads/images/${file.filename}`);
+            products[productIndex].images = req.files['images'].map(file => `/uploads/images/${file.filename}`);
         }
 
+        // Manipulação de vídeo (se houver)
         if (req.files['video'] && req.files['video'][0]) {
-            product.video = `/uploads/videos/${req.files['video'][0].filename}`;
+            products[productIndex].video = `/uploads/videos/${req.files['video'][0].filename}`;
         }
 
-        // Atualizar o produto
-        product.name = name;
-        product.brand = brand;
-        product.rating = parseInt(rating);
-        product.price = parseFloat(price);
-        product.availability = availability;
-        product.categories = categories.split(',').map(c => c.trim());
-        product.description = description.split('\n');
-
+        // Salva os produtos atualizados
         await saveProducts(products);
 
-        res.json({ success: true, product });
+        // Retorna o produto atualizado
+        res.json({ success: true, product: products[productIndex] });
     } catch (error) {
+        console.error('Erro ao editar produto:', error);
         res.status(500).json({ success: false, message: 'Erro ao editar o produto' });
     }
 });
 
-app.delete('/api/products/:id', async (req, res) => {
-    const { id } = req.params;
-    const userRole = req.body.role; // Papel do usuário
-    const userEmail = req.body.email; // Email do usuário logado (para verificar o vendedor)
 
+app.delete('/api/products/:id', async (req, res) => {
     try {
-        const products = await loadProducts();
-        const productIndex = products.findIndex(p => p.id === parseInt(id));
-        const product = products[productIndex];
+        const productId = parseInt(req.params.id);  // Captura o ID do produto da URL
+
+        const products = await loadProducts();  // Carrega todos os produtos
+        const productIndex = products.findIndex(p => p.id === productId);
 
         if (productIndex === -1) {
-            return res.status(404).json({ message: 'Produto não encontrado' });
+            return res.status(404).json({ success: false, message: 'Produto não encontrado.' });
         }
 
-        // Verifica se o usuário é admin ou o vendedor que criou o produto
-        if (userRole === 'admin' || (userRole === 'seller' && product.sellerEmail === userEmail)) {
-            products.splice(productIndex, 1); // Remove o produto
-            await saveProducts(products);
-            return res.json({ success: true, message: 'Produto removido com sucesso.' });
-        } else {
-            return res.status(403).json({ message: 'Acesso negado. Você não tem permissão para deletar este produto.' });
-        }
+        // Remove o produto da lista de produtos
+        products.splice(productIndex, 1);  // Remove o produto pelo índice
+
+        // Salva os produtos atualizados no arquivo JSON ou banco de dados
+        await saveProducts(products);
+
+        res.json({ success: true, message: 'Produto removido com sucesso.' });
     } catch (error) {
-        console.error('Erro ao remover o produto:', error);
-        res.status(500).json({ message: 'Erro ao remover o produto' });
+        console.error('Erro ao remover produto:', error);
+        res.status(500).json({ success: false, message: 'Erro ao remover o produto' });
     }
 });
-
 
 
 
