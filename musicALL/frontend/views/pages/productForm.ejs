@@ -1,0 +1,64 @@
+<div class="container mt-5">
+    <h2><%= product && product.id ? 'Editar Produto' : 'Adicionar Produto' %></h2>
+    
+    <!-- Ação condicional: se o produto tiver ID, é edição; caso contrário, é adição -->
+    <form action="<%= product && product.id ? '/product/' + product.id + '/edit' : '/product/new' %>" method="POST" enctype="multipart/form-data">
+        
+        <!-- Nome do Produto -->
+        <div class="form-group">
+            <label for="name">Nome do Produto</label>
+            <input type="text" class="form-control" id="name" name="name" value="<%= product && product.name ? product.name : '' %>">
+        </div>
+
+        <!-- Preço -->
+        <div class="form-group">
+            <label for="price">Preço</label>
+            <input type="number" step="0.01" class="form-control" id="price" name="price" value="<%= product && product.price ? product.price : '' %>">
+        </div>
+
+        <!-- Marca -->
+        <div class="form-group">
+            <label for="brand">Marca</label>
+            <input type="text" class="form-control" id="brand" name="brand" value="<%= product && product.brand ? product.brand : '' %>">
+        </div>
+
+        <!-- Avaliação -->
+        <div class="form-group">
+            <label for="rating">Avaliação (de 0 a 5)</label>
+            <input type="number" step="0.1" min="0" max="5" class="form-control" id="rating" name="rating" value="<%= product && product.rating ? product.rating : '' %>">
+        </div>
+
+        <!-- Disponibilidade -->
+        <div class="form-group">
+            <label for="availability">Disponibilidade</label>
+            <input type="text" class="form-control" id="availability" name="availability" value="<%= product && product.availability ? product.availability : '' %>">
+        </div>
+
+        <!-- Categorias -->
+        <div class="form-group">
+            <label for="categories">Categorias (separadas por vírgula)</label>
+            <input type="text" class="form-control" id="categories" name="categories" value="<%= product && product.categories ? product.categories.join(', ') : '' %>">
+        </div>
+
+        <!-- Imagens -->
+        <div class="form-group">
+            <label for="images">Imagens (upload de arquivos)</label>
+            <input type="file" class="form-control" id="images" name="images" multiple>
+        </div>
+
+        <!-- Vídeo -->
+        <div class="form-group">
+            <label for="video">Vídeo (upload de arquivo)</label>
+            <input type="file" class="form-control" id="video" name="video">
+        </div>
+
+        <!-- Descrição -->
+        <div class="form-group">
+            <label for="description">Descrição</label>
+            <textarea class="form-control" id="description" name="description" rows="4"><%= product && product.description ? product.description.join('\n') : '' %></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary"><%= product && product.id ? 'Atualizar Produto' : 'Adicionar Produto' %></button>
+        <a href="/products" class="btn btn-secondary">Voltar</a>
+    </form>
+</div>

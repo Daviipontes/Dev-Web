@@ -7,7 +7,37 @@ const app = express();
 
 const cors = require('cors');
 app.use(cors());
+const multer = require('multer');
+// Configuração do destino de upload para imagens e vídeos
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        if (file.mimetype.startsWith('image/')) {
+            cb(null, path.join(__dirname, 'public/uploads/images')); // Salvar imagens
+        } else if (file.mimetype.startsWith('video/')) {
+            cb(null, path.join(__dirname, 'public/uploads/videos')); // Salvar vídeos
+        } else {
+            cb({ message: 'Arquivo inválido, apenas imagens e vídeos são permitidos.' }, false);
+        }
+    },
+    filename: function (req, file, cb) {
+        cb(null, `${Date.now()}-${file.originalname}`);
+    }
+});
 
+// Limitar o tamanho do upload e os tipos de arquivos
+const upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 50 * 1024 * 1024 // 50 MB
+    },
+    fileFilter: function (req, file, cb) {
+        if (file.mimetype.startsWith('image/') || file.mimetype.startsWith('video/')) {
+            cb(null, true);
+        } else {
+            cb(new Error('Apenas imagens e vídeos são permitidos!'));
+        }
+    }
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -20,28 +50,57 @@ const locationsFilePath = path.join(__dirname, 'data', 'locations.json');
 let cart = [];
 const currentUserEmail = 'carlos.victor@alu.ufc.br'; // Simulação de usuário atual
 
-// Função para carregar produtos
 const loadProducts = async () => {
     const data = await fs.readFile(productsFilePath, 'utf-8');
     return JSON.parse(data);
 };
 
-// Função para carregar usuários
 const loadUsers = async () => {
     const data = await fs.readFile(usersFilePath, 'utf-8');
     return JSON.parse(data);
 };
 
-// Função para salvar usuários
 const saveUsers = async (users) => {
     await fs.writeFile(usersFilePath, JSON.stringify(users, null, 2), 'utf-8');
 };
+const saveProducts = async (products) => {
+    await fs.writeFile(productsFilePath, JSON.stringify(products, null, 2), 'utf-8');
+};
 
-// Função para carregar localizações
 const loadLocations = async () => {
     const data = await fs.readFile(locationsFilePath, 'utf-8');
     return JSON.parse(data);
 };
+
+function isLoggedIn(req, res, next) {
+    if (req.session.user) {
+        next();
+    } else {
+        res.status(401).json({ message: 'Usuário não autenticado' });
+    }
+}
+
+// Middleware para verificar se o usuário tem a role necessária
+function hasRole(role) {
+    return function (req, res, next) {
+        if (req.session.user && req.session.user.role === role) {
+            next();
+        } else {
+            res.status(403).json({ message: 'Acesso negado. Permissão insuficiente.' });
+        }
+    };
+}
+
+// Middleware para verificar múltiplos papéis
+function hasAnyRole(roles) {
+    return function (req, res, next) {
+        if (req.session.user && roles.includes(req.session.user.role)) {
+            next();
+        } else {
+            res.status(403).json({ message: 'Acesso negado. Permissão insuficiente.' });
+        }
+    };
+}
 
 // API para obter produtos
 app.get('/api/products', async (req, res) => {
@@ -68,6 +127,144 @@ app.get('/api/products/:id', async (req, res) => {
         res.status(500).json({ message: 'Erro ao buscar produto' });
     }
 });
+
+app.post('/api/products', upload.fields([
+    { name: 'images', maxCount: 5 }, // Suporta até 5 imagens
+    { name: 'video', maxCount: 1 }   // Suporta 1 vídeo
+]), async (req, res) => {
+    try {
+
+        
+        const { name, brand, rating, price, availability, categories, description} = req.body;
+
+        userEmail =req.body.userEmail;
+
+        if (!userEmail) {
+            return res.status(400).json({ success: false, message: 'Email do usuário é obrigatório.' });
+        }
+
+        // Manipulando o upload de arquivos
+        let images = [];
+        if (req.files['images']) {
+            images = req.files['images'].map(file => `/uploads/images/${file.filename}`);
+        }
+
+        let video = null;
+        if (req.files['video'] && req.files['video'][0]) {
+            video = `/uploads/videos/${req.files['video'][0].filename}`;
+        }
+        
+        const products = await loadProducts();
+        const users = await loadUsers();
+
+        const newProduct = {
+            id: products.length + 1,
+            name,
+            seller: userEmail, // O vendedor é definido pelo usuário logado
+            brand,
+            rating: parseInt(rating),
+            price: parseFloat(price),
+            availability,
+            categories: categories.split(',').map(c => c.trim()),
+            images: images,
+            video: video,
+            description: description.split('\n')
+        };
+
+        const user = users.find(u => u.email === userEmail);
+            if (user) {
+                user.products = user.products || [];
+                user.products.push(newProduct.id); // Adicionar o ID do novo produto
+                await saveUsers(users); // Salvar o usuário atualizado
+            }
+
+        products.push(newProduct);
+        await saveProducts(products);
+
+        res.json({ success: true, product: newProduct });
+    } catch (error) {
+        console.error('Erro ao criar produto:', error);
+        res.status(500).json({ success: false, message: 'Erro ao criar o produto' });
+    }
+});
+
+
+app.put('/api/products/:id', isLoggedIn, hasAnyRole(['admin', 'seller']), upload.fields([
+    { name: 'images', maxCount: 5 },
+    { name: 'video', maxCount: 1 }
+]), async (req, res) => {
+    const { id } = req.params;
+    const { name, brand, rating, price, availability, categories, description } = req.body;
+
+    try {
+        const products = await loadProducts();
+        const product = products.find(p => p.id === parseInt(id));
+
+        if (!product) {
+            return res.status(404).json({ message: 'Produto não encontrado' });
+        }
+
+        // Verificar se o usuário tem permissão para editar o produto
+        if (req.session.user.role === 'seller' && req.session.user.name !== product.seller) {
+            return res.status(403).json({ message: 'Acesso negado. Apenas o vendedor original pode editar este produto.' });
+        }
+
+        // Manipulando o upload de arquivos
+        if (req.files['images']) {
+            product.images = req.files['images'].map(file => `/uploads/images/${file.filename}`);
+        }
+
+        if (req.files['video'] && req.files['video'][0]) {
+            product.video = `/uploads/videos/${req.files['video'][0].filename}`;
+        }
+
+        // Atualizar o produto
+        product.name = name;
+        product.brand = brand;
+        product.rating = parseInt(rating);
+        product.price = parseFloat(price);
+        product.availability = availability;
+        product.categories = categories.split(',').map(c => c.trim());
+        product.description = description.split('\n');
+
+        await saveProducts(products);
+
+        res.json({ success: true, product });
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Erro ao editar o produto' });
+    }
+});
+
+app.delete('/api/products/:id', async (req, res) => {
+    const { id } = req.params;
+    const userRole = req.body.role; // Papel do usuário
+    const userEmail = req.body.email; // Email do usuário logado (para verificar o vendedor)
+
+    try {
+        const products = await loadProducts();
+        const productIndex = products.findIndex(p => p.id === parseInt(id));
+        const product = products[productIndex];
+
+        if (productIndex === -1) {
+            return res.status(404).json({ message: 'Produto não encontrado' });
+        }
+
+        // Verifica se o usuário é admin ou o vendedor que criou o produto
+        if (userRole === 'admin' || (userRole === 'seller' && product.sellerEmail === userEmail)) {
+            products.splice(productIndex, 1); // Remove o produto
+            await saveProducts(products);
+            return res.json({ success: true, message: 'Produto removido com sucesso.' });
+        } else {
+            return res.status(403).json({ message: 'Acesso negado. Você não tem permissão para deletar este produto.' });
+        }
+    } catch (error) {
+        console.error('Erro ao remover o produto:', error);
+        res.status(500).json({ message: 'Erro ao remover o produto' });
+    }
+});
+
+
+
 
 // API para obter o carrinho
 app.get('/api/cart', (req, res) => {

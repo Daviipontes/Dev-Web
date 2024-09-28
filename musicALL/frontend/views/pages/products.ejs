@@ -1,0 +1,26 @@
+<h1>Lista de Produtos</h1>
+
+<div class="container">
+    <ul>
+        <% products.forEach(function(product) { %>
+            <li>
+                <h2><%= product.name %></h2>
+                <p>Preço: R$<%= product.price %></p>
+                <p>Marca: <%= product.brand %></p>
+                <p>Vendedor: <%= product.seller %></p>
+                <p>Descrição: <%= product.description %></p>
+
+                <!-- Mostrar botões de editar e excluir apenas para admin ou seller dono do produto -->
+                <% if (userRole === 'admin' || (userRole === 'seller' && userEmail === product.seller)) { %>
+                    <a href="/product/<%= product.id %>/edit" class="btn btn-primary">Editar</a>
+                    <form action="/product/<%= product.id %>/delete" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Remover Produto</button>
+                    </form>
+                <% } %>
+            </li>
+        <% }) %>
+    </ul>
+
+    <!-- Botão para adicionar novo produto -->
+    <a href="/product/new" class="btn btn-success">Adicionar Novo Produto</a>
+</div>

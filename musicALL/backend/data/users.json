@@ -9,7 +9,7 @@
     "email": "seller@gmail.com",
     "password": "123",
     "role": "seller",
-    "name": "seller"
+    "name": "Carlos"
   },
   {
     "email": "sofia@gmail.com",
@@ -24,30 +24,33 @@
     "role": "seller"
   },
   {
-    "email": "",
-    "password": "",
-    "name": "",
-    "role": "",
-    "username": "",
-    "securityEmail": "",
-    "phone": "",
-    "fullName": "",
-    "country": "",
-    "state": "",
-    "zip": "",
+    "email": "davi@gmail.com",
+    "password": "123",
+    "name": "Davi",
+    "role": "seller",
+    "username": "davipontes",
+    "securityEmail": "davi2@gmail.com",
+    "phone": "85893292137",
+    "fullName": "Davi Pontes Luciano",
+    "country": "Brasil",
+    "state": "Ceará",
+    "zip": "60055264",
     "shippingAddress": {
-      "firstName": "",
-      "lastName": "",
+      "firstName": "Davi",
+      "lastName": "Pontes Luciano",
       "companyName": "",
-      "address": "",
-      "country": "",
-      "state": "",
-      "city": "",
-      "zip": "",
-      "email": "",
-      "phone": ""
+      "address": "asdasda",
+      "country": "Brasil",
+      "state": "Ceará",
+      "city": "Fortaleza",
+      "zip": "60055264",
+      "email": "davi@gmail.com",
+      "phone": "85893292137"
     },
-    "products": [],
+    "products": [
+      10,
+      11
+    ],
     "orders": []
   }
 ]

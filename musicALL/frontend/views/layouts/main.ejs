@@ -30,6 +30,13 @@
                 <!-- Mostrar botão de signup se usuário não está logado -->
                 <a href="/signup" class="btn btn-outline-light">Register</a>
             <% } %>
+            <% if (user && user.role === 'admin') { %>
+                <li><a href="/products" class="btn btn-outline-light">Lista de Produtos</a></li>
+            <% } %>
+            <% if (user && user.role === 'seller') { %>
+                <li><a href="/product/new" class="btn btn-outline-light">Adicionar Produto</a></li>
+            <% } %>
+
             <a href="/cart"><i class="fas fa-shopping-cart"></i></a>
             <a href="/profile"><i class="fas fa-user"></i></a>
             <button id="decrease-font-btn">A-</button>

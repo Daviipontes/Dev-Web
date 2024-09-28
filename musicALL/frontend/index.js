@@ -6,9 +6,10 @@ const bodyParser = require('body-parser');
 const expressLayouts = require('express-ejs-layouts');
 const axios = require('axios'); // Usado para fazer requisições ao servidor B
 const multer = require('multer');
+const FormData = require('form-data');
 
 const app = express();
-const upload = multer({ dest: 'uploads/' });
+const upload = multer();
 const API_SERVER_URL = 'http://localhost:8091'; // URL do Servidor B (API)
 
 // Configuração do middleware de sessão
@@ -18,6 +19,8 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: false }
 }));
+
+
 
 // Middleware para disponibilizar a sessão em todas as views
 app.use((req, res, next) => {
@@ -31,6 +34,28 @@ function isLoggedIn(req, res, next) {
         next();
     } else {
         res.redirect('/login');
+    }
+}
+
+// Middleware para verificar se o usuário tem a role necessária
+function hasRole(role) {
+    return function(req, res, next) {
+        if (req.session.user && req.session.user.role === role) {
+            next();
+        } else {
+            res.status(403).send('Acesso negado. Você não tem permissão para realizar esta ação.');
+        }
+    }
+}
+
+// Middleware para verificar múltiplos papéis
+function hasAnyRole(roles) {
+    return function(req, res, next) {
+        if (req.session.user && roles.includes(req.session.user.role)) {
+            next();
+        } else {
+            res.status(403).send('Acesso negado. Você não tem permissão para realizar esta ação.');
+        }
     }
 }
 
@@ -79,19 +104,173 @@ app.get('/search', async (req, res) => {
     }
 });
 
+app.get('/product/new', isLoggedIn, hasAnyRole(['admin', 'seller']), (req, res) => {
+    const user = req.session.user;
+    res.render('pages/productForm', { 
+        title: 'Adicionar Produto',
+        cssFile: 'css/styles/product-page.css', 
+        product: {},  // Sem dados para criação
+        userRole: user ? user.role : null,
+        userEmail: user ? user.email : null
+    });
+});
+
+app.post('/product/new', upload.fields([{ name: 'images' }, { name: 'video' }]), isLoggedIn, hasAnyRole(['admin', 'seller']), async (req, res) => {
+    try {
+        const user = req.session.user;
+        
+        const sessionUserEmail = user ? user.email : null;
+        
+        const { name, price, brand, rating, availability, categories, description, userEmail} = req.body;
+         
+        ;
+        
+        
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('price', price);
+        formData.append('brand', brand);
+        formData.append('rating', rating);
+        formData.append('availability', availability);
+        formData.append('categories', categories);
+        formData.append('description', description)
+        formData.append('userEmail', sessionUserEmail);
+
+        // Adicionar imagens ao FormData
+        if (req.files['images']) {
+            req.files['images'].forEach((file) => {
+                formData.append('images', file.buffer, file.originalname);
+            });
+        }
+
+        // Adicionar vídeo ao FormData
+        if (req.files['video'] && req.files['video'][0]) {
+            formData.append('video', req.files['video'][0].buffer, req.files['video'][0].originalname);
+        }
+
+        // Adicionar o cookie de sessão no cabeçalho da requisição
+        const response = await axios.post(`${API_SERVER_URL}/api/products`, formData, {
+            headers: {
+                ...formData.getHeaders(),
+                Cookie: req.headers.cookie  // Passa o cookie de sessão
+            }
+        });
+
+        res.redirect('/products');
+    } catch (err) {
+        console.error('Erro ao adicionar produto:', err.message);
+        res.status(500).send('Erro ao adicionar produto');
+    }
+});
+
+
+app.post('/product/delete/:id', isLoggedIn, hasAnyRole(['admin', 'seller']), async (req, res) => {
+    const productId = req.params.id;
+    try {
+        await axios.delete(`${API_SERVER_URL}/api/products/${productId}`);
+        res.redirect('/products');
+    } catch (err) {
+        res.status(500).send('Erro ao remover produto');
+    }
+});
+
+app.post('/product/edit/:id', isLoggedIn, hasAnyRole(['admin', 'seller']), upload.fields([{ name: 'images' }, { name: 'video' }]), async (req, res) => {
+    const productId = req.params.id;
+    
+    try {
+        const response = await axios.get(`${API_SERVER_URL}/api/products/${productId}`);
+        const product = response.data;
+
+        // Verifica se o vendedor está tentando editar seu próprio produto
+        if (req.session.user.role === 'seller' && product.seller !== req.session.user.email) {
+            return res.status(403).send('Você não tem permissão para editar este produto.');
+        }
+
+        // Manipula os uploads de imagens e vídeo
+        const newImages = req.files['images'] ? req.files['images'].map(file => `/uploads/images/${file.filename}`) : product.images;
+        const newVideo = req.files['video'] ? `/uploads/videos/${req.files['video'][0].filename}` : product.video;
+
+        // Atualizar o produto com os novos dados (incluindo arquivos)
+        const updatedProduct = {
+            ...product,
+            ...req.body,
+            images: newImages, // Substitui as imagens apenas se forem fornecidas novas
+            video: newVideo   // Substitui o vídeo apenas se for fornecido um novo
+        };
+
+        await axios.put(`${API_SERVER_URL}/api/products/${productId}`, updatedProduct);
+        res.redirect('/products');
+    } catch (err) {
+        res.status(500).send('Erro ao editar produto');
+    }
+});
+
+// Rota GET para carregar a página de edição de produto
+app.get('/product/:id/edit', isLoggedIn, async (req, res) => {
+    try {
+        const productId = req.params.id;
+        const products = await axios.get(`${API_SERVER_URL}/api/products`);
+        const product = products.data.find(p => p.id === parseInt(productId));
+
+        if (!product) {
+            return res.status(404).send('Produto não encontrado.');
+        }
+
+        res.render('pages/edit-product', {
+            title: 'Editar Produto',
+            product: product, // Passa os dados do produto para a view
+            cssFile: 'css/styles/edit-product.css'
+        });
+    } catch (err) {
+        console.error('Erro ao carregar o produto para edição:', err);
+        res.status(500).send('Erro ao carregar produto para edição');
+    }
+});
 // Rota de produto individual
 app.get('/product/:id', async (req, res) => {
     const productId = req.params.id;
+    const user = req.session.user; 
     try {
         const response = await axios.get(`${API_SERVER_URL}/api/products/${productId}`);
         const product = response.data;
         res.render('pages/product', {
             title: 'Produto',
             product,
-            cssFile: 'css/styles/product-page.css'
+            cssFile: 'css/styles/product-page.css',
+            user:user
         });
     } catch (err) {
         res.status(404).send('Produto não encontrado');
+    }
+});
+
+app.get('/products', isLoggedIn, async (req, res) => {
+    try {
+        // Faz a requisição para a API para obter todos os produtos
+        const response = await axios.get(`${API_SERVER_URL}/api/products`);
+        const products = response.data;
+
+        const userRole = req.session.user ? req.session.user.role : null;
+        const userEmail = req.session.user ? req.session.user.email : null;
+
+        let filteredProducts = products;
+
+        // Se o usuário for um seller, filtrar os produtos para mostrar apenas os produtos dele
+        if (userRole === 'seller') {
+            filteredProducts = products.filter(product => product.seller === userEmail);
+        }
+
+        // Renderiza a página com os produtos filtrados
+        res.render('pages/products', {
+            title: 'Produtos',
+            products: filteredProducts,   // Produtos filtrados de acordo com o papel
+            userRole: userRole,           // Papel do usuário logado (admin ou seller)
+            userEmail: userEmail,         // Email do usuário logado
+            cssFile: 'css/styles/product-page.css'
+        });
+    } catch (err) {
+        console.error('Erro ao carregar produtos:', err);
+        res.status(500).send('Erro ao carregar produtos');
     }
 });
 
