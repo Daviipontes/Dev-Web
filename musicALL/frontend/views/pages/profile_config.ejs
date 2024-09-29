@@ -28,7 +28,7 @@
                         <label for="countryRegion">Country/Region</label>
                         <input type="text" class="form-control" id="countryRegion">
                     </div>
-                    <button type="button" class="btn save-changes-btn">SAVE CHANGES</button>
+                    <button type="button" class="btn save-account-btn">SAVE CHANGES</button>
                 </div>
                 <!-- Coluna direita -->
                 <div class="col-md-4">
@@ -115,7 +115,7 @@
                         <label for="shippingPhoneNumber">Phone Number</label>
                         <input type="text" class="form-control" id="shippingPhoneNumber">
                     </div>
-                    <button type="button" class="btn save-changes-btn">SAVE CHANGES</button>
+                    <button type="button" class="btn save-shipping-btn">SAVE CHANGES</button>
                 </div>
             </div>
         </div>
@@ -138,9 +138,111 @@
                         <label for="confirmPassword">Confirm Password</label>
                         <input type="password" class="form-control" id="confirmPassword">
                     </div>
-                    <button type="button" class="btn save-changes-btn">CHANGE PASSWORD</button>
+                    <button type="button" class="btn save-password-btn">CHANGE PASSWORD</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    // Save Account Settings
+    document.querySelector('.save-account-btn').addEventListener('click', () => {
+        const accountData = {
+            displayName: document.getElementById('displayName').value,
+            fullName: document.getElementById('fullName').value,
+            secondaryEmail: document.getElementById('secondaryEmail').value,
+            countryRegion: document.getElementById('countryRegion').value,
+            username: document.getElementById('username').value,
+            email: document.getElementById('email').value,
+            phoneNumber: document.getElementById('phoneNumber').value,
+            state: document.getElementById('states').value,
+            zip: document.getElementById('zipCode').value
+        };
+
+        fetch('/profile/update/account', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(accountData),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Account updated successfully!');
+            } else {
+                alert('Error updating account');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to update account');
+        });
+    });
+
+    // Save Shipping Address
+    document.querySelector('.save-shipping-btn').addEventListener('click', () => {
+        const shippingData = {
+            firstName: document.getElementById('shippingFirstName').value,
+            lastName: document.getElementById('shippingLastName').value,
+            companyName: document.getElementById('shippingCompanyName').value,
+            address: document.getElementById('shippingAddress').value,
+            country: document.getElementById('shippingCountry').value,
+            region: document.getElementById('shippingRegion').value,
+            city: document.getElementById('shippingCity').value,
+            zip: document.getElementById('shippingZipCode').value,
+            email: document.getElementById('shippingEmail').value,
+            phone: document.getElementById('shippingPhoneNumber').value,
+        };
+
+        fetch('/profile/update/shipping', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(shippingData),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Shipping address updated successfully!');
+            } else {
+                alert('Error updating shipping address');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to update shipping address');
+        });
+    });
+
+    // Change Password
+    document.querySelector('.save-password-btn').addEventListener('click', () => {
+        const passwordData = {
+            currentPassword: document.getElementById('currentPassword').value,
+            newPassword: document.getElementById('newPassword').value,
+            confirmPassword: document.getElementById('confirmPassword').value
+        };
+
+        fetch('/profile/update/password', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(passwordData),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Password updated successfully!');
+            } else {
+                alert('Error updating password');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to update password');
+        });
+    });
+</script>

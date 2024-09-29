@@ -53,5 +53,32 @@
       12
     ],
     "orders": []
+  },
+  {
+    "email": "carlos.victor@alu.ufc.br",
+    "password": "123",
+    "name": "Carlos Victor",
+    "role": "buyer",
+    "username": "1",
+    "securityEmail": "3",
+    "phone": "4",
+    "fullName": "2",
+    "country": "5",
+    "state": "6",
+    "zip": "7",
+    "shippingAddress": {
+      "firstName": "Carlos ",
+      "lastName": "Victor",
+      "companyName": "1",
+      "address": "2",
+      "country": "3",
+      "state": "4",
+      "city": "5",
+      "zip": "6",
+      "email": "7",
+      "phone": "8"
+    },
+    "products": [],
+    "orders": []
   }
 ]

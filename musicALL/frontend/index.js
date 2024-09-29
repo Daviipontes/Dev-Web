@@ -485,8 +485,10 @@ app.get('/logout', (req, res) => {
 
 // Profile - Obter detalhes do perfil do Servidor B
 app.get('/profile', isLoggedIn, async (req, res) => {
+    const userEmail = req.session.user ? req.session.user.email : null;
+
     try {
-        const response = await axios.get(`${API_SERVER_URL}/api/profile-details`);
+        const response = await axios.get(`${API_SERVER_URL}/api/profile-details`, { params: { currentUserEmail: userEmail } });
         const profile = response.data;
         res.render('pages/profile', {
             title: 'Profile',
@@ -520,6 +522,61 @@ app.get('/recent-purchases', async (req, res) => {
         res.status(500).send('Erro ao carregar compras recentes');
     }
 });
+
+// Update Account Settings
+app.post('/profile/update/account', isLoggedIn, async (req, res) => {
+    try {
+        const userEmail = req.session.user.email;
+        const accountData = req.body;
+
+        const response = await axios.post(`${API_SERVER_URL}/api/update-account`, {
+            email: userEmail,
+            ...accountData
+        });
+
+        res.json({ success: response.data.success });
+    } catch (err) {
+        console.error('Error updating account:', err);
+        res.status(500).json({ success: false });
+    }
+});
+
+// Update Shipping Address
+app.post('/profile/update/shipping', isLoggedIn, async (req, res) => {
+    try {
+        const userEmail = req.session.user.email;
+        const shippingData = req.body;
+
+        const response = await axios.post(`${API_SERVER_URL}/api/update-shipping`, {
+            userEmail: userEmail,
+            ...shippingData
+        });
+
+        res.json({ success: response.data.success });
+    } catch (err) {
+        console.error('Error updating shipping address:', err);
+        res.status(500).json({ success: false });
+    }
+});
+
+// Change Password
+app.post('/profile/update/password', isLoggedIn, async (req, res) => {
+    try {
+        const userEmail = req.session.user.email;
+        const passwordData = req.body;
+
+        const response = await axios.post(`${API_SERVER_URL}/api/change-password`, {
+            email: userEmail,
+            ...passwordData
+        });
+
+        res.json({ success: response.data.success });
+    } catch (err) {
+        console.error('Error changing password:', err);
+        res.status(500).json({ success: false });
+    }
+});
+
 
 // Inicialização do servidor
 const porta = 8090;

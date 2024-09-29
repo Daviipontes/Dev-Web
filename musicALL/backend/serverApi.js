@@ -54,7 +54,6 @@ const usersFilePath = path.join(__dirname, 'data', 'users.json');
 const locationsFilePath = path.join(__dirname, 'data', 'locations.json');
 
 let cart = [];
-const currentUserEmail = 'carlos.victor@alu.ufc.br'; // Simulação de usuário atual
 
 const loadProducts = async () => {
     const data = await fs.readFile(productsFilePath, 'utf-8');
@@ -399,7 +398,7 @@ app.get('/api/locations', async (req, res) => {
 app.get('/api/recent-purchases', async (req, res) => {
     try {
         const users = await loadUsers();
-        const user = users.find(user => user.email === currentUserEmail);
+        const user = users.find(user => user.email === currentUserEmail); // MUDAR ESSA PARTE
 
         if (user && user.orders) {
             res.json(user.orders);
@@ -413,20 +412,26 @@ app.get('/api/recent-purchases', async (req, res) => {
 
 // API para obter detalhes do perfil de um usuário específico
 app.get('/api/profile-details', async (req, res) => {
+    const currentUserEmail = req.query.currentUserEmail;
     try {
         const users = await loadUsers();
         const user = users.find(user => user.email === currentUserEmail);
 
         if (user) {
             res.json({
-                first_name: user.first_name,
-                last_name: user.last_name,
-                email: user.email,
-                phone_number: user.phone_number,
-                address: user.address,
-                city: user.city,
+                full_name: user.fullName,
                 state: user.state,
-                country: user.country
+                country: user.country,
+                email: user.email,
+                security_email: user.securityEmail,
+                phone: user.phone,
+                address_first_name: user.shippingAddress.firstName,
+                address_address: user.shippingAddress.address,
+                address_city: user.shippingAddress.city,
+                address_state: user.shippingAddress.state,
+                address_country: user.shippingAddress.country,
+                address_phone: user.shippingAddress.phone,
+                address_email: user.shippingAddress.email
             });
         } else {
             res.status(404).json({ message: 'User not found.' });
@@ -456,6 +461,7 @@ app.post('/api/login', async (req, res) => {
 // API para signup
 app.post('/api/signup', async (req, res) => {
     const { email, password, name, role } = req.body;
+
     try {
         const users = await loadUsers();
         const existingUser = users.find(u => u.email === email);
@@ -463,15 +469,134 @@ app.post('/api/signup', async (req, res) => {
         if (existingUser) {
             res.json({ success: false, message: 'User already exists' });
         } else {
-            const newUser = { email, password, name, role };
+            // Initialize new user with blank fields
+            const newUser = {
+                email,
+                password,
+                name,
+                role,
+                username: '', // Blank username
+                securityEmail: '', // Blank security email
+                phone: '', // Blank phone
+                fullName: '', // Blank full name
+                country: '', // Blank country
+                state: '', // Blank state
+                zip: '', // Blank zip
+                shippingAddress: {
+                    firstName: '',
+                    lastName: '',
+                    companyName: '',
+                    address: '',
+                    country: '',
+                    state: '',
+                    city: '',
+                    zip: '',
+                    email: '',
+                    phone: ''
+                },
+                products: [], // Empty products array
+                orders: [] // Empty orders array
+            };
+
+            // Add the new user to the list
             users.push(newUser);
+
+            // Save the updated users list
             await saveUsers(users);
+
             res.json({ success: true });
         }
     } catch (err) {
         res.status(500).json({ message: 'Error during signup' });
     }
 });
+
+// Update Account Settings
+app.post('/api/update-account', async (req, res) => {
+    const { email, displayName, fullName, secondaryEmail, countryRegion, username, phoneNumber, state, zip } = req.body;
+
+    try {
+        const users = await loadUsers();
+        const userIndex = users.findIndex(user => user.email === email);
+
+        if (userIndex !== -1) {
+            users[userIndex].name = displayName;
+            users[userIndex].fullName = fullName;
+            users[userIndex].securityEmail = secondaryEmail;
+            users[userIndex].country = countryRegion;
+            users[userIndex].username = username;
+            users[userIndex].phone = phoneNumber;
+            users[userIndex].state = state;
+            users[userIndex].zip = zip;
+
+            await saveUsers(users);
+            res.json({ success: true });
+        } else {
+            res.status(404).json({ success: false, message: 'User not found' });
+        }
+    } catch (err) {
+        console.error('Error updating account:', err);
+        res.status(500).json({ success: false });
+    }
+});
+
+// Update Shipping Address
+app.post('/api/update-shipping', async (req, res) => {
+    const { userEmail, firstName, lastName, companyName, address, country, region, city, zip, email, phone } = req.body;
+
+    try {
+        const users = await loadUsers();
+        const userIndex = users.findIndex(user => user.email === userEmail);
+
+        if (userIndex !== -1) {
+            users[userIndex].shippingAddress.firstName = firstName;
+            users[userIndex].shippingAddress.lastName = lastName;
+            users[userIndex].shippingAddress.companyName = companyName;
+            users[userIndex].shippingAddress.address = address;
+            users[userIndex].shippingAddress.country = country;
+            users[userIndex].shippingAddress.state = region;
+            users[userIndex].shippingAddress.city = city;
+            users[userIndex].shippingAddress.zip = zip;
+            users[userIndex].shippingAddress.email = email;
+            users[userIndex].shippingAddress.phone = phone;
+
+            await saveUsers(users);
+            res.json({ success: true });
+        } else {
+            res.status(404).json({ success: false, message: 'User not found' });
+        }
+    } catch (err) {
+        console.error('Error updating shipping address:', err);
+        res.status(500).json({ success: false });
+    }
+});
+
+// Change Password
+app.post('/api/change-password', async (req, res) => {
+    const { email, currentPassword, newPassword, confirmPassword } = req.body;
+
+    if (newPassword !== confirmPassword) {
+        return res.json({ success: false, message: 'Passwords do not match' });
+    }
+
+    try {
+        const users = await loadUsers();
+        const userIndex = users.findIndex(user => user.email === email);
+
+        if (userIndex !== -1 && users[userIndex].password === currentPassword) {
+            users[userIndex].password = newPassword;
+
+            await saveUsers(users);
+            res.json({ success: true });
+        } else {
+            res.status(404).json({ success: false, message: 'Current password is incorrect' });
+        }
+    } catch (err) {
+        console.error('Error changing password:', err);
+        res.status(500).json({ success: false });
+    }
+});
+
 
 // Inicialização do servidor
 const porta = 8091;
