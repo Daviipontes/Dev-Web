@@ -2,212 +2,187 @@
   {
     "id": 1,
     "name": "Yamaha P-125 Piano Digital",
-    "seller": "Carlos",
-    "rating": 5,
+    "seller": "carlos@gmail.com",
     "brand": "Yamaha",
-    "availability": "In Stock",
-    "categories": [
-      "Piano",
-      "Instrumentos",
-      "Digital"
-    ],
+    "rating": 5,
     "price": 4200,
-    "images": [
-      "/assets/product2.jpeg",
-      "/assets/product1.jpg",
-      "/assets/product3.jpeg"
+    "availability": "In stock",
+    "categories": [
+        "Piano",
+        "Instrumentos",
+        "Digital"
     ],
-    "video": "/assets/video.mp4",
+    "images": [
+        "/uploads/images/product1.jpg",
+        "/uploads/images/product1.jpg"
+    ],
+    "video": "/uploads/videos/video.mp4",
     "description": [
-      "O Yamaha P-125 é um piano digital projetado para simular a experiência de um piano acústico com a conveniência e portabilidade de um instrumento eletrônico.",
-      "Com 88 teclas e o sistema Graded Hammer Standard (GHS), o P-125 oferece um toque natural, com teclas mais pesadas nas notas graves e mais leves nas notas agudas.",
-      "Equipado com o motor sonoro Pure CF, o P-125 reproduz com precisão o som do piano de concerto Yamaha CFIIIS, conhecido pela sua clareza tonal.",
-      "O P-125 oferece 24 vozes diferentes, incluindo pianos elétricos, órgãos e cordas, e vem com 50 músicas pré-definidas e 20 ritmos de bateria para prática e performance."
+        "O Yamaha P-125 é um piano digital projetado para simular a experiência de um piano acústico com a conveniência e portabilidade de um instrumento eletrônico.",
+        "Com 88 teclas e o sistema Graded Hammer Standard (GHS), o P-125 oferece um toque natural, com teclas mais pesadas nas notas graves e mais leves nas notas agudas.",
+        "Equipado com o motor sonoro Pure CF, o P-125 reproduz com precisão o som do piano de concerto Yamaha CFIIIS, conhecido pela sua clareza tonal.",
+        "O P-125 oferece 24 vozes diferentes, incluindo pianos elétricos, órgãos e cordas, e vem com 50 músicas pré-definidas e 20 ritmos de bateria para prática e performance."
     ]
-  },
-  {
+},
+{
     "id": 2,
     "name": "Fender Stratocaster",
-    "seller": "Carlos",
-    "rating": 4.8,
+    "seller": "carlos@gmail.com",
     "brand": "Fender",
-    "availability": "In Stock",
-    "categories": [
-      "Guitarra",
-      "Instrumentos"
-    ],
+    "rating": 4.8,
     "price": 6500,
-    "images": [
-      "/assets/product1.jpg",
-      "/assets/product1.jpg",
-      "/assets/product1.jpg"
+    "availability": "In stock",
+    "categories": [
+        "Guitarra",
+        "Instrumentos"
     ],
-    "video": "/assets/video.mp4",
+    "images": [
+        "/uploads/images/product2.jpeg",
+        "/uploads/images/product2.jpeg"
+    ],
+    "video": "/uploads/videos/video.mp4",
     "description": [
-      "A Fender Stratocaster é uma guitarra icônica...",
-      "Blah blah blah..."
+        "A Fender Stratocaster é uma guitarra icônica...",
+        "Blah blah blah..."
     ]
-  },
-  {
+},
+{
     "id": 3,
     "name": "Shure SM58 Microfone",
-    "seller": "Carlos",
-    "rating": 4.6,
+    "seller": "carlos@gmail.com",
     "brand": "Shure",
-    "availability": "In Stock",
-    "categories": [
-      "Microfone"
-    ],
+    "rating": 4.6,
     "price": 850,
-    "images": [
-      "/assets/product3.jpeg"
+    "availability": "In stock",
+    "categories": [
+        "Microfone"
     ],
-    "video": "/assets/video.mp4",
+    "images": [
+        "/uploads/images/product3.jpeg"
+    ],
+    "video": "/uploads/videos/video.mp4",
     "description": [
-      "O Shure SM58 é o microfone vocal mais popular e confiável do mercado.",
-      "Ideal para performances ao vivo e gravações em estúdio, ele oferece excelente clareza vocal.",
-      "Sua construção robusta e o sistema anti-choque minimizam o ruído de manuseio.",
-      "Com uma resposta de frequência otimizada para vocais, é o microfone preferido por profissionais em todo o mundo."
+        "O Shure SM58 é o microfone vocal mais popular e confiável do mercado.",
+        "Ideal para performances ao vivo e gravações em estúdio, ele oferece excelente clareza vocal.",
+        "Sua construção robusta e o sistema anti-choque minimizam o ruído de manuseio.",
+        "Com uma resposta de frequência otimizada para vocais, é o microfone preferido por profissionais em todo o mundo."
     ]
-  },
-  {
+},
+{
     "id": 4,
     "name": "Roland TD-17KVX Bateria Eletrônica",
-    "seller": "Carlos",
-    "rating": 4.9,
+    "seller": "carlos@gmail.com",
     "brand": "Roland",
-    "availability": "In Stock",
-    "categories": [
-      "Bateria",
-      "Instrumentos"
-    ],
+    "rating": 4.9,
     "price": 9300,
-    "images": [
-      "/assets/product4.jpg"
+    "availability": "In stock",
+    "categories": [
+        "Bateria",
+        "Instrumentos"
     ],
-    "video": "/assets/video.mp4",
+    "images": [
+        "/uploads/images/product4.jpg"
+    ],
+    "video": "/uploads/videos/video.mp4",
     "description": [
-      "A Roland TD-17KVX é uma bateria eletrônica avançada com sons realistas e ótima resposta ao toque.",
-      "Com pads de malha para uma sensação autêntica e silenciosa, ela é ideal para treinos e performances ao vivo.",
-      "Possui uma vasta gama de sons de bateria, percussão e instrumentos eletrônicos integrados.",
-      "O módulo de som é altamente personalizável, permitindo ajustes nos timbres e efeitos."
+        "A Roland TD-17KVX é uma bateria eletrônica avançada com sons realistas e ótima resposta ao toque.",
+        "Com pads de malha para uma sensação autêntica e silenciosa, ela é ideal para treinos e performances ao vivo.",
+        "Possui uma vasta gama de sons de bateria, percussão e instrumentos eletrônicos integrados.",
+        "O módulo de som é altamente personalizável, permitindo ajustes nos timbres e efeitos."
     ]
-  },
-  {
+},
+{
     "id": 5,
     "name": "Marshall DSL40C Amplificador",
-    "seller": "Carlos",
-    "rating": 4.8,
+    "seller": "carlos@gmail.com",
     "brand": "Marshall",
-    "availability": "In Stock",
-    "categories": [
-      "Amplificador",
-      "Acessório"
-    ],
+    "rating": 4.8,
     "price": 4900,
-    "images": [
-      "/assets/product5.jpeg"
+    "availability": "In stock",
+    "categories": [
+        "Amplificador",
+        "Acessório"
     ],
-    "video": "/assets/video.mp4",
+    "images": [
+        "/uploads/images/product5.jpeg"
+    ],
+    "video": "/uploads/videos/video.mp4",
     "description": [
-      "O Marshall DSL40C é um amplificador valvulado clássico com um timbre quente e encorpado.",
-      "Perfeito para guitarristas que buscam uma ampla gama de sons, desde limpos até distorções pesadas.",
-      "Possui dois canais independentes e um reverb integrado, ideal para performances ao vivo.",
-      "A qualidade de construção robusta garante durabilidade e longevidade."
+        "O Marshall DSL40C é um amplificador valvulado clássico com um timbre quente e encorpado.",
+        "Perfeito para guitarristas que buscam uma ampla gama de sons, desde limpos até distorções pesadas.",
+        "Possui dois canais independentes e um reverb integrado, ideal para performances ao vivo.",
+        "A qualidade de construção robusta garante durabilidade e longevidade."
     ]
-  },
-  {
+},
+{
     "id": 6,
     "name": "Korg Kross 2 Workstation",
-    "seller": "Carlos",
-    "rating": 4.8,
+    "seller": "carlos@gmail.com",
     "brand": "Korg",
-    "availability": "In Stock",
-    "categories": [
-      "Piano",
-      "Instrumentos",
-      "Digital"
-    ],
+    "rating": 4.8,
     "price": 5700,
-    "images": [
-      "/assets/product6.jpeg"
+    "availability": "In stock",
+    "categories": [
+        "Piano",
+        "Instrumentos",
+        "Digital"
     ],
-    "video": "/assets/video.mp4",
+    "images": [
+        "/uploads/images/product6.jpeg"
+    ],
+    "video": "/uploads/videos/video.mp4",
     "description": [
-      "O Korg Kross 2 é uma poderosa workstation com uma vasta biblioteca de sons e efeitos.",
-      "Leve e portátil, ele é ideal para músicos que se apresentam ao vivo e produzem em estúdio.",
-      "Com pads sensíveis ao toque, é fácil criar loops e faixas de acompanhamento em tempo real.",
-      "A conectividade USB permite fácil integração com softwares de gravação."
+        "O Korg Kross 2 é uma poderosa workstation com uma vasta biblioteca de sons e efeitos.",
+        "Leve e portátil, ele é ideal para músicos que se apresentam ao vivo e produzem em estúdio.",
+        "Com pads sensíveis ao toque, é fácil criar loops e faixas de acompanhamento em tempo real.",
+        "A conectividade USB permite fácil integração com softwares de gravação."
     ]
-  },
-  {
+},
+{
     "id": 7,
     "name": "Ibanez RG550",
-    "seller": "Carlos",
-    "rating": 4.7,
+    "seller": "carlos@gmail.com",
     "brand": "Ibanez",
-    "availability": "In Stock",
-    "categories": [
-      "Guitarra",
-      "Instrumentos"
-    ],
+    "rating": 4.7,
     "price": 7200,
-    "images": [
-      "/assets/product7.jpg"
+    "availability": "In stock",
+    "categories": [
+        "Guitarra",
+        "Instrumentos"
     ],
-    "video": "/assets/video.mp4",
+    "images": [
+        "/uploads/images/product2.jpeg"
+    ],
+    "video": "/uploads/videos/video.mp4",
     "description": [
-      "A Ibanez RG550 é uma guitarra de alta performance, popular entre guitarristas de rock e metal.",
-      "Com um braço fino e captadores poderosos, oferece velocidade e precisão em solos rápidos.",
-      "O sistema de tremolo permite alavancadas extremas sem perder a afinação.",
-      "A construção sólida e leve garante conforto durante longas performances."
+        "A Ibanez RG550 é uma guitarra de alta performance, popular entre guitarristas de rock e metal.",
+        "Com um braço fino e captadores poderosos, oferece velocidade e precisão em solos rápidos.",
+        "O sistema de tremolo permite alavancadas extremas sem perder a afinação.",
+        "A construção sólida e leve garante conforto durante longas performances."
     ]
-  },
-  {
+},
+{
     "id": 8,
     "name": "AKG C414 XLII Microphone",
-    "seller": "Carlos",
-    "rating": 4.5,
+    "seller": "carlos@gmail.com",
     "brand": "AKG",
-    "availability": "In Stock",
-    "categories": [
-      "Microfone"
-    ],
+    "rating": 4.5,
     "price": 6200,
-    "images": [
-      "/assets/product8.jpeg"
-    ],
-    "video": "/assets/video.mp4",
-    "description": [
-      "O AKG C414 XLII é um microfone condensador de alto desempenho, ideal para gravações de voz e instrumentos.",
-      "Com nove padrões polares, ele oferece flexibilidade em uma variedade de situações de gravação.",
-      "Sua resposta de frequência suave e detalhada faz dele uma escolha popular entre engenheiros de som.",
-      "Robusto e versátil, é uma excelente opção para estúdios profissionais e home studios."
-    ]
-  },
-  {
-    "id": 0,
-    "name": "",
-    "seller": "",
-    "rating": 0,
-    "brand": "",
-    "availability": "",
+    "availability": "In stock",
     "categories": [
-      ""
+        "Microfone"
     ],
-    "price": 0,
     "images": [
-      ""
+        "/uploads/images/product2.jpeg"
     ],
-    "video": "",
+    "video": "/uploads/videos/video.mp4",
     "description": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "ordered": false
-  },
+        "O AKG C414 XLII é um microfone condensador de alto desempenho, ideal para gravações de voz e instrumentos.",
+        "Com nove padrões polares, ele oferece flexibilidade em uma variedade de situações de gravação.",
+        "Sua resposta de frequência suave e detalhada faz dele uma escolha popular entre engenheiros de som.",
+        "Robusto e versátil, é uma excelente opção para estúdios profissionais e home studios."
+    ]
+},
   {
     "id": 10,
     "name": "Violão Silent Taylor",
@@ -243,7 +218,7 @@
       "/uploads/images/1727562566076-Image157.gif",
       "/uploads/images/1727562566077-96r5blip.png"
     ],
-    "video": "/uploads/videos/1727562566087-video.mp4",
+    "video": "/uploads/videos/video.mp4",
     "description": [
       "descrição"
     ]

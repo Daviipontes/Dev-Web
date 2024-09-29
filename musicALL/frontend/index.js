@@ -258,6 +258,7 @@ app.get('/product/:id', async (req, res) => {
     const productId = req.params.id;
     const user = req.session.user; 
     try {
+        
         const response = await axios.get(`${API_SERVER_URL}/api/products/${productId}`);
         const product = response.data;
         res.render('pages/product', {

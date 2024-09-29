@@ -100,7 +100,7 @@
                 <% cart.forEach(item => { %>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <div>
-                        <img src="<%= item.images[0] %>" alt="Product Image" class="img-thumbnail" style="width: 50px;">
+                        <img src="http://localhost:8091<%= item.images[0] %>" alt="Product Image" class="img-thumbnail" style="width: 50px;">
                         <span><%= item.name %></span>
                         <br>
                         <small><%= item.quantity %> x R$ <%= parseFloat(item.price).toFixed(2).replace('.', ',') %></small>

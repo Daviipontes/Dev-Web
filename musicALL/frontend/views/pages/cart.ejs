@@ -32,7 +32,7 @@
                                             </svg>
                                         </button>
 
-                                        <img src="<%= item.images && item.images.length > 0 ? item.images[0] : '/assets/default-image.jpg' %>" alt="<%= item.name ? item.name : 'Produto sem nome' %>" class="img-thumbnail mr-2" style="width: 50px;">
+                                        <img src="http://localhost:8091<%= item.images && item.images.length > 0 ? item.images[0] : '/assets/default-image.jpg' %>" alt="<%= item.name ? item.name : 'Produto sem nome' %>" class="img-thumbnail mr-2" style="width: 50px;">
                                         <%= item.name %>
                                     </td>
                                     <td>R$ <%= item.price ? item.price.toFixed(2).replace('.', ',') : '0,00' %></td>

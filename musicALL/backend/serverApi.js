@@ -8,6 +8,13 @@ const app = express();
 const cors = require('cors');
 app.use(cors());
 const multer = require('multer');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
+
+
 // Configuração do destino de upload para imagens e vídeos
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -24,6 +31,7 @@ const storage = multer.diskStorage({
     }
 });
 
+
 // Limitar o tamanho do upload e os tipos de arquivos
 const upload = multer({
     storage: storage,
@@ -39,8 +47,10 @@ const upload = multer({
     }
 });
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+
+
+
+
 
 // Caminhos dos arquivos JSON no novo diretório 'data'
 const productsFilePath = path.join(__dirname, 'data', 'products.json');

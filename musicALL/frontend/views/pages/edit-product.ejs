@@ -43,7 +43,7 @@
             <label>Imagens Existentes</label>
             <div>
                 <% product.images.forEach(function(image) { %>
-                    <img src="<%= image %>" alt="Imagem do Produto" style="width: 100px; height: 100px; margin-right: 10px;">
+                    <img src="http://localhost:8091<%= image %>" alt="Imagem do Produto" style="width: 100px; height: 100px; margin-right: 10px;">
                 <% }) %>
             </div>
         </div>
@@ -59,7 +59,7 @@
             <label>Vídeo Atual</label>
             <% if (product.video) { %>
                 <video controls style="width: 300px; margin-top: 10px;">
-                    <source src="<%= product.video %>" type="video/mp4">
+                    <source src="http://localhost:8091<%= product.video %>" type="video/mp4">
                     Seu navegador não suporta vídeos.
                 </video>
             <% } else { %>
