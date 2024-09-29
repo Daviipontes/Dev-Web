@@ -58,7 +58,6 @@ const usersFilePath = path.join(__dirname, 'data', 'users.json');
 const locationsFilePath = path.join(__dirname, 'data', 'locations.json');
 
 let cart = [];
-const currentUserEmail = 'carlos.victor@alu.ufc.br'; // Simulação de usuário atual
 
 const loadProducts = async () => {
     const data = await fs.readFile(productsFilePath, 'utf-8');
@@ -403,7 +402,7 @@ app.get('/api/locations', async (req, res) => {
 app.get('/api/recent-purchases', async (req, res) => {
     try {
         const users = await loadUsers();
-        const user = users.find(user => user.email === currentUserEmail);
+        const user = users.find(user => user.email === currentUserEmail); // MUDAR ESSA PARTE
 
         if (user && user.orders) {
             res.json(user.orders);
@@ -417,20 +416,26 @@ app.get('/api/recent-purchases', async (req, res) => {
 
 // API para obter detalhes do perfil de um usuário específico
 app.get('/api/profile-details', async (req, res) => {
+    const currentUserEmail = req.query.currentUserEmail;
     try {
         const users = await loadUsers();
         const user = users.find(user => user.email === currentUserEmail);
 
         if (user) {
             res.json({
-                first_name: user.first_name,
-                last_name: user.last_name,
-                email: user.email,
-                phone_number: user.phone_number,
-                address: user.address,
-                city: user.city,
+                full_name: user.fullName,
                 state: user.state,
-                country: user.country
+                country: user.country,
+                email: user.email,
+                security_email: user.securityEmail,
+                phone: user.phone,
+                address_first_name: user.shippingAddress.firstName,
+                address_address: user.shippingAddress.address,
+                address_city: user.shippingAddress.city,
+                address_state: user.shippingAddress.state,
+                address_country: user.shippingAddress.country,
+                address_phone: user.shippingAddress.phone,
+                address_email: user.shippingAddress.email
             });
         } else {
             res.status(404).json({ message: 'User not found.' });
@@ -460,6 +465,7 @@ app.post('/api/login', async (req, res) => {
 // API para signup
 app.post('/api/signup', async (req, res) => {
     const { email, password, name, role } = req.body;
+
     try {
         const users = await loadUsers();
         const existingUser = users.find(u => u.email === email);
@@ -467,9 +473,41 @@ app.post('/api/signup', async (req, res) => {
         if (existingUser) {
             res.json({ success: false, message: 'User already exists' });
         } else {
-            const newUser = { email, password, name, role };
+            // Initialize new user with blank fields
+            const newUser = {
+                email,
+                password,
+                name,
+                role,
+                username: '', // Blank username
+                securityEmail: '', // Blank security email
+                phone: '', // Blank phone
+                fullName: '', // Blank full name
+                country: '', // Blank country
+                state: '', // Blank state
+                zip: '', // Blank zip
+                shippingAddress: {
+                    firstName: '',
+                    lastName: '',
+                    companyName: '',
+                    address: '',
+                    country: '',
+                    state: '',
+                    city: '',
+                    zip: '',
+                    email: '',
+                    phone: ''
+                },
+                products: [], // Empty products array
+                orders: [] // Empty orders array
+            };
+
+            // Add the new user to the list
             users.push(newUser);
+
+            // Save the updated users list
             await saveUsers(users);
+
             res.json({ success: true });
         }
     } catch (err) {

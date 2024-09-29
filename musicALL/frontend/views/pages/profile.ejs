@@ -1,15 +1,24 @@
 <!-- Boxes de informações pessoais e endereço -->
 <div class="container">
-    <h4 id="username">Hello, User</h4>
+    <h4 id="username">Hello, <%= profile.full_name %></h4>
     <p>This is your profile. You can check your <a href="#" class="profile-link">Recent Purchases</a> and <a href="#" class="profile-link">Shipping Addresses</a> and also edit your <a href="#" class="profile-link">Password</a> and <a href="#" class="profile-link">Account Settings</a>.</p>
     <div class="row">
-
         <!-- Box de informações pessoais -->
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">PROFILE DETAILS</div>
                 <div class="card-body" id="profile-details">
-                    <!-- Detalhes do perfil serão gerados dinamicamente aqui -->
+                    <div class="d-flex align-items-center">
+                        <img src="assets/profile_pic.png" alt="Profile Image" class="profile-image">
+                        <div>
+                            <p class="profile-header"><%= profile.full_name %></p>
+                            <p class="profile-info"><%= profile.state %>, <%= profile.country %></p>
+                        </div>
+                    </div>
+                    <p class="profile-info">Email: <%= profile.email %></p>
+                    <p class="profile-info">Security Email: <%= profile.security_email %></p>
+                    <p class="profile-info">Phone Number: <%= profile.phone %></p>
+                    <a class="btn btn-custom" href="/profile_config">EDIT ACCOUNT</a>
                 </div>
             </div>
         </div>
@@ -19,7 +28,12 @@
             <div class="card">
                 <div class="card-header">SHIPPING ADDRESS</div>
                 <div class="card-body" id="shipping-address">
-                    <!-- Endereço de entrega será gerado dinamicamente aqui -->
+                    <p class="profile-header"><%= profile.address_first_name %> <%= profile.address_last_name %></p>
+                    <p class="address-info"><%= profile.address_address %></p>
+                    <p class="address-info"><%= profile.address_city %> - <%= profile.address_state %>, <%= profile.address_country %></p>
+                    <p class="address-info">Phone Number: <%= profile.address_phone %></p>
+                    <p class="address-info">Email: <%= profile.address_email %></p>
+                    <a class="btn btn-custom" href="/profile_config">EDIT ADDRESS</a>
                 </div>
             </div>
         </div>
@@ -47,46 +61,6 @@
 </div>
 
 <script>
-    // Gerar detalhes do perfil e endereço de entrega dinamicamente
-    document.addEventListener('DOMContentLoaded', function () {
-        fetch('/api/profile-details')
-            .then(response => response.json())
-            .then(data => {
-                // Exibir detalhes do perfil
-                const profileDetailsContainer = document.getElementById('profile-details');
-                profileDetailsContainer.innerHTML = `
-                    <div class="d-flex align-items-center">
-                        <img src="assets/profile_pic.png" alt="Profile Image" class="profile-image">
-                        <div>
-                            <p class="profile-header">${data.first_name} ${data.last_name}</p>
-                            <p class="profile-info">${data.city}, ${data.state}, ${data.country}</p>
-                        </div>
-                    </div>
-                    <p class="profile-info">Email: ${data.email}</p>
-                    <p class="profile-info">Security Email: ${data.email}</p>
-                    <p class="profile-info">Phone Number: ${data.phone_number}</p>
-                    <a class="btn btn-custom" href="/profile_config">EDIT ACCOUNT</a>
-                `;
-
-                // Exibir endereço de entrega
-                const shippingAddressContainer = document.getElementById('shipping-address');
-                shippingAddressContainer.innerHTML = `
-                    <p class="profile-header">${data.first_name} ${data.last_name}</p>
-                    <p class="address-info">${data.address}</p>
-                    <p class="address-info">${data.city}-${data.state}, ${data.country}</p>
-                    <p class="address-info">Phone Number: ${data.phone_number}</p>
-                    <p class="address-info">Email: ${data.email}</p>
-                    <a class="btn btn-custom" href="/profile_config">EDIT ADDRESS</a>
-                `;
-
-                // Atualizar o nome de usuário no Welcome (início da página)
-                document.getElementById('username').textContent = `Hello, ${data.first_name}`;
-            })
-            .catch(error => {
-                console.error('Error fetching profile details:', error);
-            });
-    });
-
     // Gerar compras recentes dinamicamente
     document.addEventListener('DOMContentLoaded', function () {
         fetch('/api/recent-purchases')

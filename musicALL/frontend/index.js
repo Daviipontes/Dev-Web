@@ -466,8 +466,10 @@ app.get('/logout', (req, res) => {
 
 // Profile - Obter detalhes do perfil do Servidor B
 app.get('/profile', isLoggedIn, async (req, res) => {
+    const userEmail = req.session.user ? req.session.user.email : null;
+
     try {
-        const response = await axios.get(`${API_SERVER_URL}/api/profile-details`);
+        const response = await axios.get(`${API_SERVER_URL}/api/profile-details`, { params: { currentUserEmail: userEmail } });
         const profile = response.data;
         res.render('pages/profile', {
             title: 'Profile',
