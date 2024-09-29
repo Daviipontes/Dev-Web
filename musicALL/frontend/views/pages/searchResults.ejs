@@ -1,5 +1,3 @@
-
-
 <div class="container mt-5">
     <h2 class="font-weight-bold"><%= title %></h2>
     
@@ -9,7 +7,7 @@
                 <% products.forEach(product => { %>
                     <div class="col-md-4 product-col">
                         <a href="/product/<%= product.id %>" class="product-card">
-                            <img src="http://localhost:8091<%= product.images[0] %>" class="img-fluid" alt="<%= product.name %>">
+                            <img src="<%= serverUrl + product.images[0] %>" class="img-fluid" alt="<%= product.name %>">
                             <p class="product-title"><%= product.name %></p>
                             <p class="product-text">Seller: <%= product.seller %></p>
                             <p class="product-price">R$ <%= parseFloat(product.price).toFixed(2).replace('.', ',') %></p>

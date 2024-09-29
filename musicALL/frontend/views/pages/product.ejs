@@ -5,11 +5,11 @@
             <div class="col-lg-6">
                 <div class="product-images">
                     <div id="mainImageContainer">
-                        <img id="mainImage" class="d-block w-100 main-image" src="http://localhost:8091<%= product.images[0] %>" alt="Main Image">
+                        <img id="mainImage" class="d-block w-100 main-image" src="<%= serverUrl+ product.images[0] %>" alt="Main Image">
                     </div>
                     <div class="d-flex mt-3 thumbnail-images">
                         <% product.images.forEach((img, index) => { %>
-                            <img src="http://localhost:8091<%= img %>" alt="Thumb" class="img-thumbnail" onclick="changeMainImage('<%= img %>')">
+                            <img src="<%= serverUrl+img %>" alt="Thumb" class="img-thumbnail" onclick="changeMainImage('<%= img %>')">
                         <% }); %>
                     </div>
                 </div>

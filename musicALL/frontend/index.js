@@ -75,10 +75,13 @@ app.get('/', async (req, res) => {
     try {
         const response = await axios.get(`${API_SERVER_URL}/api/products`);
         const products = response.data;
+        const serverUrl=API_SERVER_URL;
+        console.log(products);
         res.render('pages/index', {
             title: 'Home',
             cssFile: null,
-            products
+            products,
+            serverUrl
         });
     } catch (err) {
         res.status(500).send('Erro ao carregar produtos');
@@ -94,10 +97,13 @@ app.get('/search', async (req, res) => {
         const filteredProducts = products.filter(product =>
             product.name.toLowerCase().includes(query)
         );
+
+        const serverUrl=API_SERVER_URL;
         res.render('pages/searchResults', {
             title: `Search Results for "${req.query.query}"`,
             cssFile: null,
-            products: filteredProducts
+            products: filteredProducts,
+            serverUrl
         });
     } catch (err) {
         res.status(500).send('Erro ao buscar produtos');
@@ -239,12 +245,15 @@ app.get('/product/:id/edit', isLoggedIn, hasAnyRole(['admin', 'seller']), async 
         // Buscar o produto a partir da API
         const response = await axios.get(`${API_SERVER_URL}/api/products/${productId}`);
         const product = response.data;
+        const serverUrl=API_SERVER_URL;
+        
 
         // Renderiza a página de edição, passando os dados do produto para o formulário
         res.render('pages/edit-product', {
             title: 'Editar Produto',
             product: product, // Passa o produto para a página EJS
             userEmail: req.session.user.email, // Email do usuário logado
+            serverUrl,
             cssFile: 'css/styles/edit-product.css'  // Arquivo CSS para o estilo
         });
     } catch (err) {
@@ -257,13 +266,16 @@ app.get('/product/:id/edit', isLoggedIn, hasAnyRole(['admin', 'seller']), async 
 app.get('/product/:id', async (req, res) => {
     const productId = req.params.id;
     const user = req.session.user; 
+    
     try {
         
         const response = await axios.get(`${API_SERVER_URL}/api/products/${productId}`);
         const product = response.data;
+        const serverUrl=API_SERVER_URL;
         res.render('pages/product', {
             title: 'Produto',
             product,
+            serverUrl,
             cssFile: 'css/styles/product-page.css',
             user:user
         });
@@ -282,6 +294,7 @@ app.get('/products', isLoggedIn, async (req, res) => {
         const userEmail = req.session.user ? req.session.user.email : null;
 
         let filteredProducts = products;
+        const serverUrl=API_SERVER_URL;
 
         // Se o usuário for um seller, filtrar os produtos para mostrar apenas os produtos dele
         if (userRole === 'seller') {
@@ -293,7 +306,8 @@ app.get('/products', isLoggedIn, async (req, res) => {
             title: 'Produtos',
             products: filteredProducts,   // Produtos filtrados de acordo com o papel
             userRole: userRole,           // Papel do usuário logado (admin ou seller)
-            userEmail: userEmail,         // Email do usuário logado
+            userEmail: userEmail,  
+            serverUrl,     // Email do usuário logado
             cssFile: 'css/styles/product-page.css'
         });
     } catch (err) {
@@ -307,9 +321,12 @@ app.get('/cart', async (req, res) => {
     try {
         const response = await axios.get(`${API_SERVER_URL}/api/cart`);
         const cart = response.data;
+
+        const serverUrl=API_SERVER_URL;
         res.render('pages/cart', {
             title: 'Seu Carrinho',
             cart: cart,
+            serverUrl,
             cssFile: 'css/styles/cart.css'
         });
     } catch (err) {
@@ -347,11 +364,13 @@ app.get('/checkout', async (req, res) => {
         const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
         const locationResponse = await axios.get(`${API_SERVER_URL}/api/locations`);
         const locationData = locationResponse.data;
+        const serverUrl=API_SERVER_URL;
         res.render('pages/checkout', {
             title: 'Checkout',
             cssFile: 'css/styles/checkout.css',
             cart,
             subtotal,
+            serverUrl,
             locationData
         });
     } catch (err) {
