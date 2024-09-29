@@ -338,14 +338,16 @@ app.put('/cart', async (req, res) => {
     const { id, quantity } = req.body;
 
     try {
+        // Faz uma requisição PUT para o serverApi.js
         const response = await axios.put(`${API_SERVER_URL}/api/cart`, { id, quantity });
-        res.json(response.data); // Retorna a resposta do serverApi.js
+
+        // Retorna a resposta do serverApi.js ao frontend
+        res.json(response.data);
     } catch (err) {
-        console.error('Erro ao atualizar o carrinho:', err.message);
-        res.status(500).json({ success: false, message: 'Erro ao atualizar o carrinho.' });
+        console.error('Erro ao adicionar produto ao carrinho:', err.message);
+        res.status(500).json({ success: false, message: 'Erro ao adicionar o produto ao carrinho.' });
     }
 });
-
 // Rota DELETE para remover um item do carrinho
 app.delete('/cart/:id', async (req, res) => {
     const productId = req.params.id;
