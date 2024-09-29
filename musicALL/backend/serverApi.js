@@ -515,6 +515,93 @@ app.post('/api/signup', async (req, res) => {
     }
 });
 
+// Update Account Settings
+app.post('/api/update-account', async (req, res) => {
+    const { email, displayName, fullName, secondaryEmail, countryRegion, username, phoneNumber, state, zip } = req.body;
+
+    try {
+        const users = await loadUsers();
+        const userIndex = users.findIndex(user => user.email === email);
+
+        if (userIndex !== -1) {
+            users[userIndex].name = displayName;
+            users[userIndex].fullName = fullName;
+            users[userIndex].securityEmail = secondaryEmail;
+            users[userIndex].country = countryRegion;
+            users[userIndex].username = username;
+            users[userIndex].phone = phoneNumber;
+            users[userIndex].state = state;
+            users[userIndex].zip = zip;
+
+            await saveUsers(users);
+            res.json({ success: true });
+        } else {
+            res.status(404).json({ success: false, message: 'User not found' });
+        }
+    } catch (err) {
+        console.error('Error updating account:', err);
+        res.status(500).json({ success: false });
+    }
+});
+
+// Update Shipping Address
+app.post('/api/update-shipping', async (req, res) => {
+    const { userEmail, firstName, lastName, companyName, address, country, region, city, zip, email, phone } = req.body;
+
+    try {
+        const users = await loadUsers();
+        const userIndex = users.findIndex(user => user.email === userEmail);
+
+        if (userIndex !== -1) {
+            users[userIndex].shippingAddress.firstName = firstName;
+            users[userIndex].shippingAddress.lastName = lastName;
+            users[userIndex].shippingAddress.companyName = companyName;
+            users[userIndex].shippingAddress.address = address;
+            users[userIndex].shippingAddress.country = country;
+            users[userIndex].shippingAddress.state = region;
+            users[userIndex].shippingAddress.city = city;
+            users[userIndex].shippingAddress.zip = zip;
+            users[userIndex].shippingAddress.email = email;
+            users[userIndex].shippingAddress.phone = phone;
+
+            await saveUsers(users);
+            res.json({ success: true });
+        } else {
+            res.status(404).json({ success: false, message: 'User not found' });
+        }
+    } catch (err) {
+        console.error('Error updating shipping address:', err);
+        res.status(500).json({ success: false });
+    }
+});
+
+// Change Password
+app.post('/api/change-password', async (req, res) => {
+    const { email, currentPassword, newPassword, confirmPassword } = req.body;
+
+    if (newPassword !== confirmPassword) {
+        return res.json({ success: false, message: 'Passwords do not match' });
+    }
+
+    try {
+        const users = await loadUsers();
+        const userIndex = users.findIndex(user => user.email === email);
+
+        if (userIndex !== -1 && users[userIndex].password === currentPassword) {
+            users[userIndex].password = newPassword;
+
+            await saveUsers(users);
+            res.json({ success: true });
+        } else {
+            res.status(404).json({ success: false, message: 'Current password is incorrect' });
+        }
+    } catch (err) {
+        console.error('Error changing password:', err);
+        res.status(500).json({ success: false });
+    }
+});
+
+
 // Inicialização do servidor
 const porta = 8091;
 app.listen(porta, () => {

@@ -504,6 +504,61 @@ app.get('/recent-purchases', async (req, res) => {
     }
 });
 
+// Update Account Settings
+app.post('/profile/update/account', isLoggedIn, async (req, res) => {
+    try {
+        const userEmail = req.session.user.email;
+        const accountData = req.body;
+
+        const response = await axios.post(`${API_SERVER_URL}/api/update-account`, {
+            email: userEmail,
+            ...accountData
+        });
+
+        res.json({ success: response.data.success });
+    } catch (err) {
+        console.error('Error updating account:', err);
+        res.status(500).json({ success: false });
+    }
+});
+
+// Update Shipping Address
+app.post('/profile/update/shipping', isLoggedIn, async (req, res) => {
+    try {
+        const userEmail = req.session.user.email;
+        const shippingData = req.body;
+
+        const response = await axios.post(`${API_SERVER_URL}/api/update-shipping`, {
+            userEmail: userEmail,
+            ...shippingData
+        });
+
+        res.json({ success: response.data.success });
+    } catch (err) {
+        console.error('Error updating shipping address:', err);
+        res.status(500).json({ success: false });
+    }
+});
+
+// Change Password
+app.post('/profile/update/password', isLoggedIn, async (req, res) => {
+    try {
+        const userEmail = req.session.user.email;
+        const passwordData = req.body;
+
+        const response = await axios.post(`${API_SERVER_URL}/api/change-password`, {
+            email: userEmail,
+            ...passwordData
+        });
+
+        res.json({ success: response.data.success });
+    } catch (err) {
+        console.error('Error changing password:', err);
+        res.status(500).json({ success: false });
+    }
+});
+
+
 // Inicialização do servidor
 const porta = 8090;
 app.listen(porta, () => {
