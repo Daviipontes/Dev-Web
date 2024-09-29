@@ -83,35 +83,43 @@
 </div>
 
 <script>
-    // Função para remover do carrinho
-    function removeFromCart(id) {
-        fetch(`http://localhost:8091/api/cart/${id}`, { // Aponta para a nova rota DELETE
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' }
-        }).then(res => res.json())
-          .then(data => {
-            if (data.success) {
-                location.reload(); // Recarrega a página para refletir as mudanças no carrinho
-            } else {
-                console.error('Erro ao remover o produto do carrinho:', data.message);
-            }
-        }).catch(err => console.error('Erro:', err));
-    }
-
     // Função para atualizar a quantidade no carrinho
     function updateCart(id, quantity) {
-        // Envia uma requisição PUT para o backend para atualizar a quantidade
-        fetch('http://localhost:8091/api/cart', {
+        // Verifica se a quantidade é válida (não negativa)
+        if (quantity < 0) {
+            alert("A quantidade não pode ser negativa.");
+            return;
+        }
+
+        fetch('/cart', {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id, quantity })
-        }).then(res => res.json())
-          .then(data => {
+        })
+        .then(res => res.json())
+        .then(data => {
             if (data.success) {
                 location.reload(); // Recarregar a página para refletir as mudanças no carrinho
             } else {
                 console.error('Erro ao atualizar o carrinho:', data.message);
             }
-        }).catch(err => console.error('Erro:', err));
+        })
+        .catch(err => console.error('Erro:', err));
+    }
+
+    function removeFromCart(id) {
+        fetch(`/cart/${id}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                location.reload(); // Recarregar a página para refletir as mudanças no carrinho
+            } else {
+                console.error('Erro ao remover o produto do carrinho:', data.message);
+            }
+        })
+        .catch(err => console.error('Erro:', err));
     }
 </script>

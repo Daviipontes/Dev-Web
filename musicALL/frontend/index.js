@@ -334,6 +334,31 @@ app.get('/cart', async (req, res) => {
     }
 });
 
+app.put('/cart', async (req, res) => {
+    const { id, quantity } = req.body;
+
+    try {
+        const response = await axios.put(`${API_SERVER_URL}/api/cart`, { id, quantity });
+        res.json(response.data); // Retorna a resposta do serverApi.js
+    } catch (err) {
+        console.error('Erro ao atualizar o carrinho:', err.message);
+        res.status(500).json({ success: false, message: 'Erro ao atualizar o carrinho.' });
+    }
+});
+
+// Rota DELETE para remover um item do carrinho
+app.delete('/cart/:id', async (req, res) => {
+    const productId = req.params.id;
+
+    try {
+        const response = await axios.delete(`${API_SERVER_URL}/api/cart/${productId}`);
+        res.json(response.data); // Retorna a resposta do serverApi.js
+    } catch (err) {
+        console.error('Erro ao remover o produto do carrinho:', err.message);
+        res.status(500).json({ success: false, message: 'Erro ao remover o produto do carrinho.' });
+    }
+});
+
 // Adicionar produto ao carrinho
 app.post('/cart', async (req, res) => {
     const { id, quantity } = req.body;
