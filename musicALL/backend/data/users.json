@@ -56,5 +56,32 @@
     },
     "products": [],
     "orders": []
+  },
+  {
+    "email": "admin@gmail.com",
+    "password": "123",
+    "name": "Admin",
+    "role": "admin",
+    "username": "Admin",
+    "securityEmail": "",
+    "phone": "",
+    "fullName": "",
+    "country": "",
+    "state": "",
+    "zip": "",
+    "shippingAddress": {
+      "firstName": "",
+      "lastName": "",
+      "companyName": "",
+      "address": "",
+      "country": "",
+      "state": "",
+      "city": "",
+      "zip": "",
+      "email": "",
+      "phone": ""
+    },
+    "products": [],
+    "orders": []
   }
 ]

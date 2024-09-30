@@ -396,9 +396,9 @@ app.post('/api/checkout', async (req, res) => {
     try {
         const orders = await loadOrders();
         const newOrder = {
-            id: orders.length + 1, userEmail, first_name, last_name, company_name, address, country, state, city, zip_code, email, phone_number, pix_name,
-            pix_receipt, order_notes, order_items: cart, order_total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
-            order_date: new Date().toISOString()
+            id: orders.length + 1, userEmail, first_name, last_name, company_name, address, country, state, city, zip_code, email, phone_number, 
+            pix_name, pix_receipt, order_notes, order_items: cart, order_total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+            order_date: new Date().toISOString(), status: "IN PROGRESS", number_items: cart.length
         };
         orders.push(newOrder);
         await saveOrders(orders);
@@ -421,12 +421,14 @@ app.get('/api/locations', async (req, res) => {
 
 // API para obter compras recentes de um usuário específico
 app.get('/api/recent-purchases', async (req, res) => {
+    const currentUserEmail = req.query.currentUserEmail;
     try {
-        const users = await loadUsers();
-        const user = users.find(user => user.email === currentUserEmail); // MUDAR ESSA PARTE
+        const orders = await loadOrders();
+        const orderList = orders.filter(order => order.userEmail === currentUserEmail);
+        console.log(orderList)
 
-        if (user && user.orders) {
-            res.json(user.orders);
+        if (orderList) {
+            res.json(orderList);
         } else {
             res.status(404).json({ message: 'No orders found for this user.' });
         }

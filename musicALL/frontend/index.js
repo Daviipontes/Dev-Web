@@ -561,13 +561,14 @@ app.get('/profile/info', isLoggedIn, async (req, res) => {
 // Obter compras recentes - Chamar a API para buscar compras recentes
 app.get('/recent-purchases', async (req, res) => {
     try {
-        const response = await axios.get(`${API_SERVER_URL}/api/recent-purchases`);
+        const userEmail = req.session.user ? req.session.user.email : null;
+
+        const response = await axios.get(`${API_SERVER_URL}/api/recent-purchases`, { params: { currentUserEmail: userEmail } });
         const purchases = response.data;
-        res.render('pages/recentPurchases', {
-            title: 'Recent Purchases',
-            purchases,
-            cssFile: 'css/styles/purchases.css'
-        });
+
+        console.log(purchases)
+        
+        res.json(purchases)
     } catch (err) {
         res.status(500).send('Erro ao carregar compras recentes');
     }

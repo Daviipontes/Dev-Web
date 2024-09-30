@@ -63,9 +63,10 @@
 <script>
     // Gerar compras recentes dinamicamente
     document.addEventListener('DOMContentLoaded', function () {
-        fetch('/api/recent-purchases')
+        fetch('/recent-purchases')
             .then(response => response.json())
             .then(purchases => {
+                console.log(purchases)
                 const purchasesTableBody = document.getElementById('purchases-table-body');
                 
                 //iterar para cada compra recente obtida
@@ -77,16 +78,18 @@
                     row.appendChild(orderId);
 
                     const status = document.createElement('td');
-                    status.className = `status-${purchase.status.toLowerCase()}`;
-                    status.textContent = purchase.order_status;
+                    var statusString = purchase.status.toLowerCase()
+                    statusString = statusString.trim().replace(/\s+/g, "")
+                    status.className = `status-${statusString}`;
+                    status.textContent = purchase.status;
                     row.appendChild(status);
 
                     const date = document.createElement('td');
-                    date.textContent = new Date(purchase.date).toLocaleDateString('pt-BR', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+                    date.textContent = new Date(purchase.order_date).toLocaleDateString('pt-BR', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
                     row.appendChild(date);
 
                     const total = document.createElement('td');
-                    total.textContent = `$${purchase.total_price} (${purchase.number_items} Products)`;
+                    total.textContent = `$${purchase.order_total} (${purchase.number_items} Products)`;
                     row.appendChild(total);
 
                     purchasesTableBody.appendChild(row);
