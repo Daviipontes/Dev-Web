@@ -52,6 +52,7 @@ const upload = multer({
 const productsFilePath = path.join(__dirname, 'data', 'products.json');
 const usersFilePath = path.join(__dirname, 'data', 'users.json');
 const locationsFilePath = path.join(__dirname, 'data', 'locations.json');
+const ordersFilePath = path.join(__dirname, 'data', 'orders.json');
 
 let cart = [];
 
@@ -65,11 +66,19 @@ const loadUsers = async () => {
     return JSON.parse(data);
 };
 
+const loadOrders = async () => {
+    const data = await fs.readFile(ordersFilePath, 'utf-8');
+    return JSON.parse(data);
+};
+
 const saveUsers = async (users) => {
     await fs.writeFile(usersFilePath, JSON.stringify(users, null, 2), 'utf-8');
 };
 const saveProducts = async (products) => {
     await fs.writeFile(productsFilePath, JSON.stringify(products, null, 2), 'utf-8');
+};
+const saveOrders = async (orders) => {
+    await fs.writeFile(ordersFilePath, JSON.stringify(products, null, 2), 'utf-8');
 };
 
 const loadLocations = async () => {
@@ -485,19 +494,18 @@ app.post('/api/signup', async (req, res) => {
         if (existingUser) {
             res.json({ success: false, message: 'User already exists' });
         } else {
-            // Initialize new user with blank fields
             const newUser = {
                 email,
                 password,
                 name,
                 role,
-                username: '', // Blank username
-                securityEmail: '', // Blank security email
-                phone: '', // Blank phone
-                fullName: '', // Blank full name
-                country: '', // Blank country
-                state: '', // Blank state
-                zip: '', // Blank zip
+                username: '',
+                securityEmail: '',
+                phone: '',
+                fullName: '',
+                country: '',
+                state: '',
+                zip: '',
                 shippingAddress: {
                     firstName: '',
                     lastName: '',
@@ -510,14 +518,12 @@ app.post('/api/signup', async (req, res) => {
                     email: '',
                     phone: ''
                 },
-                products: [], // Empty products array
-                orders: [] // Empty orders array
+                products: [],
+                orders: []
             };
 
-            // Add the new user to the list
             users.push(newUser);
 
-            // Save the updated users list
             await saveUsers(users);
 
             res.json({ success: true });
@@ -527,7 +533,26 @@ app.post('/api/signup', async (req, res) => {
     }
 });
 
-// Update Account Settings
+// API para obter informações da conta
+app.get('/api/user-info', async (req, res) => {
+    const { email } = req.query;
+
+    try {
+        const users = await loadUsers(); // Load users from users.json
+        const user = users.find(user => user.email === email);
+
+        if (user) {
+            res.json({ success: true, user });
+        } else {
+            res.status(404).json({ success: false, message: 'User not found' });
+        }
+    } catch (err) {
+        console.error('Error retrieving user info:', err);
+        res.status(500).json({ success: false });
+    }
+});
+
+// Atualizar detalhes da conta
 app.post('/api/update-account', async (req, res) => {
     const { email, displayName, fullName, secondaryEmail, countryRegion, username, phoneNumber, state, zip } = req.body;
 
@@ -556,7 +581,7 @@ app.post('/api/update-account', async (req, res) => {
     }
 });
 
-// Update Shipping Address
+// Atualizar endereço de entrega
 app.post('/api/update-shipping', async (req, res) => {
     const { userEmail, firstName, lastName, companyName, address, country, region, city, zip, email, phone } = req.body;
 
@@ -587,7 +612,7 @@ app.post('/api/update-shipping', async (req, res) => {
     }
 });
 
-// Change Password
+// Atualizar senha
 app.post('/api/change-password', async (req, res) => {
     const { email, currentPassword, newPassword, confirmPassword } = req.body;
 

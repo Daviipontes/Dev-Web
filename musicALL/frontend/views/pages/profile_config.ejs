@@ -146,7 +146,43 @@
 </div>
 
 <script>
-    // Save Account Settings
+    // Preencher campos ao iniciar a página
+    document.addEventListener('DOMContentLoaded', () => {
+        fetch('/profile/info')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('displayName').value = data.user.name || '';
+                    document.getElementById('fullName').value = data.user.fullName || '';
+                    document.getElementById('secondaryEmail').value = data.user.securityEmail || '';
+                    document.getElementById('countryRegion').value = data.user.country || '';
+                    document.getElementById('username').value = data.user.username || '';
+                    document.getElementById('email').value = data.user.email || '';
+                    document.getElementById('phoneNumber').value = data.user.phone || '';
+                    document.getElementById('states').value = data.user.state || '';
+                    document.getElementById('zipCode').value = data.user.zip || '';
+
+                    document.getElementById('shippingFirstName').value = data.user.shippingAddress.firstName || '';
+                    document.getElementById('shippingLastName').value = data.user.shippingAddress.lastName || '';
+                    document.getElementById('shippingCompanyName').value = data.user.shippingAddress.companyName || '';
+                    document.getElementById('shippingAddress').value = data.user.shippingAddress.address || '';
+                    document.getElementById('shippingCountry').value = data.user.shippingAddress.country || '';
+                    document.getElementById('shippingRegion').value = data.user.shippingAddress.state || '';
+                    document.getElementById('shippingCity').value = data.user.shippingAddress.city || '';
+                    document.getElementById('shippingZipCode').value = data.user.shippingAddress.zip || '';
+                    document.getElementById('shippingEmail').value = data.user.shippingAddress.email || '';
+                    document.getElementById('shippingPhoneNumber').value = data.user.shippingAddress.phone || '';
+                } else {
+                    alert('Failed to load profile information');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to load profile information');
+            });
+    });
+
+    // Salvar detalhes da conta
     document.querySelector('.save-account-btn').addEventListener('click', () => {
         const accountData = {
             displayName: document.getElementById('displayName').value,
@@ -181,7 +217,7 @@
         });
     });
 
-    // Save Shipping Address
+    // Salvar endereço de entrega
     document.querySelector('.save-shipping-btn').addEventListener('click', () => {
         const shippingData = {
             firstName: document.getElementById('shippingFirstName').value,
@@ -217,7 +253,7 @@
         });
     });
 
-    // Change Password
+    // Mudar senha
     document.querySelector('.save-password-btn').addEventListener('click', () => {
         const passwordData = {
             currentPassword: document.getElementById('currentPassword').value,

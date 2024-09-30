@@ -537,6 +537,26 @@ app.get('/profile_config', (req, res) => {
     });
 });
 
+// Obter informações do perfil
+app.get('/profile/info', isLoggedIn, async (req, res) => {
+    try {
+        const userEmail = req.session.user.email;
+
+        const response = await axios.get(`${API_SERVER_URL}/api/user-info`, {
+            params: { email: userEmail }
+        });
+
+        if (response.data.success) {
+            res.json({ success: true, user: response.data.user });
+        } else {
+            res.status(404).json({ success: false, message: 'User not found' });
+        }
+    } catch (err) {
+        console.error('Error fetching user info:', err);
+        res.status(500).json({ success: false });
+    }
+});
+
 // Obter compras recentes - Chamar a API para buscar compras recentes
 app.get('/recent-purchases', async (req, res) => {
     try {
@@ -552,7 +572,7 @@ app.get('/recent-purchases', async (req, res) => {
     }
 });
 
-// Update Account Settings
+// Atualizar detalhes da conta
 app.post('/profile/update/account', isLoggedIn, async (req, res) => {
     try {
         const userEmail = req.session.user.email;
@@ -570,7 +590,7 @@ app.post('/profile/update/account', isLoggedIn, async (req, res) => {
     }
 });
 
-// Update Shipping Address
+// Atualizar endereço de entrega
 app.post('/profile/update/shipping', isLoggedIn, async (req, res) => {
     try {
         const userEmail = req.session.user.email;
@@ -588,7 +608,7 @@ app.post('/profile/update/shipping', isLoggedIn, async (req, res) => {
     }
 });
 
-// Change Password
+// Mudar senha
 app.post('/profile/update/password', isLoggedIn, async (req, res) => {
     try {
         const userEmail = req.session.user.email;
