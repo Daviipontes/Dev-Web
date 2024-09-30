@@ -78,7 +78,7 @@ const saveProducts = async (products) => {
     await fs.writeFile(productsFilePath, JSON.stringify(products, null, 2), 'utf-8');
 };
 const saveOrders = async (orders) => {
-    await fs.writeFile(ordersFilePath, JSON.stringify(products, null, 2), 'utf-8');
+    await fs.writeFile(ordersFilePath, JSON.stringify(orders, null, 2), 'utf-8');
 };
 
 const loadLocations = async () => {
@@ -392,16 +392,16 @@ app.get('/api/user-shipping-address', async (req, res) => {
 
 // API para submeter checkout
 app.post('/api/checkout', async (req, res) => {
-    const { first_name, last_name, company_name, address, country, state, city, zip_code, email, phone_number, pix_name, order_notes, pix_receipt } = req.body;
+    const { userEmail, first_name, last_name, company_name, address, country, state, city, zip_code, email, phone_number, pix_name, order_notes, pix_receipt } = req.body;
     try {
-        const users = await loadUsers();
-        const newUser = {
-            first_name, last_name, company_name, address, country, state, city, zip_code, email, phone_number, pix_name,
+        const orders = await loadOrders();
+        const newOrder = {
+            userEmail, first_name, last_name, company_name, address, country, state, city, zip_code, email, phone_number, pix_name,
             pix_receipt, order_notes, order_items: cart, order_total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
             order_date: new Date().toISOString()
         };
-        users.push(newUser);
-        await saveUsers(users);
+        orders.push(newOrder);
+        await saveOrders(orders);
         cart = [];
         res.json({ success: true });
     } catch (err) {

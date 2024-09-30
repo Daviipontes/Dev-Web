@@ -410,9 +410,10 @@ app.get('/checkout', isLoggedIn, async (req, res) => {
 // Submeter checkout
 app.post('/submit-checkout', upload.single('pix_receipt'), async (req, res) => {
     const { first_name, last_name, company_name, address, country, state, city, zip_code, email, phone_number, pix_name, order_notes } = req.body;
+    const userEmail = req.session.user.email;
     try {
         await axios.post(`${API_SERVER_URL}/api/checkout`, {
-            first_name, last_name, company_name, address, country, state, city, zip_code, email, phone_number, pix_name, order_notes,
+            userEmail, first_name, last_name, company_name, address, country, state, city, zip_code, email, phone_number, pix_name, order_notes,
             pix_receipt: req.file ? req.file.filename : null
         });
         res.redirect('/finished');

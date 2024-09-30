@@ -1,12 +1,112 @@
 [
-    {
-        "id": "",
-        "buyer": "",
-        "seller": "",
-        "items": [],
-        "totalPrice": 0,
-        "date": "",
-        "number_items": 0,
-        "status": ""
-    }
+  {
+    "userEmail": "carlos.victor@alu.ufc.br",
+    "first_name": "Carlos ",
+    "last_name": "Victor",
+    "company_name": "1",
+    "address": "2",
+    "country": "Brazil",
+    "state": "Ceará",
+    "city": "Fortaleza",
+    "zip_code": "6",
+    "email": "7",
+    "phone_number": "8",
+    "pix_name": "Carlos v",
+    "order_notes": "orders test 2",
+    "order_items": [
+      {
+        "id": 1,
+        "name": "Yamaha P-125 Piano Digital",
+        "seller": "carlos@gmail.com",
+        "brand": "Yamaha",
+        "rating": 5,
+        "price": 4200,
+        "availability": "In stock",
+        "categories": [
+          "Piano",
+          "Instrumentos",
+          "Digital"
+        ],
+        "images": [
+          "/uploads/images/product1.jpg",
+          "/uploads/images/product1.jpg"
+        ],
+        "video": "/uploads/videos/video.mp4",
+        "description": [
+          "O Yamaha P-125 é um piano digital projetado para simular a experiência de um piano acústico com a conveniência e portabilidade de um instrumento eletrônico.",
+          "Com 88 teclas e o sistema Graded Hammer Standard (GHS), o P-125 oferece um toque natural, com teclas mais pesadas nas notas graves e mais leves nas notas agudas.",
+          "Equipado com o motor sonoro Pure CF, o P-125 reproduz com precisão o som do piano de concerto Yamaha CFIIIS, conhecido pela sua clareza tonal.",
+          "O P-125 oferece 24 vozes diferentes, incluindo pianos elétricos, órgãos e cordas, e vem com 50 músicas pré-definidas e 20 ritmos de bateria para prática e performance."
+        ],
+        "quantity": 1
+      },
+      {
+        "id": 2,
+        "name": "Fender Stratocaster",
+        "seller": "carlos@gmail.com",
+        "brand": "Fender",
+        "rating": 4.8,
+        "price": 6500,
+        "availability": "In stock",
+        "categories": [
+          "Guitarra",
+          "Instrumentos"
+        ],
+        "images": [
+          "/uploads/images/product2.jpeg",
+          "/uploads/images/product2.jpeg"
+        ],
+        "video": "/uploads/videos/video.mp4",
+        "description": [
+          "A Fender Stratocaster é uma guitarra icônica...",
+          "Blah blah blah..."
+        ],
+        "quantity": 1
+      }
+    ],
+    "order_total": 10700,
+    "order_date": "2024-09-30T11:12:05.276Z"
+  },
+  {
+    "userEmail": "carlos.victor@alu.ufc.br",
+    "first_name": "Carlos ",
+    "last_name": "Victor",
+    "company_name": "1",
+    "address": "2",
+    "country": "Brazil",
+    "state": "São Paulo",
+    "city": "São Paulo",
+    "zip_code": "6",
+    "email": "7",
+    "phone_number": "8",
+    "pix_name": "Carlos V",
+    "order_notes": "notas teste 2",
+    "order_items": [
+      {
+        "id": 3,
+        "name": "Shure SM58 Microfone",
+        "seller": "carlos@gmail.com",
+        "brand": "Shure",
+        "rating": 4.6,
+        "price": 850,
+        "availability": "In stock",
+        "categories": [
+          "Microfone"
+        ],
+        "images": [
+          "/uploads/images/product3.jpeg"
+        ],
+        "video": "/uploads/videos/video.mp4",
+        "description": [
+          "O Shure SM58 é o microfone vocal mais popular e confiável do mercado.",
+          "Ideal para performances ao vivo e gravações em estúdio, ele oferece excelente clareza vocal.",
+          "Sua construção robusta e o sistema anti-choque minimizam o ruído de manuseio.",
+          "Com uma resposta de frequência otimizada para vocais, é o microfone preferido por profissionais em todo o mundo."
+        ],
+        "quantity": 1
+      }
+    ],
+    "order_total": 850,
+    "order_date": "2024-09-30T11:13:07.904Z"
+  }
 ]

@@ -73,20 +73,20 @@
                     const row = document.createElement('tr');
 
                     const orderId = document.createElement('td');
-                    orderId.innerHTML = `<a href="#" class="profile-link">#${purchase.order_id}</a>`;
+                    orderId.innerHTML = `<a href="#" class="profile-link">#${purchase.id}</a>`;
                     row.appendChild(orderId);
 
                     const status = document.createElement('td');
-                    status.className = `status-${purchase.order_status.toLowerCase()}`;
+                    status.className = `status-${purchase.status.toLowerCase()}`;
                     status.textContent = purchase.order_status;
                     row.appendChild(status);
 
                     const date = document.createElement('td');
-                    date.textContent = new Date(purchase.order_date).toLocaleDateString('pt-BR', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+                    date.textContent = new Date(purchase.date).toLocaleDateString('pt-BR', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
                     row.appendChild(date);
 
                     const total = document.createElement('td');
-                    total.textContent = `$${purchase.order_total} (${purchase.order_number_items} Products)`;
+                    total.textContent = `$${purchase.total_price} (${purchase.number_items} Products)`;
                     row.appendChild(total);
 
                     purchasesTableBody.appendChild(row);
