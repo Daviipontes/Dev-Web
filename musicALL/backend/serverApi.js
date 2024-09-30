@@ -511,6 +511,18 @@ app.post('/api/signup', async (req, res) => {
     }
 });
 
+
+app.get('/api/users', async (req, res) => {
+    try {
+        const users = await loadUsers(); // Função que carrega os usuários de um arquivo JSON ou banco de dados
+        res.json(users);
+    } catch (err) {
+        console.error('Erro ao carregar usuários:', err.message);
+        res.status(500).json({ success: false, message: 'Erro ao carregar usuários' });
+    }
+});
+
+
 // Update Account Settings
 app.post('/api/update-account', async (req, res) => {
     const { email, displayName, fullName, secondaryEmail, countryRegion, username, phoneNumber, state, zip } = req.body;

@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "Yamaha P-125 Piano Digital",
-    "seller": "carlos@gmail.com",
+    "seller": "carlos.victor@alu.ufc.br",
     "brand": "Yamaha",
     "rating": 5,
     "price": 4200,
@@ -27,7 +27,7 @@
 {
     "id": 2,
     "name": "Fender Stratocaster",
-    "seller": "carlos@gmail.com",
+    "seller": "carlos.victor@alu.ufc.br",
     "brand": "Fender",
     "rating": 4.8,
     "price": 6500,
@@ -49,7 +49,7 @@
 {
     "id": 3,
     "name": "Shure SM58 Microfone",
-    "seller": "carlos@gmail.com",
+    "seller": "carlos.victor@alu.ufc.br",
     "brand": "Shure",
     "rating": 4.6,
     "price": 850,
@@ -71,7 +71,7 @@
 {
     "id": 4,
     "name": "Roland TD-17KVX Bateria Eletrônica",
-    "seller": "carlos@gmail.com",
+    "seller": "carlos.victor@alu.ufc.br",
     "brand": "Roland",
     "rating": 4.9,
     "price": 9300,
@@ -94,7 +94,7 @@
 {
     "id": 5,
     "name": "Marshall DSL40C Amplificador",
-    "seller": "carlos@gmail.com",
+    "seller": "carlos.victor@alu.ufc.br",
     "brand": "Marshall",
     "rating": 4.8,
     "price": 4900,
@@ -117,7 +117,7 @@
 {
     "id": 6,
     "name": "Korg Kross 2 Workstation",
-    "seller": "carlos@gmail.com",
+    "seller": "carlos.victor@alu.ufc.br",
     "brand": "Korg",
     "rating": 4.8,
     "price": 5700,
@@ -141,7 +141,7 @@
 {
     "id": 7,
     "name": "Ibanez RG550",
-    "seller": "carlos@gmail.com",
+    "seller": "carlos.victor@alu.ufc.br",
     "brand": "Ibanez",
     "rating": 4.7,
     "price": 7200,
@@ -164,7 +164,7 @@
 {
     "id": 8,
     "name": "AKG C414 XLII Microphone",
-    "seller": "carlos@gmail.com",
+    "seller": "carlos.victor@alu.ufc.br",
     "brand": "AKG",
     "rating": 4.5,
     "price": 6200,

@@ -38,13 +38,18 @@ function isLoggedIn(req, res, next) {
 }
 
 // Middleware para verificar se o usuário tem a role necessária
-function hasRole(role) {
-    return function(req, res, next) {
-        if (req.session.user && req.session.user.role === role) {
-            next();
-        } else {
-            res.status(403).send('Acesso negado. Você não tem permissão para realizar esta ação.');
-        }
+async function getSellerName(email) {
+    try {
+        // Supondo que você tenha uma rota no serverApi.js que retorna todos os usuários
+        const response = await axios.get(`${API_SERVER_URL}/api/users`);
+        const users = response.data;
+
+        // Encontrar o usuário com o email correspondente
+        const user = users.find(u => u.email === email);
+        return user ? user.name : email; // Se não encontrar o nome, retorna o próprio email como fallback
+    } catch (err) {
+        console.error('Erro ao obter os usuários:', err.message);
+        return email; // Retorna o email como fallback no caso de erro
     }
 }
 
@@ -76,6 +81,12 @@ app.get('/', async (req, res) => {
         const response = await axios.get(`${API_SERVER_URL}/api/products`);
         const products = response.data;
         const serverUrl=API_SERVER_URL;
+
+        for (let product of products) {
+            product.sellerName = await getSellerName(product.seller); // Busca o nome do seller
+        }
+
+
         console.log(products);
         res.render('pages/index', {
             title: 'Home',
@@ -97,6 +108,10 @@ app.get('/search', async (req, res) => {
         const filteredProducts = products.filter(product =>
             product.name.toLowerCase().includes(query)
         );
+        for (let product of products) {
+            product.sellerName = await getSellerName(product.seller); // Busca o nome do seller
+        }
+
 
         const serverUrl=API_SERVER_URL;
         res.render('pages/searchResults', {
@@ -271,6 +286,11 @@ app.get('/product/:id', async (req, res) => {
         
         const response = await axios.get(`${API_SERVER_URL}/api/products/${productId}`);
         const product = response.data;
+
+        
+        product.sellerName = await getSellerName(product.seller); // Busca o nome do seller
+        
+
         const serverUrl=API_SERVER_URL;
         res.render('pages/product', {
             title: 'Produto',
@@ -295,6 +315,8 @@ app.get('/products', isLoggedIn, async (req, res) => {
 
         let filteredProducts = products;
         const serverUrl=API_SERVER_URL;
+
+        product.sellerName = await getSellerName(product.seller); // Busca o nome do seller
 
         // Se o usuário for um seller, filtrar os produtos para mostrar apenas os produtos dele
         if (userRole === 'seller') {

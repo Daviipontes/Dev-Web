@@ -179,7 +179,7 @@
     // renderiza
     function renderProducts(products) {
         
-        const productsList = document.querySelector('#products-list .row');
+        const productsList = document.querySelector('#products-list .row'); 
         productsList.innerHTML = ''; // Limpar a lista
 
         if (products.length > 0) {
@@ -190,7 +190,7 @@
                     <a href="/product/${product.id}" class="product-card">
                         <img src="${Url+product.images[0]}" class="img-fluid" alt="${product.name}">
                         <p class="product-title">${product.name}</p>
-                        <p class="product-text">Seller: ${product.seller}</p>
+                        <p class="product-text"><strong>Seller: ${product.sellerName}<strong></p>
                         <p class="product-price">R$ ${product.price.toFixed(2).replace('.', ',')}</p>
                     </a>
                 `;
