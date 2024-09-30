@@ -396,7 +396,7 @@ app.post('/api/checkout', async (req, res) => {
     try {
         const orders = await loadOrders();
         const newOrder = {
-            userEmail, first_name, last_name, company_name, address, country, state, city, zip_code, email, phone_number, pix_name,
+            id: orders.length + 1, userEmail, first_name, last_name, company_name, address, country, state, city, zip_code, email, phone_number, pix_name,
             pix_receipt, order_notes, order_items: cart, order_total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
             order_date: new Date().toISOString()
         };
