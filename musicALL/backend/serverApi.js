@@ -535,7 +535,6 @@ app.post('/api/signup', async (req, res) => {
     }
 });
 
-<<<<<<< HEAD
 
 app.get('/api/users', async (req, res) => {
     try {
@@ -547,17 +546,12 @@ app.get('/api/users', async (req, res) => {
     }
 });
 
-
-// Update Account Settings
-=======
 // API para obter informações da conta
 app.get('/api/user-info', async (req, res) => {
     const { email } = req.query;
-
     try {
         const users = await loadUsers(); // Load users from users.json
         const user = users.find(user => user.email === email);
-
         if (user) {
             res.json({ success: true, user });
         } else {
@@ -570,7 +564,6 @@ app.get('/api/user-info', async (req, res) => {
 });
 
 // Atualizar detalhes da conta
->>>>>>> 8008c14c116b0f2b97238978b431fd1f5f87bfa7
 app.post('/api/update-account', async (req, res) => {
     const { email, displayName, fullName, secondaryEmail, countryRegion, username, phoneNumber, state, zip } = req.body;
 
