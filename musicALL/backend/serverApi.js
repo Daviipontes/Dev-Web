@@ -363,7 +363,23 @@ app.post('/api/cart/buy-now', async (req, res) => {
     }
 });
 
-
+// API para obter shipping address
+app.get('/api/user-shipping-address', async (req, res) => {
+    const { email } = req.query;
+    
+    try {
+        const users = await loadUsers();
+        const user = users.find(u => u.email === email);
+        
+        if (user && user.shippingAddress) {
+            res.json({ shippingAddress: user.shippingAddress });
+        } else {
+            res.status(404).json({ message: 'User or shipping address not found' });
+        }
+    } catch (err) {
+        res.status(500).json({ message: 'Error retrieving user shipping address' });
+    }
+});
 
 // API para submeter checkout
 app.post('/api/checkout', async (req, res) => {

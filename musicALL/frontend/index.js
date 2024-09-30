@@ -382,24 +382,28 @@ app.post('/cart/buy-now', async (req, res) => {
 });
 
 // Checkout
-app.get('/checkout', async (req, res) => {
+app.get('/checkout', isLoggedIn, async (req, res) => {
     try {
-        const response = await axios.get(`${API_SERVER_URL}/api/cart`);
-        const cart = response.data;
+        const cartResponse = await axios.get(`${API_SERVER_URL}/api/cart`);
+        const cart = cartResponse.data;
         const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
         const locationResponse = await axios.get(`${API_SERVER_URL}/api/locations`);
         const locationData = locationResponse.data;
-        const serverUrl=API_SERVER_URL;
+
+        const userEmail = req.session.user.email;
+        const userAddressResponse = await axios.get(`${API_SERVER_URL}/api/user-shipping-address`, { params: { email: userEmail } });
+        const userShippingAddress = userAddressResponse.data.shippingAddress;
+
         res.render('pages/checkout', {
             title: 'Checkout',
             cssFile: 'css/styles/checkout.css',
             cart,
             subtotal,
-            serverUrl,
-            locationData
+            locationData,
+            userShippingAddress
         });
     } catch (err) {
-        res.status(500).send('Erro ao carregar checkout');
+        res.status(500).send('Error loading checkout');
     }
 });
 
