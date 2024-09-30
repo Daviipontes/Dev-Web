@@ -1,29 +1,5 @@
 [
   {
-    "email": "buyer@gmail.com",
-    "password": "123",
-    "role": "buyer",
-    "name": "buyer"
-  },
-  {
-    "email": "seller@gmail.com",
-    "password": "123",
-    "role": "seller",
-    "name": "Carlos"
-  },
-  {
-    "email": "sofia@gmail.com",
-    "password": "123",
-    "name": "Sofia",
-    "role": "buyer"
-  },
-  {
-    "email": "brenda@gmail.com",
-    "password": "123",
-    "name": "Brenda",
-    "role": "seller"
-  },
-  {
     "email": "davi@gmail.com",
     "password": "123",
     "name": "Davi",
@@ -77,6 +53,33 @@
       "zip": "6",
       "email": "7",
       "phone": "8"
+    },
+    "products": [],
+    "orders": []
+  },
+  {
+    "email": "admin@gmail.com",
+    "password": "123",
+    "name": "Admin",
+    "role": "admin",
+    "username": "Admin",
+    "securityEmail": "",
+    "phone": "",
+    "fullName": "",
+    "country": "",
+    "state": "",
+    "zip": "",
+    "shippingAddress": {
+      "firstName": "",
+      "lastName": "",
+      "companyName": "",
+      "address": "",
+      "country": "",
+      "state": "",
+      "city": "",
+      "zip": "",
+      "email": "",
+      "phone": ""
     },
     "products": [],
     "orders": []

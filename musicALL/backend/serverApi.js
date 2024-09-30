@@ -52,6 +52,7 @@ const upload = multer({
 const productsFilePath = path.join(__dirname, 'data', 'products.json');
 const usersFilePath = path.join(__dirname, 'data', 'users.json');
 const locationsFilePath = path.join(__dirname, 'data', 'locations.json');
+const ordersFilePath = path.join(__dirname, 'data', 'orders.json');
 
 let cart = [];
 
@@ -65,11 +66,19 @@ const loadUsers = async () => {
     return JSON.parse(data);
 };
 
+const loadOrders = async () => {
+    const data = await fs.readFile(ordersFilePath, 'utf-8');
+    return JSON.parse(data);
+};
+
 const saveUsers = async (users) => {
     await fs.writeFile(usersFilePath, JSON.stringify(users, null, 2), 'utf-8');
 };
 const saveProducts = async (products) => {
     await fs.writeFile(productsFilePath, JSON.stringify(products, null, 2), 'utf-8');
+};
+const saveOrders = async (orders) => {
+    await fs.writeFile(ordersFilePath, JSON.stringify(orders, null, 2), 'utf-8');
 };
 
 const loadLocations = async () => {
@@ -363,20 +372,36 @@ app.post('/api/cart/buy-now', async (req, res) => {
     }
 });
 
-
+// API para obter shipping address
+app.get('/api/user-shipping-address', async (req, res) => {
+    const { email } = req.query;
+    
+    try {
+        const users = await loadUsers();
+        const user = users.find(u => u.email === email);
+        
+        if (user && user.shippingAddress) {
+            res.json({ shippingAddress: user.shippingAddress });
+        } else {
+            res.status(404).json({ message: 'User or shipping address not found' });
+        }
+    } catch (err) {
+        res.status(500).json({ message: 'Error retrieving user shipping address' });
+    }
+});
 
 // API para submeter checkout
 app.post('/api/checkout', async (req, res) => {
-    const { first_name, last_name, company_name, address, country, state, city, zip_code, email, phone_number, pix_name, order_notes, pix_receipt } = req.body;
+    const { userEmail, first_name, last_name, company_name, address, country, state, city, zip_code, email, phone_number, pix_name, order_notes, pix_receipt } = req.body;
     try {
-        const users = await loadUsers();
-        const newUser = {
-            first_name, last_name, company_name, address, country, state, city, zip_code, email, phone_number, pix_name,
-            pix_receipt, order_notes, order_items: cart, order_total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
-            order_date: new Date().toISOString()
+        const orders = await loadOrders();
+        const newOrder = {
+            id: orders.length + 1, userEmail, first_name, last_name, company_name, address, country, state, city, zip_code, email, phone_number, 
+            pix_name, pix_receipt, order_notes, order_items: cart, order_total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+            order_date: new Date().toISOString(), status: "IN PROGRESS", number_items: cart.length
         };
-        users.push(newUser);
-        await saveUsers(users);
+        orders.push(newOrder);
+        await saveOrders(orders);
         cart = [];
         res.json({ success: true });
     } catch (err) {
@@ -396,12 +421,14 @@ app.get('/api/locations', async (req, res) => {
 
 // API para obter compras recentes de um usuário específico
 app.get('/api/recent-purchases', async (req, res) => {
+    const currentUserEmail = req.query.currentUserEmail;
     try {
-        const users = await loadUsers();
-        const user = users.find(user => user.email === currentUserEmail); // MUDAR ESSA PARTE
+        const orders = await loadOrders();
+        const orderList = orders.filter(order => order.userEmail === currentUserEmail);
+        console.log(orderList)
 
-        if (user && user.orders) {
-            res.json(user.orders);
+        if (orderList) {
+            res.json(orderList);
         } else {
             res.status(404).json({ message: 'No orders found for this user.' });
         }
@@ -469,19 +496,18 @@ app.post('/api/signup', async (req, res) => {
         if (existingUser) {
             res.json({ success: false, message: 'User already exists' });
         } else {
-            // Initialize new user with blank fields
             const newUser = {
                 email,
                 password,
                 name,
                 role,
-                username: '', // Blank username
-                securityEmail: '', // Blank security email
-                phone: '', // Blank phone
-                fullName: '', // Blank full name
-                country: '', // Blank country
-                state: '', // Blank state
-                zip: '', // Blank zip
+                username: '',
+                securityEmail: '',
+                phone: '',
+                fullName: '',
+                country: '',
+                state: '',
+                zip: '',
                 shippingAddress: {
                     firstName: '',
                     lastName: '',
@@ -494,14 +520,12 @@ app.post('/api/signup', async (req, res) => {
                     email: '',
                     phone: ''
                 },
-                products: [], // Empty products array
-                orders: [] // Empty orders array
+                products: [],
+                orders: []
             };
 
-            // Add the new user to the list
             users.push(newUser);
 
-            // Save the updated users list
             await saveUsers(users);
 
             res.json({ success: true });
@@ -511,6 +535,7 @@ app.post('/api/signup', async (req, res) => {
     }
 });
 
+<<<<<<< HEAD
 
 app.get('/api/users', async (req, res) => {
     try {
@@ -524,6 +549,28 @@ app.get('/api/users', async (req, res) => {
 
 
 // Update Account Settings
+=======
+// API para obter informações da conta
+app.get('/api/user-info', async (req, res) => {
+    const { email } = req.query;
+
+    try {
+        const users = await loadUsers(); // Load users from users.json
+        const user = users.find(user => user.email === email);
+
+        if (user) {
+            res.json({ success: true, user });
+        } else {
+            res.status(404).json({ success: false, message: 'User not found' });
+        }
+    } catch (err) {
+        console.error('Error retrieving user info:', err);
+        res.status(500).json({ success: false });
+    }
+});
+
+// Atualizar detalhes da conta
+>>>>>>> 8008c14c116b0f2b97238978b431fd1f5f87bfa7
 app.post('/api/update-account', async (req, res) => {
     const { email, displayName, fullName, secondaryEmail, countryRegion, username, phoneNumber, state, zip } = req.body;
 
@@ -552,7 +599,7 @@ app.post('/api/update-account', async (req, res) => {
     }
 });
 
-// Update Shipping Address
+// Atualizar endereço de entrega
 app.post('/api/update-shipping', async (req, res) => {
     const { userEmail, firstName, lastName, companyName, address, country, region, city, zip, email, phone } = req.body;
 
@@ -583,7 +630,7 @@ app.post('/api/update-shipping', async (req, res) => {
     }
 });
 
-// Change Password
+// Atualizar senha
 app.post('/api/change-password', async (req, res) => {
     const { email, currentPassword, newPassword, confirmPassword } = req.body;
 

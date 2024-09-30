@@ -406,33 +406,38 @@ app.post('/cart/buy-now', async (req, res) => {
 });
 
 // Checkout
-app.get('/checkout', async (req, res) => {
+app.get('/checkout', isLoggedIn, async (req, res) => {
     try {
-        const response = await axios.get(`${API_SERVER_URL}/api/cart`);
-        const cart = response.data;
+        const cartResponse = await axios.get(`${API_SERVER_URL}/api/cart`);
+        const cart = cartResponse.data;
         const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
         const locationResponse = await axios.get(`${API_SERVER_URL}/api/locations`);
         const locationData = locationResponse.data;
-        const serverUrl=API_SERVER_URL;
+
+        const userEmail = req.session.user.email;
+        const userAddressResponse = await axios.get(`${API_SERVER_URL}/api/user-shipping-address`, { params: { email: userEmail } });
+        const userShippingAddress = userAddressResponse.data.shippingAddress;
+
         res.render('pages/checkout', {
             title: 'Checkout',
             cssFile: 'css/styles/checkout.css',
             cart,
             subtotal,
-            serverUrl,
-            locationData
+            locationData,
+            userShippingAddress
         });
     } catch (err) {
-        res.status(500).send('Erro ao carregar checkout');
+        res.status(500).send('Error loading checkout');
     }
 });
 
 // Submeter checkout
 app.post('/submit-checkout', upload.single('pix_receipt'), async (req, res) => {
     const { first_name, last_name, company_name, address, country, state, city, zip_code, email, phone_number, pix_name, order_notes } = req.body;
+    const userEmail = req.session.user.email;
     try {
         await axios.post(`${API_SERVER_URL}/api/checkout`, {
-            first_name, last_name, company_name, address, country, state, city, zip_code, email, phone_number, pix_name, order_notes,
+            userEmail, first_name, last_name, company_name, address, country, state, city, zip_code, email, phone_number, pix_name, order_notes,
             pix_receipt: req.file ? req.file.filename : null
         });
         res.redirect('/finished');
@@ -557,22 +562,43 @@ app.get('/profile_config', (req, res) => {
     });
 });
 
+// Obter informações do perfil
+app.get('/profile/info', isLoggedIn, async (req, res) => {
+    try {
+        const userEmail = req.session.user.email;
+
+        const response = await axios.get(`${API_SERVER_URL}/api/user-info`, {
+            params: { email: userEmail }
+        });
+
+        if (response.data.success) {
+            res.json({ success: true, user: response.data.user });
+        } else {
+            res.status(404).json({ success: false, message: 'User not found' });
+        }
+    } catch (err) {
+        console.error('Error fetching user info:', err);
+        res.status(500).json({ success: false });
+    }
+});
+
 // Obter compras recentes - Chamar a API para buscar compras recentes
 app.get('/recent-purchases', async (req, res) => {
     try {
-        const response = await axios.get(`${API_SERVER_URL}/api/recent-purchases`);
+        const userEmail = req.session.user ? req.session.user.email : null;
+
+        const response = await axios.get(`${API_SERVER_URL}/api/recent-purchases`, { params: { currentUserEmail: userEmail } });
         const purchases = response.data;
-        res.render('pages/recentPurchases', {
-            title: 'Recent Purchases',
-            purchases,
-            cssFile: 'css/styles/purchases.css'
-        });
+
+        console.log(purchases)
+        
+        res.json(purchases)
     } catch (err) {
         res.status(500).send('Erro ao carregar compras recentes');
     }
 });
 
-// Update Account Settings
+// Atualizar detalhes da conta
 app.post('/profile/update/account', isLoggedIn, async (req, res) => {
     try {
         const userEmail = req.session.user.email;
@@ -590,7 +616,7 @@ app.post('/profile/update/account', isLoggedIn, async (req, res) => {
     }
 });
 
-// Update Shipping Address
+// Atualizar endereço de entrega
 app.post('/profile/update/shipping', isLoggedIn, async (req, res) => {
     try {
         const userEmail = req.session.user.email;
@@ -608,7 +634,7 @@ app.post('/profile/update/shipping', isLoggedIn, async (req, res) => {
     }
 });
 
-// Change Password
+// Mudar senha
 app.post('/profile/update/password', isLoggedIn, async (req, res) => {
     try {
         const userEmail = req.session.user.email;
