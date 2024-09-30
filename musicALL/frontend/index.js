@@ -1,4 +1,4 @@
-// serverA.js - Servidor A (Frontend)
+
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
@@ -37,10 +37,9 @@ function isLoggedIn(req, res, next) {
     }
 }
 
-// Middleware para verificar se o usuário tem a role necessária
 async function getSellerName(email) {
     try {
-        // Supondo que você tenha uma rota no serverApi.js que retorna todos os usuários
+        
         const response = await axios.get(`${API_SERVER_URL}/api/users`);
         const users = response.data;
 
@@ -75,7 +74,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Rota principal (Home) - Buscar produtos do Servidor B
+// Rota principal (Home) 
 app.get('/', async (req, res) => {
     try {
         const response = await axios.get(`${API_SERVER_URL}/api/products`);
